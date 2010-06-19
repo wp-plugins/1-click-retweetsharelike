@@ -1,0 +1,67 @@
+<html>
+	<style type="text/css">	
+		.outsideBorder {width:1000px;height:auto;border-width:1px;border-color:gray;border-style:solid;margin:10px; padding:10px;}
+		.settingsTitle {font-weight:bold; font-size:11px; font-style:"Verdana Helvetica Arial"; color:#6f6f6f;}		
+	</style>
+
+	<body>	
+		<h1> <a href="http://www.linksalpha.com" style="margin:10px"><img src="http://www.linksalpha.com/favicon.ico" style="width:16px; height=16px"/></a>
+		     1-click Retweet/Share/Like
+		</h1>			
+		
+		<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+			<input type="hidden" name="lacands_widget_update" id="lacands_widget_update" value="true" />
+			
+			<div class="outsideBorder">
+			
+				<span style="font-weight: bold; font-size: 14px;"> <h3 class="step_indicator active_step">1</h3>  1-Click Social Widget Position & Colors <span style="float:right"><?php echo $lacands_combo_iconWidget?></span></span>	
+
+				<div><a id="lacands_idPosColorsWidget" style="text-decoration:underline;font-size:11px;">Edit</a></div>									
+				<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
+				<div style="font-size: 11px;">Edit position of 1-click Retweet/Share/Like widget on your blog. Select Manual option. </div>
+
+				<div id="lacands_idPosColorsContentWidget">		
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#6f6f6f;">1-click Retweet/Share/Like Widget Location </span> 
+						<span> <a class="counter_links" title="Based on the selection, you can show the buttons at the top and bottom of your blog post, before your blog post, or after your blog post. [email: discuss@linksalpha.com]" style="text-decoration:underline">(What is this?) </a></span> <br/>
+						<input type="radio" name="lacands-html-widget-counters-location" value="beforeAndafter" <?php checked('beforeAndafter', $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Top and Bottom (default)</input>
+						<br/>						
+						<input type="radio" name="lacands-html-widget-counters-location" value="before" <?php checked('before', $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Top only</input>
+						<br/>	
+						<input type="radio" name="lacands-html-widget-counters-location" value="after"  <?php checked('after',  $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Bottom only</input>
+					</div>
+		
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#6f6f6f;">1-click Retweet/Share/Like Relative Position </span>						
+						<span> <a class="counter_links" title="You can position the location of the buttons relative to your page. You can use both positive and negative numbers. Remember to 'save changes' and refresh your blog webpage. [email: discuss@linksalpha.com]" style="text-decoration:underline">(What is this?) </a></span> <br/>			
+						<input name="lacands-html-widget-margin-top" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_top; ?>" style="border-color:#ffd050"> </input> Top <br />
+						<input name="lacands-html-widget-margin-right" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_right; ?>" style="border-color:#ffd050"> </input> Right <br />
+						<input name="lacands-html-widget-margin-bottom" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_bottom; ?>" style="border-color:#ffd050"> </input> Bottom <br />
+						<input name="lacands-html-widget-margin-left" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_left; ?>" style="border-color:#ffd050"> </input> Left <br />
+					</div>
+
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#6f6f6f;">Select checkbox for Manual option (this will disable the widgets): </span> 
+						<span> <a class="counter_links" title="If you want to position the widget manually, then select this option. After you select this option, the widget will not show. You will have to manually put the code in single.php or index.php file for the widget to show. [email: discuss@linksalpha.com]" style="text-decoration:underline">(What is this?) </a></span> <br/>
+						<input name="lacands-html-widget-disable-cntr-display" type="checkbox"<?php if($lacands_widget_disable_cntr_display != "0") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Disable displaying 1-click Retweet/Share/Like (for Manual Option Only - see readme.txt) </em><br/>
+						<br/>				
+						<span style="font-size:11px">Place the code <?php highlight_string("<?php lacands_wp_filter_content_widget(); ?>");?>
+						in one of the files single.php or index.php - depending on the theme you are using. These files can be found under directory ...\wordpress\wp-content\themes\ 
+						</span>
+						
+					</div>					
+										
+					<div style="margin: 20px 20px 20px 250px">
+						<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" />
+					</div>			
+				</div>			
+			</div>
+		</form>
+
+		<div class="outsideBorder">			
+			<span style="font-weight: bold; font-size: 14px;"> Your Suggestion </span>								
+			<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
+			<div style="font-size: 11px;">Email us at <a href="mailto:suggest@linksalpha.com">suggest@linksalpha.com</a> if you would like a particular functionality or have any recommendations. Thanks. </div>				
+		</div>
+	</body>
+</html>
