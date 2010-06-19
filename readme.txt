@@ -30,7 +30,7 @@ The 3 buttons above offer consistent look and feel. You can try out the above fu
 
 For Manually positioning the 1-click Retweet/Share/Like on your blog you need to do the following two things:
 
-1. Place the following code `<?php laecho_wp_filter_content_widget(); ?>` in index.php file or any other file as you see appropriate in themes folder (...\wordpress\wp-content\themes). Note: if you are using 'default' theme for the Wordpress plugin, then place the above code in single.php 
+1. Place the following code `<?php lacands_wp_filter_content_widget(); ?>` in index.php file or any other file as you see appropriate in themes folder (...\wordpress\wp-content\themes). Note: if you are using 'default' theme for the Wordpress plugin, then place the above code in single.php 
 (...\wordpress\wp-content\themes\default\single.php)
 
 2. On admin page for this plugin ('Click and Share'), check the box next to "Disable displaying Widgets (for Manual Option Only - see readme.txt)" under "1-Click Social Widget Position & Colors" and submit by clicking on 'Save Changes'.
