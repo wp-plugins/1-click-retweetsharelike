@@ -16,7 +16,7 @@ Plugin offers 1-Click Retweet/Share/Like *(user experience similar to Facebook L
 * 1-click Facebook Share
 * 1-click Facebook Like
 
-The 3 buttons above offer consistent look and feel. You can try out the above functionality at: http://dev.linksalpha.com/?p=1
+The 3 buttons above offer consistent look and feel. You can try out the above functionality at: http://dev.linksalpha.com/?p=12
 
 **Benefit to you:**
 
