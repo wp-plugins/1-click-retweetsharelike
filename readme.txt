@@ -1,30 +1,27 @@
 === Plugin Name ===
 
 Contributors: LinksAlpha
-Tags: post, facebook, twitter, google buzz, discussions, links, social, shares, comments, Digg, likes, google, yahoo, page, Post, posts, stats, URL stats, bitly, plugin, social networks, counters, comments, statistics, analytics, social networks, social, URL stats, OAuth, performance
+Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social.
 Requires at least: 2.0.2
 Tested up to: 2.9.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
+
 
 == Description ==
 
-Plugin offers 1-Click Retweet/Share/Like *(user experience similar to Facebook Like button but expanded to Twitter and Facebook Share as well !). Screenshot: http://cdn.linksalpha.com/static/socialdiscussions_1clickwidget.png*
+Lets users Retweet, Share and Like pages from your site back to their Twitter followers and Facebook friends with just one click. *The user experience is similar to Facebook Like button but expanded to Twitter and Facebook Share as well ! Screenshot: http://cdn.linksalpha.com/static/1clickwidget.png*
 
-**Plugin allows 1-click sharing for best user experience for the most popular Social networks:**
+**Plugin allows 1-click sharing for best user experience for the most popular social networks:**
 
 * 1-click Retweet
 * 1-click Facebook Share
 * 1-click Facebook Like
+* Displays counts next to the buttons
+* Offers consistent UI: aligned buttons and uniform color selection
+* Gives visual indication after the blog post is Retweeted/Shared/Liked. See screenshot at http://cdn.linksalpha.com/static/1clickedwidget.png
 
-The 3 buttons above offer consistent look and feel. You can try out the above functionality at: http://dev30.linksalpha.com/?p=4
+You can interact with the plugin at http://dev30.linksalpha.com/?p=8
 
-**Benefit to you:**
-
-* 1-click sharing. Allowing your users to spread your blog easily. 
-
-**Benefit to your users:**
-
-* Able to share your blog post in their network of friends & followers on 1-click. 
 
 **Manual positioning**
 
@@ -49,9 +46,11 @@ For Manually positioning the 1-click Retweet/Share/Like on your blog you need to
 
 For support email us at: discuss@linksalpha.com. 
 
+
 == Screenshots ==
 1. Social 1-click Retweet/Share/Like buttons
 
+
 == Changelog ==
-= 1.0.0 =
-* 1-click Retweet/Share/Like feature.
+= 1.0.1 =
+* Optional upgrade. Very minor enhancement to UI (applicable to new first-time installs only).

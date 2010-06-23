@@ -5,7 +5,7 @@ Plugin URI: http://wwww.linksalpha.com/
 Description: 1-click Retweet/Share/Like. Similar to Facebook Like button, but expanded to Twitter Retweet and Facebook Share as well! Email us at discuss@linksalpha.com if you have any queries or suggestions.
 Author: LinksAlpha
 Author URI: http://linksalpha.com
-Version: 1.0.0
+Version: 1.0.1
 */
 
 /*
@@ -37,36 +37,36 @@ function lacands_readOptionsValuesFromWPDatabase() {
 
 	$lacands_opt_widget_counters_location     = get_option('lacands-html-widget-counters-location');
 	$lacands_opt_widget_float                 = get_option('lacands-html-widget-float');
-	$lacands_opt_widget_margin_top            = get_option('lacands-html-widget-margin-top');	
+	$lacands_opt_widget_margin_top            = get_option('lacands-html-widget-margin-top');
 	$lacands_opt_widget_margin_right          = get_option('lacands-html-widget-margin-right');
 	$lacands_opt_widget_margin_bottom         = get_option('lacands-html-widget-margin-bottom');
 	$lacands_opt_widget_margin_left           = get_option('lacands-html-widget-margin-left');
-	$lacands_opt_widget_margin_top_after      = get_option('lacands-html-widget-margin-top-after');	
+	$lacands_opt_widget_margin_top_after      = get_option('lacands-html-widget-margin-top-after');
 	$lacands_opt_widget_margin_right_after    = get_option('lacands-html-widget-margin-right-after');
 	$lacands_opt_widget_margin_bottom_after   = get_option('lacands-html-widget-margin-bottom-after');
-	$lacands_opt_widget_margin_left_after     = get_option('lacands-html-widget-margin-left-after');	
+	$lacands_opt_widget_margin_left_after     = get_option('lacands-html-widget-margin-left-after');
 	$lacands_widget_disable_cntr_display      = get_option('lacands-html-widget-disable-cntr-display');
 }
 
 function lacands_writeOptionsValuesToWPDatabase($option) {
-	
+
 	if($option == 'default') {
-		
+
 		$lacands_eget = get_bloginfo('admin_email'); $lacands_uget = get_bloginfo('url'); $lacands_nget = get_bloginfo('name');
 		$lacands_dget = get_bloginfo('description'); $lacands_cget = get_bloginfo('charset'); $lacands_vget = get_bloginfo('version');
 		$lacands_lget = get_bloginfo('language'); $link='http://www.linksalpha.com/a/bloginfo';
 		$lacands_bloginfo = array('email'=>$lacands_eget, 'url'=>$lacands_uget, 'name'=>$lacands_nget, 'desc'=>$lacands_dget, 'charset'=>$lacands_cget, 'version'=>$lacands_vget, 'lang'=>$lacands_lget);
 		lacands_http_post($link, $lacands_bloginfo);
-				
-		add_option('lacands-html-widget-counters-location', 'beforeAndafter');		
-		add_option('lacands-html-widget-margin-top',    '0');
+
+		add_option('lacands-html-widget-counters-location', 'beforeAndafter');
+		add_option('lacands-html-widget-margin-top',    '5');
 		add_option('lacands-html-widget-margin-right',  '0');
-		add_option('lacands-html-widget-margin-bottom', '0');
+		add_option('lacands-html-widget-margin-bottom', '5');
 		add_option('lacands-html-widget-margin-left',   '0');
 		add_option('lacands-html-widget-margin-top-after',    '0');
 		add_option('lacands-html-widget-margin-right-after',  '0');
 		add_option('lacands-html-widget-margin-bottom-after', '0');
-		add_option('lacands-html-widget-margin-left-after',   '0');		
+		add_option('lacands-html-widget-margin-left-after',   '0');
 		add_option('lacands-html-widget-disable-cntr-display-after', '0');
 	}
 	else if ($option == 'update')
@@ -74,63 +74,63 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		if(!empty($_POST['lacands-html-widget-counters-location'])) {
 			update_option('lacands-html-widget-counters-location', $_POST['lacands-html-widget-counters-location']);
 		}
-		
+
 		if($_POST['lacands-html-widget-margin-top'] != NULL) {
     		update_option('lacands-html-widget-margin-top',    (string)$_POST['lacands-html-widget-margin-top']);
 		}
 		else {
 			update_option('lacands-html-widget-margin-top',    '0');
 		}
-		
+
 		if($_POST['lacands-html-widget-margin-right'] != NULL) {
     		update_option('lacands-html-widget-margin-right',  (string)$_POST['lacands-html-widget-margin-right']);
 		}
 		else {
 			update_option('lacands-html-widget-margin-right',    '0');
 		}
-    	
+
     	if($_POST['lacands-html-widget-margin-bottom'] != NULL) {
     		update_option('lacands-html-widget-margin-bottom', (string)$_POST['lacands-html-widget-margin-bottom']);
     	}
 		else {
 			update_option('lacands-html-widget-margin-bottom',    '0');
 		}
-    	    	
+
     	if($_POST['lacands-html-widget-margin-left'] != NULL) {
     		update_option('lacands-html-widget-margin-left',   (string)$_POST['lacands-html-widget-margin-left']);
     	}
 		else {
 			update_option('lacands-html-widget-margin-left',    '0');
 		}
-    	
+
     	if($_POST['lacands-html-widget-margin-top-after'] != NULL) {
     		update_option('lacands-html-widget-margin-top-after',    (string)$_POST['lacands-html-widget-margin-top-after']);
     	}
 		else {
 			update_option('lacands-html-widget-margin-top-after',    '0');
 		}
-    	
+
     	if($_POST['lacands-html-widget-margin-right-after'] != NULL) {
     		update_option('lacands-html-widget-margin-right-after',  (string)$_POST['lacands-html-widget-margin-right-after']);
     	}
 		else {
 			update_option('lacands-html-widget-margin-right-after',    '0');
 		}
-    	
+
     	if($_POST['lacands-html-widget-margin-bottom-after'] != NULL) {
     		update_option('lacands-html-widget-margin-bottom-after', (string)$_POST['lacands-html-widget-margin-bottom-after']);
     	}
 		else {
 			update_option('lacands-html-widget-margin-bottom-after',    '0');
-		}    	
-    	
+		}
+
     	if($_POST['lacands-html-widget-margin-left-after'] != NULL) {
     		update_option('lacands-html-widget-margin-left-after',   (string)$_POST['lacands-html-widget-margin-left-after']);
     	}
 		else {
 			update_option('lacands-html-widget-margin-left-after',    '0');
-		}    	
-    	
+		}
+
     	if(!empty($_POST['lacands-html-widget-disable-cntr-display'])) {
 			update_option('lacands-html-widget-disable-cntr-display',   (string)$_POST['lacands-html-widget-disable-cntr-display']);
 		}
@@ -139,6 +139,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		}
 	}
 	else {
+		/*
 		delete_option('lacands-html-widget-counters-location');
 		delete_option('lacands-html-widget-margin-top');
 		delete_option('lacands-html-widget-margin-right');
@@ -147,8 +148,9 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		delete_option('lacands-html-widget-margin-top-after');
 		delete_option('lacands-html-widget-margin-right-after');
 		delete_option('lacands-html-widget-margin-bottom-after');
-		delete_option('lacands-html-widget-margin-left-after');		
-		delete_option('lacands-html-widget-disable-cntr-display-after');		
+		delete_option('lacands-html-widget-margin-left-after');
+		delete_option('lacands-html-widget-disable-cntr-display-after');
+		*/
 	}
 }
 
@@ -164,7 +166,7 @@ function lacands_wp_filter_post_content ( $related_content ) {
 			$related_content = lacands_wp_filter_content_widget(FALSE).$related_content;
 			$related_content = $related_content.lacands_wp_filter_content_widget(FALSE);
 		}
-		
+
 		if($lacands_opt_widget_counters_location == "before") {
 			$related_content = lacands_wp_filter_content_widget(FALSE).$related_content;
 		}
@@ -220,7 +222,7 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 function lacands_wp_admin_options_settings () {
 	global $lacands_opt_widget_counters_location, $lacands_opt_widget_float, $lacands_widget_disable_cntr_display;
 	global $lacands_opt_widget_margin_top, $lacands_opt_widget_margin_right, $lacands_opt_widget_margin_bottom, $lacands_opt_widget_margin_left;
-	global $lacands_opt_widget_margin_top_after, $lacands_opt_widget_margin_right_after, $lacands_opt_widget_margin_bottom_after, $lacands_opt_widget_margin_left_after;	
+	global $lacands_opt_widget_margin_top_after, $lacands_opt_widget_margin_right_after, $lacands_opt_widget_margin_bottom_after, $lacands_opt_widget_margin_left_after;
 
     if (isset($_POST['lacands_widget_update']))
     {
@@ -229,13 +231,13 @@ function lacands_wp_admin_options_settings () {
 		}
 
     	lacands_writeOptionsValuesToWPDatabase('update');
-    	
+
     	echo '<div id="message" class="updated fade" style="width:1000px;"><p><strong>Settings saved for 1-click Retweet/Share/Like.</strong></p></div>';
 		echo '</strong></p></div>';
 	}
-	
+
 	lacands_readOptionsValuesFromWPDatabase();
-	
+
 	$lacands_combo_iconWidget = '<img border="0" style="vertical-align:middle; border:1px solid #C0C0C0  " src="'.LACANDS_PLUGIN_URL.'icons/widget.png">';
 
 	require("html/la-click-and-share-comboAdmin.html");
