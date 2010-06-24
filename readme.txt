@@ -4,7 +4,7 @@ Contributors: LinksAlpha
 Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social.
 Requires at least: 2.0.2
 Tested up to: 2.9.2
-Stable tag: 1.0.1
+Stable tag: 2.0.0
 
 
 == Description ==
@@ -30,7 +30,7 @@ For Manually positioning the 1-click Retweet/Share/Like on your blog you need to
 1. Place the following code `<?php lacands_wp_filter_content_widget(); ?>` in index.php file or any other file as you see appropriate in themes folder (...\wordpress\wp-content\themes). Note: if you are using 'default' theme for the Wordpress plugin, then place the above code in single.php 
 (...\wordpress\wp-content\themes\default\single.php)
 
-2. On admin page for this plugin ('Click and Share'), check the box next to "Disable displaying Widgets (for Manual Option Only - see readme.txt)" under "1-Click Social Widget Position & Colors" and submit by clicking on 'Save Changes'.
+2. On admin page for this plugin ('1-click Retweet/Share/Like'), check the box next to "Disable displaying 1-click Retweet/Share/Like (for Manual Option Only - see readme.txt)" under "1-Click Social Widget Position & Colors" and submit by clicking on 'Save Changes'.
 
 
 **Misc**
@@ -52,5 +52,5 @@ For support email us at: discuss@linksalpha.com.
 
 
 == Changelog ==
-= 1.0.1 =
-* Optional upgrade. Very minor enhancement to UI (applicable to new first-time installs only).
+= 2.0.0 =
+* Must upgrade. Lighter code base.

@@ -76,21 +76,4 @@ function lacands_json_decode($str) {
 	}
 }
 
-function lacands_fetch_count($link) {
-		
-	if (!$link) {
-		return array();
-	}	
-	
-	$url = 'http://www.linksalpha.com/a/link?link='.$link;
-	
-	$body = array('link'=>$link);
-	$response_full = lacands_http_post($url, $body);
-	$results = lacands_http_process($response_full);
-
-	if(!$results) {
-		return array();
-	}
-	return $results;
-}
 ?>
