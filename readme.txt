@@ -3,7 +3,7 @@
 Contributors: LinksAlpha
 Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social.
 Requires at least: 2.0.2
-Tested up to: 2.9.2
+Tested up to: 3.0.0
 Stable tag: 2.0.0
 
 
