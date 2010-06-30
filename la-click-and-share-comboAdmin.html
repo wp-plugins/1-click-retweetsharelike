@@ -1,0 +1,103 @@
+<html>
+	<style type="text/css">	
+		.outsideBorder {width:1000px;height:auto;border-width:1px;border-color:gray;border-style:solid;margin:10px; padding:10px;}				
+	</style>
+
+	<body>	
+		<h1> <a href="http://www.linksalpha.com" style="margin:10px"><img src="http://www.linksalpha.com/favicon.ico" style="width:16px; height=16px"/></a>
+		     1-click Retweet/Share/Like
+		</h1>			
+		
+		<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+			<input type="hidden" name="lacands_widget_update" id="lacands_widget_update" value="true" />
+			
+			<div class="outsideBorder">
+			
+				<span style="float:right"><?php echo $lacands_combo_iconWidget?></span>	
+													
+				<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
+				<div style="font-size: 11px;">Edit position of 1-click Retweet/Share/Like widget on your blog. Select Manual option. </div>
+
+				<div>		
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">1-click Retweet/Share/Like Widget Location </span> <br/>
+						<input type="radio" name="lacands-html-widget-counters-location" value="beforeAndafter" <?php checked('beforeAndafter', $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Top and Bottom (default)</input>
+						<br/>						
+						<input type="radio" name="lacands-html-widget-counters-location" value="before" <?php checked('before', $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Top only</input>
+						<br/>	
+						<input type="radio" name="lacands-html-widget-counters-location" value="after"  <?php checked('after',  $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Bottom only</input>
+					</div>
+		
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">1-click Retweet/Share/Like Relative Position </span> <br/>			
+						<input name="lacands-html-widget-margin-top" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_top; ?>" style="border-color:#ffd050"> </input> Top <br />
+						<input name="lacands-html-widget-margin-right" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_right; ?>" style="border-color:#ffd050"> </input> Right <br />
+						<input name="lacands-html-widget-margin-bottom" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_bottom; ?>" style="border-color:#ffd050"> </input> Bottom <br />
+						<input name="lacands-html-widget-margin-left" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_left; ?>" style="border-color:#ffd050"> </input> Left <br />
+					</div>
+
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Colors for Counters shown next to Retweet and Share buttons (not applicable to Like button):</span> 
+						<br/>
+						Set font color of counters (default: 333333):
+						<div><input name="lacands-html-cntr-font-color" type="text" size="15" value="<?php echo $lacands_opt_cntr_font_color; ?>" style="border-color:#ffd050";></input></div>
+					</div>								
+					
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Select pages on which 1-click Retweet/Share/Like widget should show: </span> <br/>
+						<input name="lacands-html-display-page-single" type="checkbox"<?php if($lacands_display_pages['single'] == "1") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Display on Single page </em><br/>						
+						<input name="lacands-html-display-page-home" type="checkbox"<?php if($lacands_display_pages['home'] == "1") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Display on Home page </em><br/>
+						<input name="lacands-html-display-page-archive" type="checkbox"<?php if($lacands_display_pages['archive'] == "1") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Display on Archive page </em><br/>							
+						</span>						
+					</div>		
+					
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:333333;">Font Style for 'Retweet/Share/Like' buttons:</span> <br/>						
+						<select name="lacands-html-widget-font-style">
+							<option <?php if($lacands_opt_widget_font_style == 'arial') echo "selected"; ?> value="arial">arial</option>
+							<option <?php if($lacands_opt_widget_font_style == 'lucida grande') echo "selected"; ?> value="lucida grande">lucida grande</option>
+							<option <?php if($lacands_opt_widget_font_style == 'segoe ui') echo "selected"; ?> value="segoe ui">segoe ui</option>
+							<option <?php if($lacands_opt_widget_font_style == 'tahoma') echo "selected"; ?> value="tahoma">tahoma</option>
+							<option <?php if($lacands_opt_widget_font_style == 'trebuchet ms') echo "selected"; ?> value="trebuchet ms">trebuchet ms</option>
+							<option <?php if($lacands_opt_widget_font_style == 'verdana') echo "selected"; ?> value="verdana">verdana</option>						
+						</select>
+					</div>
+
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Text for 'Facebook Like' button:</span> <br/>
+						<select name="lacands-html-widget-fb-like">
+							<option <?php if($lacands_opt_widget_fb_like == 'like') echo "selected"; ?> value="like">Like</option>
+							<option <?php if($lacands_opt_widget_fb_like == 'recommend') echo "selected"; ?> value="recommend">Recommend</option>
+						</select>
+					</div>
+
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Select checkbox for Manual option (this will disable the widgets): </span> <br/>
+						<input name="lacands-html-widget-disable-cntr-display" type="checkbox"<?php if($lacands_widget_disable_cntr_display != "0") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Disable displaying 1-click Retweet/Share/Like (for Manual Option Only - see readme.txt) </em><br/>
+						<br/>				
+						<span style="font-size:11px">Place the code <?php highlight_string("<?php lacands_wp_filter_content_widget(); ?>");?>
+						in one of the files single.php or index.php (note: or any other file - as the file name depends on the theme you are using). These files can be found under directory ...\wordpress\wp-content\themes\ 
+						</span>						
+					</div>									
+										
+					<div style="margin: 20px 20px 20px 250px">
+						<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" />
+					</div>			
+				</div>			
+			</div>
+		</form>
+
+		<div class="outsideBorder">			
+			<span style="font-weight: bold; font-size: 14px;"> Your Suggestion </span>								
+			<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
+			<div style="font-size: 11px;">Email us at <a href="mailto:suggest@linksalpha.com">suggest@linksalpha.com</a> if you would like a particular functionality or have any recommendations. Thanks. </div>				
+		</div>
+		
+		<div class="outsideBorder">			
+			<span style="font-weight: bold; font-size: 14px;"> FAQs / Help Pages </span>								
+			<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
+			<div style="font-size: 11px;">Go to <a href="http://help.linksalpha.com/1-click-retweet-share-like/faqs" target="_blank">1-click Retweet/Share/Like FAQs</a></div>				
+		</div>
+		
+	</body>
+</html>
