@@ -4,7 +4,7 @@ Contributors: LinksAlpha
 Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social.
 Requires at least: 2.0.2
 Tested up to: 3.0.0
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 
 
 == Description ==
@@ -52,5 +52,14 @@ For support email us at: discuss@linksalpha.com.
 
 
 == Changelog ==
-= 2.0.0 =
-* Must upgrade. Lighter code base.
+= 2.0.1 =
+
+Multiple fixes and enhancements
+
+* Fix for iframe - as for some themes it was taking more space
+* Fix for sharing URLs with international languages (i.e., other than English)
+* Option to select pages on which buttons should be visible: home, single page, archive
+* Option to select Font Styles for Retweet/Share/Like: arial, tahoma, lucida grande, segoe ui, trebuchet ms, verdana
+* Option to select Counter Colors (any color) for Retweet and Facebook Share (For Facebook Like, option not available from Facebook)
+* Option to change 'Like' to show as text 'Recommend'
+* Text for 'Share' changes to 'Shared' after the article is shared
