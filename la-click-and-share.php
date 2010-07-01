@@ -41,8 +41,8 @@ function lacands_readOptionsValuesFromWPDatabase() {
 	$lacands_opt_widget_margin_right          = get_option('lacands-html-widget-margin-right');
 	$lacands_opt_widget_margin_bottom         = get_option('lacands-html-widget-margin-bottom');
 	$lacands_opt_widget_margin_left           = get_option('lacands-html-widget-margin-left');
-	$lacands_widget_disable_cntr_display      = get_option('lacands-html-widget-disable-cntr-display');	
-	$lacands_opt_cntr_font_color              = get_option('lacands-html-cntr-font-color');	
+	$lacands_widget_disable_cntr_display      = get_option('lacands-html-widget-disable-cntr-display');
+	$lacands_opt_cntr_font_color              = get_option('lacands-html-cntr-font-color');
 	$lacands_opt_widget_fb_like               = get_option('lacands-html-widget-fb-like');
 	$lacands_opt_widget_font_style            = get_option('lacands-html-widget-font-style');
 	$lacands_display_pages            		  = get_option('lacands-html-display-pages');
@@ -51,14 +51,14 @@ function lacands_readOptionsValuesFromWPDatabase() {
 
 function lacands_writeOptionsValuesToWPDatabase($option) {
 	global $lacands_display_pages;
-	
+
 	if($option == 'default') {
 		$lacands_eget = get_bloginfo('admin_email'); $lacands_uget = get_bloginfo('url'); $lacands_nget = get_bloginfo('name');
 		$lacands_dget = get_bloginfo('description'); $lacands_cget = get_bloginfo('charset'); $lacands_vget = get_bloginfo('version');
 		$lacands_lget = get_bloginfo('language'); $link='http://www.linksalpha.com/a/bloginfo';
 		$lacands_bloginfo = array('email'=>$lacands_eget, 'url'=>$lacands_uget, 'name'=>$lacands_nget, 'desc'=>$lacands_dget, 'charset'=>$lacands_cget, 'version'=>$lacands_vget, 'lang'=>$lacands_lget, 'plugin'=>'cs');
 		lacands_http_post($link, $lacands_bloginfo);
-		$lacands_display_pages = array('single' => '1','home' => '1','archive' => '1');		
+		$lacands_display_pages = array('single' => '1','home' => '1','archive' => '1');
 		add_option('lacands-html-widget-counters-location', 'beforeAndafter');
 		add_option('lacands-html-widget-margin-top',    '5');
 		add_option('lacands-html-widget-margin-right',  '0');
@@ -72,7 +72,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		add_option('lacands-html-like-layout', 'button_count');
 	}
 	else if ($option == 'update')
-	{		
+	{
 		if(!empty($_POST['lacands-html-widget-counters-location'])) {
 			update_option('lacands-html-widget-counters-location', $_POST['lacands-html-widget-counters-location']);
 		}
@@ -111,7 +111,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		else {
 			update_option('lacands-html-widget-disable-cntr-display', '0');
 		}
-		
+
 	    if(!empty($_POST['lacands-html-cntr-font-color'])) {
 	    	update_option('lacands-html-cntr-font-color',(string)$_POST['lacands-html-cntr-font-color']);
 	    }
@@ -124,7 +124,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 	    }
 	    else {
 	    	update_option('lacands-html-widget-fb-like', 'Like');
-	    }		
+	    }
 
 	    if(!empty($_POST['lacands-html-widget-font-style'])) {
 	    	update_option('lacands-html-widget-font-style',(string)$_POST['lacands-html-widget-font-style']);
@@ -137,30 +137,30 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		    $lacands_display_pages['single'] = '1';
 	    }
 	    else {
-		    $lacands_display_pages['single'] = '0';	    
+		    $lacands_display_pages['single'] = '0';
 	    }
 
 	    if(!empty($_POST['lacands-html-display-page-home'])) {
 		    $lacands_display_pages['home'] = '1';
 	    }
 	    else {
-		    $lacands_display_pages['home'] = '0';	    
+		    $lacands_display_pages['home'] = '0';
 	    }
-	   	
+
 	    if(!empty($_POST['lacands-html-display-page-archive'])) {
 		    $lacands_display_pages['archive'] = '1';
 	    }
 	    else {
-		    $lacands_display_pages['archive'] = '0';	    
-	    }	    
+		    $lacands_display_pages['archive'] = '0';
+	    }
 	   	update_option('lacands-html-display-pages', $lacands_display_pages);
-	   	
+
 	    if(!empty($_POST['lacands-html-like-layout'])) {
-	    	update_option('lacands-html-like-layout', (string)$_POST['lacands-html-like-layout']);		    
+	    	update_option('lacands-html-like-layout', (string)$_POST['lacands-html-like-layout']);
 	    }
 	}
 	else {
-		/*		
+		/*
 		delete_option('lacands-html-widget-counters-location');
 		delete_option('lacands-html-widget-margin-top');
 		delete_option('lacands-html-widget-margin-right');
@@ -172,8 +172,8 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		delete_option('lacands-html-widget-font-style');
 		delete_option('lacands-html-display-pages');
 		delete_option('lacands-html-like-layout');
-		*/				
-	}	
+		*/
+	}
 }
 
 function lacands_wp_filter_post_content ( $related_content ) {
@@ -185,7 +185,7 @@ function lacands_wp_filter_post_content ( $related_content ) {
 
 	if($lacands_widget_disable_cntr_display == '0') {
 		if($lacands_opt_widget_counters_location == "beforeAndafter") {
-			$related_content_beforeAndafter = lacands_wp_filter_content_widget(FALSE);			
+			$related_content_beforeAndafter = lacands_wp_filter_content_widget(FALSE);
 			$related_content                = $related_content_beforeAndafter.$related_content.$related_content_beforeAndafter;
 		}
 
@@ -205,30 +205,30 @@ function lacands_wp_filter_post_content ( $related_content ) {
 function lacands_wp_filter_content_widget ($show=TRUE) {
 	global $lacands_opt_widget_counters_location, $lacands_widget_disable_cntr_display;
 	global $lacands_opt_widget_margin_top, $lacands_opt_widget_margin_right, $lacands_opt_widget_margin_bottom, $lacands_opt_widget_margin_left;
-	global $lacands_opt_cntr_font_color, $lacands_opt_widget_fb_like, $lacands_opt_widget_font_style;	
+	global $lacands_opt_cntr_font_color, $lacands_opt_widget_fb_like, $lacands_opt_widget_font_style;
 	global $lacands_display_pages, $lacands_like_layout;
 	global $post;
 
 	$p          = $post;
-	
-	lacands_readOptionsValuesFromWPDatabase();	
+
+	lacands_readOptionsValuesFromWPDatabase();
 
 	$position = '';
 
 	if( $lacands_widget_disable_cntr_display == '0') {
 		$position = 'padding-top:'.$lacands_opt_widget_margin_top.'px;padding-right:'.$lacands_opt_widget_margin_right.'px;padding-bottom:'.$lacands_opt_widget_margin_bottom.'px;padding-left:'.$lacands_opt_widget_margin_left.'px;';
 	}
-	
+
 	if ((is_single() && ($lacands_display_pages['single']))  ||   (is_home() && ($lacands_display_pages['home'])) || (is_archive() && ($lacands_display_pages['archive'])) )
-	{				
+	{
 		$link1 = urlencode(urldecode(get_permalink($p)));
-				
+
 		$lacands_opt_cntr_font_color = str_replace('#', '', $lacands_opt_cntr_font_color);
 		$lacands_opt_cntr_font_color = trim($lacands_opt_cntr_font_color);
-				
-    	$lacands_widget_display_cntrs = '<div style="'.$position.';">										
+
+    	$lacands_widget_display_cntrs = '<div style="'.$position.';">
 										<iframe
-											style="height:25px !important;" frameborder="0" scrolling="no" 								
+											style="height:25px !important; border:none !important; overflow:hidden !important; width:340px !important;" frameborder="0" scrolling="no" allowTransparency="true"
 											src="http://www.linksalpha.com/social?link='.$link1.'&fc='.$lacands_opt_cntr_font_color.'&fs='.$lacands_opt_widget_font_style.'&fblname='.$lacands_opt_widget_fb_like.'">
 										</iframe>
 										</div>';
@@ -237,7 +237,7 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 			echo $lacands_widget_display_cntrs;
 			return;
 		}
-		
+
 	    return $lacands_widget_display_cntrs;
 	}
 	return;
@@ -246,9 +246,9 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 function lacands_wp_admin_options_settings () {
 	global $lacands_opt_widget_counters_location, $lacands_widget_disable_cntr_display;
 	global $lacands_opt_widget_margin_top, $lacands_opt_widget_margin_right, $lacands_opt_widget_margin_bottom, $lacands_opt_widget_margin_left;
-	global $lacands_opt_cntr_font_color, $lacands_opt_widget_fb_like, $lacands_opt_widget_font_style;		
-	global $lacands_display_pages, $lacands_like_layout;	
-	
+	global $lacands_opt_cntr_font_color, $lacands_opt_widget_fb_like, $lacands_opt_widget_font_style;
+	global $lacands_display_pages, $lacands_like_layout;
+
     if (isset($_POST['lacands_widget_update']))
     {
     	if ( function_exists('current_user_can') && !current_user_can('manage_options') ) {
