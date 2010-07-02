@@ -219,7 +219,7 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 		$position = 'padding-top:'.$lacands_opt_widget_margin_top.'px;padding-right:'.$lacands_opt_widget_margin_right.'px;padding-bottom:'.$lacands_opt_widget_margin_bottom.'px;padding-left:'.$lacands_opt_widget_margin_left.'px;';
 	}
 
-	if ((is_single() && ($lacands_display_pages['single']))  ||   (is_home() && ($lacands_display_pages['home'])) || (is_archive() && ($lacands_display_pages['archive'])) )
+	if ((is_single())  ||   (is_home() && ($lacands_display_pages['home'])) || (is_archive() && ($lacands_display_pages['archive'])) )
 	{
 		$link1 = urlencode(urldecode(get_permalink($p)));
 
