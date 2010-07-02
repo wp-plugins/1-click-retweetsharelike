@@ -137,7 +137,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		    $lacands_display_pages['single'] = '1';
 	    }
 	    else {
-		    $lacands_display_pages['single'] = '0';
+		    $lacands_display_pages['single'] = '1';
 	    }
 
 	    if(!empty($_POST['lacands-html-display-page-home'])) {
