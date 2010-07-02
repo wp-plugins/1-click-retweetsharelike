@@ -46,6 +46,21 @@ For Manually positioning the 1-click Retweet/Share/Like on your blog you need to
 For support email us at: discuss@linksalpha.com. 
 
 
+== Frequently Asked Questions ==
+
+= After plugin upgrade it doesn't work? =
+
+Deactivate and then Activate the plugin. If by default it shows as 'activated', then click on 'deactivate' and then click on 'activate'. 
+
+= What if I have more questions? =
+
+Go to http://help.linksalpha.com/1-click-retweet-share-like/faqs for list of FAQs and corresponding answers.
+
+= Question still not answered? =
+
+Email us at discuss@linksalpha.com
+
+
 == Screenshots ==
 1. Social 1-click Retweet/Share/Like buttons
 
