@@ -30,6 +30,19 @@ require("la-click-and-share-utility-fns.php");
 
 define('LACANDS_PLUGIN_URL', lacands_get_plugin_dir());
 
+$lacands_version_number = '2.0.1';
+
+function lacands_init() {
+	global $lacands_version_number;
+			
+	$lacands_version_number_db = get_option('lacands-html-version-number');
+	
+	if($lacands_version_number != $lacands_version_number_db) {
+		update_option('lacands-html-version-number', $lacands_version_number);
+		lacands_writeOptionsValuesToWPDatabase('default');
+	}
+}
+
 function lacands_readOptionsValuesFromWPDatabase() {
 	global $lacands_opt_widget_counters_location, $lacands_widget_disable_cntr_display;
 	global $lacands_opt_widget_margin_top, $lacands_opt_widget_margin_right, $lacands_opt_widget_margin_bottom, $lacands_opt_widget_margin_left;
@@ -51,8 +64,9 @@ function lacands_readOptionsValuesFromWPDatabase() {
 
 function lacands_writeOptionsValuesToWPDatabase($option) {
 	global $lacands_display_pages;
+	global $lacands_version_number;
 
-	if($option == 'default') {
+	if($option == 'default') {		
 		$lacands_eget = get_bloginfo('admin_email'); $lacands_uget = get_bloginfo('url'); $lacands_nget = get_bloginfo('name');
 		$lacands_dget = get_bloginfo('description'); $lacands_cget = get_bloginfo('charset'); $lacands_vget = get_bloginfo('version');
 		$lacands_lget = get_bloginfo('language'); $link='http://www.linksalpha.com/a/bloginfo';
@@ -70,6 +84,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		add_option('lacands-html-widget-font-style', 'arial');
 		add_option('lacands-html-display-pages', $lacands_display_pages);
 		add_option('lacands-html-like-layout', 'button_count');
+		update_option('lacands-html-version-number', $lacands_version_number);
 	}
 	else if ($option == 'update')
 	{
@@ -133,13 +148,6 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 	    	update_option('lacands-html-widget-font-style', 'Like');
 	    }
 
-	    if(!empty($_POST['lacands-html-display-page-single'])) {
-		    $lacands_display_pages['single'] = '1';
-	    }
-	    else {
-		    $lacands_display_pages['single'] = '1';
-	    }
-
 	    if(!empty($_POST['lacands-html-display-page-home'])) {
 		    $lacands_display_pages['home'] = '1';
 	    }
@@ -160,7 +168,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 	    }
 	}
 	else {
-		/*
+		/*		
 		delete_option('lacands-html-widget-counters-location');
 		delete_option('lacands-html-widget-margin-top');
 		delete_option('lacands-html-widget-margin-right');
@@ -172,7 +180,8 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		delete_option('lacands-html-widget-font-style');
 		delete_option('lacands-html-display-pages');
 		delete_option('lacands-html-like-layout');
-		*/
+		delete_option('lacands-html-version-number');
+		*/		
 	}
 }
 
@@ -283,6 +292,7 @@ function lacands_deactivate() {
 }
 
 function lacands_main() {
+	lacands_init();
 	register_activation_hook( __FILE__, 'lacands_activate' );
 	add_action ( 'admin_menu',  'lacands_wp_admin') ;
 	add_filter ( 'the_content', 'lacands_wp_filter_post_content');
