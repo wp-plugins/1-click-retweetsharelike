@@ -33,10 +33,28 @@ For Manually positioning the 1-click Retweet/Share/Like on your blog you need to
 2. On admin page for this plugin ('1-click Retweet/Share/Like'), check the box next to "Disable displaying 1-click Retweet/Share/Like (for Manual Option Only - see readme.txt)" under "1-Click Social Widget Position & Colors" and submit by clicking on 'Save Changes'.
 
 
+**Admin Options**
+
+* Option to show the buttons at top, bottom, or both top and bottom of the blog post
+* Option to set margins for the buttons
+* Option to place the buttons manually
+* Select pages on which buttons should be visible: home and archive (default: single/home/archive)
+* Select Font Styles for Retweet/Share/Like: arial, tahoma, lucida grande, segoe ui, trebuchet ms, verdana
+* Select Counter Colors (any color) for Retweet and Facebook Share (For Facebook Like, option not available from Facebook)
+* Option to change 'Like' text to 'Recommend'
+
+
 **Misc**
 
 * For getting support, email us at: discuss@linksalpha.com
 * Note: We encourage you to download the latest version of the plugin as soon as it becomes available - as it may have additional extremely useful features for your blog.
+
+
+**Check out Network Publisher plugin:**
+
+* `Automatically Publishes` your `Blog Posts to Social Networks`: Facebook Profile, Facebook Pages, Twitter, LinkedIn, Yahoo, Yammer, Identi.ca, and MySpace. 
+* Download plugin from http://wordpress.org/extend/plugins/network-publisher/
+* Plugin also supports `Publishing your Blog Posts to Twitter` via `OAuth`
 
 
 == Installation ==
