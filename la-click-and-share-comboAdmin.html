@@ -8,6 +8,76 @@
 		     1-click Retweet/Share/Like
 		</h1>			
 		
+		<div class="outsideBorder">
+			<span style="font-weight: bold; font-size: 14px;"> Auto Publish to Social Networks (enter API key) </span>
+
+			<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
+			<div style="font-size: 11px;">
+				Enter API key to automatically publish your blog posts on 20+ Social Networks including Twitter, Facebook Profile, Facebook Pages, Google Buzz, LinkedIn, MySpace, Yammer, Yahoo, Identi.ca, etc.
+				<br/>Once setup, your Blog posts content automatically appears on the social networks as soon as you hit the Wordpress Publish button.
+				<br/><a href="http://www.linksalpha.com/user/networks" target="_blank">Click here</a> to get API Keys for your Social Networks.
+				You can <a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank">read more about this process at LinksAlpha.com</a>.
+			</div>
+
+			<div>
+				<div id="la-networkpub_msg"></div>
+				<div class="rts_header"></div>
+				<table style="width:100%;">
+					<tr><td style="width:800px;">
+						<table style="width:800px;">
+							<tr><td style="padding-bottom:40px;">
+								<div class="rts_header2"><big><strong>Setup</strong></big></div>
+								<div style="padding-left:0px;">
+									<div class="la_content_box">
+										<form action="" method="post" id="networkpubadd" name="networkpubadd" style="width:90%;">
+											<fieldset class="rts_fieldset">
+												<legend>Additional API Key</legend>
+												<div>
+													<label for="<?php echo $field_name ?>"><?php echo $lacandsnw_networkpub_settings[$curr_field]['label'] ?>&nbsp;</label>
+												</div>
+												<div style="padding-bottom:10px">
+													<a href="http://www.linksalpha.com/user/networks" target="_blank" style="color:red">Click here</a> <b>to get API Key</b> and enter it in the box below. <br/>
+													<input style="width:400px; border-color:#ffd050" class="widefat" id="<?php echo $field_name ?>" name="<?php echo $field_name ?>" type="text" />
+												</div>
+												<div>
+													You need to get key from LinksAlpha and copy it here. You CANNOT generate your own key.
+													<a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank">Read more about the simple and quick process here</a>.
+												</div>
+											</fieldset>
+											<div style="padding-top:20px;"><input type="submit" name="AddAPIKey" class="button-primary" value="Add API Key" /></div>
+											<input type="hidden" value="<?php echo LACANDS_PLUGIN_URL ?>" id="la-networkpub_plugin_url" />
+										</form>
+									</div>
+								</div>
+							</td></tr>
+							<tr><td style="padding:0px 0px 0px 0px;vertical-align:top;">
+								<div class="rts_header2"><big><strong>Currently Publishing</strong></big></div>
+								<div id="la-idAPIBox">
+								 <?php echo lacandsnw_networkpub_load() ?>
+								</div>
+							</td></tr>
+						</table>
+					</td></tr>
+				</table>
+
+				<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+					<input type="hidden" name="warning_msg" id="warning_msg" value="true" />
+
+					<div style="margin: 20px 10px 10px 10px; font-size:13px">
+						<input name="lacandsnw-html-warning-msg" type="checkbox"<?php if($lacandsnw_opt_warning_msg != "0") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; Do NOT show warning message: '1-click Retweet/Share/Like plugin is almost ready'
+						<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Warning Msg change' ); ?>" />
+					</div>
+				</form>
+
+				<div style="font-size:14px; margin: 50px 10px 10px 10px;">
+ 			  		Note: If you decide to stop using this functionality permanently (after adding API key even once), pls also remove your blog URL by logging into <a href="http://www.linksalpha.com/user/tracked" target="_blank">http://www.linksalpha.com/user/tracked</a>.
+ 			  	Otherwise, your blog posts may continue to get posted even after you do not use this functionality. If you have questions, pls email us at discuss@linksalpha.com.
+			  	</div>
+
+			</div>
+		</div>
+		
+		
 		<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 			<input type="hidden" name="lacands_widget_update" id="lacands_widget_update" value="true" />
 			

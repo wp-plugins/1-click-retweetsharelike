@@ -1,17 +1,46 @@
 === Plugin Name ===
 
 Contributors: LinksAlpha
-Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social.
+Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer.
 Requires at least: 2.0.2
-Tested up to: 3.0.0
-Stable tag: 2.0.1
+Tested up to: 3.0.1
+Stable tag: 3.0.0
 
 
 == Description ==
 
-Lets users Retweet, Share and Like pages from your site back to their Twitter followers and Facebook friends with just one click. *The user experience is similar to Facebook Like button but expanded to Twitter and Facebook Share as well ! Screenshot: http://cdn.linksalpha.com/static/1clickwidget.png*
+Lets users Retweet, Share and Like pages from your site back to their Twitter followers and Facebook friends with just one click. *The user experience is similar to Facebook Like button but expanded to Twitter and Facebook Share as well ! Screenshot: http://cdn.linksalpha.com/static/1clickwidget.png*. You can interact with the plugin at http://dev30.linksalpha.com/?p=8
 
-**Plugin allows 1-click sharing for best user experience for the most popular social networks:**
+Plugin also enables you to `Automatically Publish` your `Blog Posts to 20+ Social Networks`.
+
+1. Facebook Profile
+1. Facebook Pages
+1. Twitter
+1. LinkedIn
+1. MySpace
+1. Yammer
+1. Yahoo
+1. Identi.ca
+1. Blogger
+1. Brightkite
+1. Delicious
+1. Diigo
+1. Foursquare
+1. Google Buzz
+1. Plurk
+1. Posterous
+1. Sonico
+1. Tumblr
+1. Typepad
+1. Windows Live
+1. Yahoo
+1. Yahoo Meme
+1. Yammer
+
+Plugin also supports `Publishing your Blog Posts to Twitter` via `OAuth`. Go to http://www.linksalpha.com/publish for a quick 2mins. setup.
+
+
+**List of Features**
 
 * 1-click Retweet
 * 1-click Facebook Share
@@ -19,8 +48,16 @@ Lets users Retweet, Share and Like pages from your site back to their Twitter fo
 * Displays counts next to the buttons
 * Offers consistent UI: aligned buttons and uniform color selection
 * Gives visual indication after the blog post is Retweeted/Shared/Liked. See screenshot at http://cdn.linksalpha.com/static/1clickedwidget.png
+* View Weekly Stats to track total number of Blog Posts, Tweets, Bitly Clicks, Facebook Comments, Facebook Likes, and Facebook Shares.
+* View status of your blog posts to each social network - whether the blog post has been published, when it was published, etc. 
+* Using advanced features such as categories, automatically post selected blog posts to a subset of social networks.
 
-You can interact with the plugin at http://dev30.linksalpha.com/?p=8
+
+**Benefits**
+
+* Enable your users to retweet, share and like your blog posts to their Twitter followers and Facebook friends.
+* Keep your fans, followers, and connections automatically updated on your blog posts.
+* Expand your blog reach and save time by letting the plugin publish your blog posts - automatically.
 
 
 **Manual positioning**
@@ -50,18 +87,9 @@ For Manually positioning the 1-click Retweet/Share/Like on your blog you need to
 * Note: We encourage you to download the latest version of the plugin as soon as it becomes available - as it may have additional extremely useful features for your blog.
 
 
-**Check out Network Publisher plugin:**
-
-* `Automatically Publishes` your `Blog Posts to Social Networks`: Facebook Profile, Facebook Pages, Twitter, LinkedIn, Yahoo, Yammer, Identi.ca, and MySpace. 
-* Download plugin from http://wordpress.org/extend/plugins/network-publisher/
-* Plugin also supports `Publishing your Blog Posts to Twitter` via `OAuth`
-
-
 == Installation ==
 1. Upload la-click-and-share.zip to '/wp-content/plugins/' directory and unzip it.
 2. Activate the Plugin from "Manage Plugins" window
-
-For support email us at: discuss@linksalpha.com. 
 
 
 == Frequently Asked Questions ==
@@ -81,17 +109,10 @@ Email us at discuss@linksalpha.com
 
 == Screenshots ==
 1. Social 1-click Retweet/Share/Like buttons
+2. List of supported networks for automatic publishing
 
 
 == Changelog ==
-= 2.0.1 =
+= 3.0.0 =
 
-Multiple fixes and enhancements
-
-* Fix for iframe - as for some themes it was taking more space
-* Fix for sharing URLs with international languages (i.e., other than English)
-* Option to select pages on which buttons should be visible: home, single page, archive
-* Option to select Font Styles for Retweet/Share/Like: arial, tahoma, lucida grande, segoe ui, trebuchet ms, verdana
-* Option to select Counter Colors (any color) for Retweet and Facebook Share (For Facebook Like, option not available from Facebook)
-* Option to change 'Like' to show as text 'Recommend'
-* Text for 'Share' changes to 'Shared' after the article is shared
+* New functionality: ability to Automatically Publish your blog posts to 20+ social networks!

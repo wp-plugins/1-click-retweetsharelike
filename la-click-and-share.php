@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: 1-click Retweet/Share/Like
-Plugin URI: http://wwww.linksalpha.com/
-Description: 1-click Retweet/Share/Like. Similar to Facebook Like button, but expanded to Twitter Retweet and Facebook Share as well! Email us at discuss@linksalpha.com if you have any queries or suggestions. <a href="http://help.linksalpha.com/1-click-retweet-share-like/faqs" target="_blank">FAQs</a>.
+Plugin URI: http://wwww.linksalpha.com/publish
+Description: 1-click Retweet/Share/Like. Similar to Facebook Like. Additionally, Automatically publish your blog posts to 20+ Social Networks including Twitter, Facebook Profile, Facebook Pages, LinkedIn, MySpace, Yammer, Yahoo, Identi.ca, and <a href="http://www.linksalpha.com/user/networks" target="_blank">more</a>. <a href="http://help.linksalpha.com/wordpress-plugin-network-publisher">Instructions</a>. Email: discuss@linksalpha.com. <a href="http://help.linksalpha.com/" target="_blank">Help</a>.
 Author: LinksAlpha
-Author URI: http://linksalpha.com
-Version: 2.0.1
+Author URI: http://www.linksalpha.com/publish
+Version: 3.0.0
 */
 
 /*
@@ -27,10 +27,21 @@ Version: 2.0.1
 */
 
 require("la-click-and-share-utility-fns.php");
+require("la-click-and-share-networkpub.php");
 
 define('LACANDS_PLUGIN_URL', lacands_get_plugin_dir());
+define('LACANDSNW_WIDGET_NAME_INTERNAL', 'lacandsnw_networkpub');
+define('LACANDSNW_WIDGET_PREFIX',        'lacandsnw_networkpub');
+define('LACANDSNW_NETWORKPUB', 'Automatically publish your blog posts to 20+ Social Networks including Facebook,Twitter,LinkedIn,Yahoo,Yammer,MySpace,Identi.ca');
+define('LACANDSNW_ERROR_INTERNAL',       'internal error');
+define('LACANDSNW_ERROR_INVALID_URL',    'invalid url');
+define('LACANDSNW_ERROR_INVALID_KEY',    'invalid key');
 
-$lacands_version_number = '2.0.1';
+$lacandsnw_networkpub_settings['api_key'] = array('label'=>'API Key:', 'type'=>'text', 'default'=>'');
+$lacandsnw_networkpub_settings['id']      = array('label'=>'id', 'type'=>'text', 'default'=>'');
+$lacandsnw_options                        = get_option(LACANDSNW_WIDGET_NAME_INTERNAL);
+
+$lacands_version_number = '3.0.0';
 
 function lacands_init() {
 	global $lacands_version_number;
@@ -47,7 +58,7 @@ function lacands_readOptionsValuesFromWPDatabase() {
 	global $lacands_opt_widget_counters_location, $lacands_widget_disable_cntr_display;
 	global $lacands_opt_widget_margin_top, $lacands_opt_widget_margin_right, $lacands_opt_widget_margin_bottom, $lacands_opt_widget_margin_left;
 	global $lacands_opt_cntr_font_color, $lacands_opt_widget_fb_like, $lacands_opt_widget_font_style;
-	global $lacands_display_pages, $lacands_like_layout;
+	global $lacands_display_pages, $lacands_like_layout, $lacandsnw_opt_warning_msg;
 
 	$lacands_opt_widget_counters_location     = get_option('lacands-html-widget-counters-location');
 	$lacands_opt_widget_margin_top            = get_option('lacands-html-widget-margin-top');
@@ -60,6 +71,7 @@ function lacands_readOptionsValuesFromWPDatabase() {
 	$lacands_opt_widget_font_style            = get_option('lacands-html-widget-font-style');
 	$lacands_display_pages            		  = get_option('lacands-html-display-pages');
 	$lacands_like_layout            		  = get_option('lacands-html-like-layout');
+	$lacandsnw_opt_warning_msg                = get_option('lacandsnw-html-warning-msg');
 }
 
 function lacands_writeOptionsValuesToWPDatabase($option) {
@@ -85,6 +97,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		add_option('lacands-html-display-pages', $lacands_display_pages);
 		add_option('lacands-html-like-layout', 'button_count');
 		update_option('lacands-html-version-number', $lacands_version_number);
+		add_option('lacandsnw-html-warning-msg', '0');
 	}
 	else if ($option == 'update')
 	{
@@ -166,9 +179,19 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 	    if(!empty($_POST['lacands-html-like-layout'])) {
 	    	update_option('lacands-html-like-layout', (string)$_POST['lacands-html-like-layout']);
 	    }
+	    
+		if (isset($_POST['warning_msg'])) {
+			if(!empty($_POST['lacandsnw-html-warning-msg'])) {
+				update_option('lacandsnw-html-warning-msg',  (string)$_POST['lacandsnw-html-warning-msg']);
+			}
+			else {
+				update_option('lacandsnw-html-warning-msg', '0');
+			}
+		}	    
 	}
 	else {
-		/*		
+		
+		/*
 		delete_option('lacands-html-widget-counters-location');
 		delete_option('lacands-html-widget-margin-top');
 		delete_option('lacands-html-widget-margin-right');
@@ -181,6 +204,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		delete_option('lacands-html-display-pages');
 		delete_option('lacands-html-like-layout');
 		delete_option('lacands-html-version-number');
+		delete_option('lacandsnw-html-warning-msg');
 		*/		
 	}
 }
@@ -188,7 +212,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 function lacands_wp_filter_post_content ( $related_content ) {
 	global $lacands_opt_widget_counters_location;
 	global $lacands_widget_disable_cntr_display;
-
+	
 	$lacands_widget_disable_cntr_display  = get_option('lacands-html-widget-disable-cntr-display');
 	$lacands_opt_widget_counters_location = get_option('lacands-html-widget-counters-location');
 
@@ -257,6 +281,8 @@ function lacands_wp_admin_options_settings () {
 	global $lacands_opt_widget_margin_top, $lacands_opt_widget_margin_right, $lacands_opt_widget_margin_bottom, $lacands_opt_widget_margin_left;
 	global $lacands_opt_cntr_font_color, $lacands_opt_widget_fb_like, $lacands_opt_widget_font_style;
 	global $lacands_display_pages, $lacands_like_layout;
+	global $lacandsnw_networkpub_settings;
+	global $lacandsnw_opt_warning_msg;
 
     if (isset($_POST['lacands_widget_update']))
     {
@@ -269,7 +295,41 @@ function lacands_wp_admin_options_settings () {
     	echo '<div id="message" class="updated fade" style="width:1000px;"><p><strong>Settings saved for 1-click Retweet/Share/Like.</strong></p></div>';
 		echo '</strong></p></div>';
 	}
+	
+	if (isset($_POST['AddAPIKey']))
+    {
+    	if ( function_exists('current_user_can') && !current_user_can('manage_options') ) {
+			die(__('Cheatin&#8217; uh?'));
+		}
 
+		$field_name = sprintf('%s_%s', LACANDSNW_WIDGET_PREFIX, 'api_key');
+		$value = strip_tags(stripslashes($_POST[$field_name]));
+		if($value) {
+			$networkadd = lacandsnw_networkpub_add($value);
+		}
+	}
+	
+	if (isset($_POST['warning_msg']))
+    {
+      	if ( function_exists('current_user_can') && !current_user_can('manage_options') ) {
+			die(__('Cheatin&#8217; uh?'));
+		}
+
+		if(!empty($_POST['lacandsnw-html-warning-msg'])) {
+			update_option('lacandsnw-html-warning-msg',  (string)$_POST['lacandsnw-html-warning-msg']);
+		}
+		else {
+			update_option('lacandsnw-html-warning-msg', '0');
+		}
+
+    	echo '<div id="message" class="updated fade" style="width:1000px;"><p><strong>Warning Msg setting saved.</strong></p></div>';
+		echo '</strong></p></div>';
+	}
+	
+	$options    = get_option(LACANDSNW_WIDGET_NAME_INTERNAL);
+	$curr_field = 'api_key';
+	$field_name = sprintf('%s_%s', LACANDSNW_WIDGET_PREFIX, $curr_field);
+	
 	lacands_readOptionsValuesFromWPDatabase();
 
 	$lacands_combo_iconWidget = '<img border="0" style="vertical-align:middle; border:1px solid #C0C0C0  " src="'.LACANDS_PLUGIN_URL.'widget.png">';
@@ -291,11 +351,66 @@ function lacands_deactivate() {
 	lacands_writeOptionsValuesToWPDatabase('delete');
 }
 
+function lacands_warning() {
+	$options          = get_option(LACANDSNW_WIDGET_NAME_INTERNAL);	
+	$show_warning_msg = get_option('lacandsnw-html-warning-msg');
+
+	if( ($show_warning_msg == 1) || (!empty($options['api_key']) ) )
+	{
+		return;
+	}
+	else {
+		echo "<div id='1-click Retweet/Share/Like' class='updated fade' style='width:80%;'>
+		      <p>
+   			  	<strong>".__('<a href="http://wordpress.org/extend/plugins/1-click-retweetsharelike/" target="_blank">1-click Retweet/Share/Like</a> plugin is almost ready.')."</strong>
+			    <ol>
+		      ";
+
+		if(empty($options['api_key'])) {
+			if (!isset($_POST['AddAPIKey'])) {
+			    echo "<li>".sprintf(__('<div style="font-size:11px"><span style=color:#d12424;"><b>Pending:</b></span> For automatic posting of your blog articles to 20+ Social Networks including Twitter, Facebook Profile, Facebook Pages, LinkedIn, MySpace, Yammer, Yahoo, Identi.ca, you must <a href="%1$s">enter API key</a> (under Settings->1-click Retweet/Share/Like->Auto Publish on Social Networks)</div>'),
+				"options-general.php?page=1-click-retweetsharelike/la-click-and-share.php")."</li>";
+			}
+		}
+
+		if(!empty($options['api_key'])) {
+			    echo "<li>".sprintf(__('<div style="font-size:11px"><span style=color:#006633;"><b>Done:</b></span>
+			    <span style="color:#808080;">Automatic posting of your blog articles to 20+ Social Networks including Twitter, Facebook Profile, Facebook Pages, LinkedIn, MySpace, Yammer, Yahoo, Identi.ca</span></div>'),
+				"options-general.php?page=1-click-retweetsharelike/la-click-and-share.php")."</li>";
+		}
+
+		echo "<li> <div style='color: #006633;font-size:11px'><b>Done:</b> <span style='color:#808080;'>Displaying 1-click Retweet/Share/Like</span></div></li>
+		     ";
+
+		echo "<div style='color:#808080; font-size:11px'>To disable this message, go to Settings->1-click Retweet/Share/Like->'Auto Publish on Social Networks' and check the 'Warning box' and save changes. </div></div>";
+
+	}
+}
+
+
 function lacands_main() {
 	lacands_init();
+	
 	register_activation_hook( __FILE__, 'lacands_activate' );
+	
+	wp_register_script('lacandsjs', LACANDS_PLUGIN_URL.'la-click-and-share.js');
+	wp_enqueue_script ('lacandsjs');	
+	
+	wp_register_script('swfobjectjs', LACANDS_PLUGIN_URL.'swfobject.js');
+	wp_enqueue_script ('swfobjectjs');
+	
+	wp_register_style ('lacandsnetworkpubcss', LACANDS_PLUGIN_URL.'la-click-and-share-networkpub.css');
+	wp_enqueue_style  ('lacandsnetworkpubcss');
+	
 	add_action ( 'admin_menu',  'lacands_wp_admin') ;
+	add_action ( 'admin_notices',                    'lacands_warning');
+	
+	add_action ( 'init',                             'lacandsnw_networkpub_ajax');
+	add_action ( '{$new_status}_{$post->post_type}', 'lacandsnw_networkping');
+	add_action ( 'publish_post',                     'lacandsnw_networkping');
+		
 	add_filter ( 'the_content', 'lacands_wp_filter_post_content');
+	
 	register_deactivation_hook( __FILE__, 'lacands_deactivate' );
 }
 
