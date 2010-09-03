@@ -332,4 +332,21 @@ function lacandsnw_error_msgs($errMsg) {
 	}	
 }
 
+function lacandsnw_pushpresscheck() {
+	$active_plugins = get_option('active_plugins');
+	$pushpress_plugin = 'pushpress/pushpress.php';
+	$this_plugin_key = array_search($pushpress_plugin, $active_plugins);
+	if ($this_plugin_key) {
+		$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
+		if(array_key_exists('lacandsnw_id', $options)) {
+			if($options['lacandsnw_id']) {
+				$link = 'http://www.linksalpha.com/a/pushpress';
+				$body = array('id'=>$options['lacandsnw_id']);
+				$response_full = lacandsnw_networkpub_http_post($link, $body);
+				$response_code = $response_full[0];	
+			}	
+		}
+	}
+}
+
 ?>

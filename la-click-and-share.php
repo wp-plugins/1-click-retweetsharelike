@@ -5,7 +5,7 @@ Plugin URI: http://wwww.linksalpha.com/publish
 Description: 1-click Retweet/Share/Like. Similar to Facebook Like. Additionally, Automatically publish your blog posts to 20+ Social Networks including Twitter, Facebook Profile, Facebook Pages, LinkedIn, MySpace, Yammer, Yahoo, Identi.ca, and <a href="http://www.linksalpha.com/user/networks" target="_blank">more</a>. <a href="http://help.linksalpha.com/wordpress-plugin-network-publisher">Instructions</a>. Email: discuss@linksalpha.com. <a href="http://help.linksalpha.com/" target="_blank">Help</a>.
 Author: LinksAlpha
 Author URI: http://www.linksalpha.com/publish
-Version: 3.0.0
+Version: 3.1.0
 */
 
 /*
@@ -69,8 +69,8 @@ function lacands_readOptionsValuesFromWPDatabase() {
 	$lacands_opt_cntr_font_color              = get_option('lacands-html-cntr-font-color');
 	$lacands_opt_widget_fb_like               = get_option('lacands-html-widget-fb-like');
 	$lacands_opt_widget_font_style            = get_option('lacands-html-widget-font-style');
-	$lacands_display_pages            		  = get_option('lacands-html-display-pages');
-	$lacands_like_layout            		  = get_option('lacands-html-like-layout');
+	$lacands_display_pages            	  = get_option('lacands-html-display-pages');
+	$lacands_like_layout            	  = get_option('lacands-html-like-layout');
 	$lacandsnw_opt_warning_msg                = get_option('lacandsnw-html-warning-msg');
 }
 
@@ -409,10 +409,15 @@ function lacands_main() {
 	add_action ( '{$new_status}_{$post->post_type}', 'lacandsnw_networkping');
 	add_action ( 'publish_post',                     'lacandsnw_networkping');
 		
+	add_action('activate_{$plugin}', 'lacandsnw_pushpresscheck');
+	add_action("activated_plugin", "lacandsnw_pushpresscheck");
+	
 	add_filter ( 'the_content', 'lacands_wp_filter_post_content');
 	
 	register_deactivation_hook( __FILE__, 'lacands_deactivate' );
 }
+
+
 
 lacands_main();
 

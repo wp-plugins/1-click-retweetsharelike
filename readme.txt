@@ -4,14 +4,14 @@ Contributors: LinksAlpha
 Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer.
 Requires at least: 2.0.2
 Tested up to: 3.0.1
-Stable tag: 3.0.0
+Stable tag: 3.1.0
 
 
 == Description ==
 
 Lets users Retweet, Share and Like pages from your site back to their Twitter followers and Facebook friends with just one click. *The user experience is similar to Facebook Like button but expanded to Twitter and Facebook Share as well ! Screenshot: http://cdn.linksalpha.com/static/1clickwidget.png*. You can interact with the plugin at http://dev30.linksalpha.com/?p=8
 
-Plugin also enables you to `Automatically Publish` your `Blog Posts to 20+ Social Networks`.
+Plugin also enables you to `Automatically Publish` your `Blog Posts to 20+ Networks`.
 
 1. Facebook Profile
 1. Facebook Pages
@@ -20,6 +20,8 @@ Plugin also enables you to `Automatically Publish` your `Blog Posts to 20+ Socia
 1. MySpace
 1. Yammer
 1. Yahoo
+1. Yahoo Meme
+1. Status.net
 1. Identi.ca
 1. Blogger
 1. Brightkite
@@ -32,10 +34,8 @@ Plugin also enables you to `Automatically Publish` your `Blog Posts to 20+ Socia
 1. Sonico
 1. Tumblr
 1. Typepad
-1. Windows Live
-1. Yahoo
-1. Yahoo Meme
-1. Yammer
+1. Wordpress.com
+1. Wordpress.org self-hosted Blog
 
 Plugin also supports `Publishing your Blog Posts to Twitter` via `OAuth`. Go to http://www.linksalpha.com/publish for a quick 2mins. setup.
 
@@ -49,8 +49,8 @@ Plugin also supports `Publishing your Blog Posts to Twitter` via `OAuth`. Go to 
 * Offers consistent UI: aligned buttons and uniform color selection
 * Gives visual indication after the blog post is Retweeted/Shared/Liked. See screenshot at http://cdn.linksalpha.com/static/1clickedwidget.png
 * View Weekly Stats to track total number of Blog Posts, Tweets, Bitly Clicks, Facebook Comments, Facebook Likes, and Facebook Shares.
-* View status of your blog posts to each social network - whether the blog post has been published, when it was published, etc. 
-* Using advanced features such as categories, automatically post selected blog posts to a subset of social networks.
+* View status of your blog posts to each network - whether the blog post has been published, when it was published, etc. 
+* Using advanced features such as categories, automatically post selected blog posts to a subset of networks.
 
 
 **Benefits**
@@ -113,6 +113,12 @@ Email us at discuss@linksalpha.com
 
 
 == Changelog ==
+
+= 3.1.0 =
+
+* Plugin now uses official Twitter button instead of ReTweet button from LinksAlpha.com
+* Plugin now detects if user has PuSHPress plugin installed. Helps in faster publishing
+
 = 3.0.0 =
 
-* New functionality: ability to Automatically Publish your blog posts to 20+ social networks!
+* New functionality: ability to Automatically Publish your blog posts to 20+ Networks!
