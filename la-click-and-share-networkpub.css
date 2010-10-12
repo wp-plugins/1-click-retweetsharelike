@@ -24,5 +24,7 @@ div.rts_tweet_box div table td img{height:35px;width:35px;border:2px solid #FFF;
 div#rts_tweets_load_button {text-align:center;}
 #rts_tweets_load {background-color:#eceff5;border-top:1px solid #d8dfea;border-left:1px solid #d8dfea;border-bottom:1px solid #7f93bc;border-right:1px solid #7f93bc;}
 
-.msg_success {text-align:left;background-color:#d8dfea;padding:5px 10px 5px 10px;font-weight:bold;font-size:12px;  width:825px;}
+.msg_success {text-align:center;background-color:#d8dfea;padding:5px 10px 5px 10px;font-weight:bold;font-size:12px;  width:900px;margin:10px;}
 .msg_error {text-align:left;background-color:#ffebe8;padding:5px 10px 5px 10px;font-weight:normal;font-size:11px; border: 1px solid #dd3c10; width:825px; margin-left:10px; margin-top:10px;}
+
+#la-networkpub_msg {background-color:#FFF8CC;border:1px solid #FFE222;text-align:center;font-size:13px;width:905px;padding:5px 0px 5px 0px;}

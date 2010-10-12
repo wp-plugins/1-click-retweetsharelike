@@ -15,6 +15,8 @@ jQuery(document).ready(function()
 	});
 
 	jQuery(".lanetworkpubre").live("click", function(e) {
+		jQuery("#la-networkpub_msg").css('display', 'block');
+		jQuery("#la-networkpub_msg").html('Removing...');	
 		var key = jQuery(this).attr("id");
 		if(key) {
 			jQuery.post(blog_url+"la-click-and-share-networkpub_ajax.php", {key:key, type:'remove'}, function(data) {
@@ -22,7 +24,8 @@ jQuery(document).ready(function()
 					jQuery("#la-networkpub_msg").html('<div class="msg_error">Error occured while removing the API Key. As a workaround, you can remove this publishing at the following link: <a href="http://www.linksalpha.com/user/publish">LinksAlpha Publisher</a> </div>');
 				} else {
 					jQuery("#r_"+key).remove();
-					jQuery("#la-networkpub_msg").html('<div class="msg_success">API Key has been removed successfully</div>');	
+					jQuery("#la-networkpub_msg").css('display', 'block');
+					jQuery("#la-networkpub_msg").html('API Key has been removed successfully');	
 				}
 		    });
 		} 

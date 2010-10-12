@@ -1,41 +1,48 @@
 === Plugin Name ===
 
 Contributors: LinksAlpha
-Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer.
+Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack
 Requires at least: 2.0.2
 Tested up to: 3.0.1
-Stable tag: 3.1.0
+Stable tag: 3.5.0
 
 
 == Description ==
 
 Lets users Retweet, Share and Like pages from your site back to their Twitter followers and Facebook friends with just one click. *The user experience is similar to Facebook Like button but expanded to Twitter and Facebook Share as well ! Screenshot: http://cdn.linksalpha.com/static/1clickwidget.png*. You can interact with the plugin at http://dev30.linksalpha.com/?p=8
 
-Plugin also enables you to `Automatically Publish` your `Blog Posts to 20+ Networks`.
+Plugin also enables you to `Automatically Publish` your `Blog Posts to 30 Networks`.
 
-1. Facebook Profile
+1. Facebook Profile/Wall
 1. Facebook Pages
+1. Facebook Application Page
+1. Facebook Events
+1. Facebook Groups
 1. Twitter
 1. LinkedIn
 1. MySpace
 1. Yammer
 1. Yahoo
-1. Yahoo Meme
-1. Status.net
 1. Identi.ca
-1. Blogger
-1. Brightkite
+1. Status.net
+1. Google Buzz
+1. Socialcast
+1. Plurk
+1. Sonico
 1. Delicious
 1. Diigo
 1. Foursquare
-1. Google Buzz
-1. Plurk
-1. Posterous
-1. Sonico
+1. Gowalla
+1. Brightkite
+1. Wordpress.com Blog
+1. Wordpress.org Blog
+1. Blogger
 1. Tumblr
 1. Typepad
-1. Wordpress.com
-1. Wordpress.org self-hosted Blog
+1. Posterous
+1. Yahoo Meme
+1. Basecamp
+1. Backpack
 
 Plugin also supports `Publishing your Blog Posts to Twitter` via `OAuth`. Go to http://www.linksalpha.com/publish for a quick 2mins. setup.
 
@@ -114,6 +121,12 @@ Email us at discuss@linksalpha.com
 
 == Changelog ==
 
+= 3.5.0 =
+
+* Options added for Facebook Like button
+* Options added for Twitter button
+* Options added for Publishing
+
 = 3.1.0 =
 
 * Plugin now uses official Twitter button instead of ReTweet button from LinksAlpha.com
@@ -121,4 +134,4 @@ Email us at discuss@linksalpha.com
 
 = 3.0.0 =
 
-* New functionality: ability to Automatically Publish your blog posts to 20+ Networks!
+* New functionality: ability to Automatically Publish your blog posts to 30 Networks!

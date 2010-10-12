@@ -1,4 +1,5 @@
 <?php  
+
 function lacands_get_plugin_dir() {
 	if ( version_compare($wp_version, '2.8', '<') ) {
 		$path = dirname(plugin_basename(__FILE__));

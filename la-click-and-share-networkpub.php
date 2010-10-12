@@ -93,12 +93,13 @@ function lacandsnw_networkpub_load() {
 		echo $html;
 		return;
 	}
-	$html = '<div style="padding:10px ;">You are currently Publishing your Blog to '.count($response->results).' Social Networks</div>';
-	$html .= '<table class="networkpub_added"><tr><th>API Key</th><th>Network</th><th>Option</th></tr>';
+	$html = '<div style="padding:0px 10px 10px 10px;">You are currently Publishing your Blog to '.count($response->results).' Social Networks</div>';
+	$html .= '<table class="networkpub_added"><tr><th>API Key</th><th>Network</th><th>Option</th><th>Remove</th></tr>';
 	if (count($response->results)) {
 		foreach($response->results as $row) {
 			$html .= '<tr id="r_key_'.$row->api_key.'">';
-			$html  .= '<td>'.$row->api_key.'</td><td><a href="'.$row->profile_url.'">'.$row->name.'</a></td>';
+			$html .= '<td>'.$row->api_key.'</td><td><a href="'.$row->profile_url.'">'.$row->name.'</a></td>';
+			$html .= '<td style="text-align:center;"><a href="http://www.linksalpha.com/a/networkpuboptions?api_key='.$row->api_key.'&id='.$options['lacandsnw_id'].'&KeepThis=true&TB_iframe=true&height=430&width=650" title="Publish Options" class="thickbox" type="button" />Options</a></td>';
 			$html .= '<td><a href="#" id="key_'.$row->api_key.'" class="lanetworkpubre">Remove</a></td></tr>';
 		}
 	} else {
@@ -122,36 +123,30 @@ function lacandsnw_networkpub_ajax() {
 	}
 }
 
-function lacandsnw_networkpub_remove($key_full) {
+function lacandsnw_networkpub_remove() {
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
-		
-	if ($key_full) {	
-		$key_only = substr($key_full, 4);
+	if (!empty($_POST['key'])) {
+		$key_full = $_POST['key'];
+		$key_only = trim(substr($key_full, 4));
 		$link = 'http://www.linksalpha.com/a/networkpubremove?id='.$options['lacandsnw_id'].'&key='.$key_only;
 		$response_full = lacandsnw_networkpub_http($link);
 		$response_code = $response_full[0];
-		
 		if ($response_code != 200) {
 			$errdesc = lacandsnw_error_msgs($response_full[1]); 
 			echo $errdesc;		
 			return FALSE;
 		}
-		
 		$api_key = $options['api_key'];
 		$api_key_array = explode(',', $api_key);
-		$loc = array_search($key_only, $api_key_array);
-		
+		$loc = array_search($key_only, $api_key_array, True);
 		if($loc !== FALSE) {
 			unset($api_key_array[$loc]);
 		}
-		
 		$api_key = implode(",", $api_key_array);
 		$options['api_key'] = $api_key;
 		update_option(LAECHONW_WIDGET_NAME_INTERNAL, $options);
-		
-		print_r($options);
-		
-		return $key_full;
+		echo $key_full;
+		return;
 	}
 }
 

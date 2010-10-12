@@ -1,172 +1,233 @@
-<html>
-	<style type="text/css">	
-		.outsideBorder {width:1000px;height:auto;border-width:1px;border-color:gray;border-style:solid;margin:10px; padding:10px;}				
-	</style>
+<style type="text/css">	
+.outsideBorder {width:1000px;height:auto;border-width:1px;border-color:gray;border-style:solid;margin:10px; padding:10px;}				
+</style>
 
-	<body>	
-		<h1> <a href="http://www.linksalpha.com" style="margin:10px"><img src="http://www.linksalpha.com/favicon.ico" style="width:16px; height=16px"/></a>
-		     1-click Retweet/Share/Like
-		</h1>			
-		
-		<div class="outsideBorder">
-			<span style="font-weight: bold; font-size: 14px;"> Auto Publish to Social Networks (enter API key) </span>
+<h1><a href="http://www.linksalpha.com" style="margin:10px"><img src="http://www.linksalpha.com/favicon.ico" style="width:16px; height=16px"/></a>
+	 1-click Retweet/Share/Like
+</h1>
 
-			<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
-			<div style="font-size: 11px;">
-				Enter API key to automatically publish your blog posts on 20+ Social Networks including Twitter, Facebook Profile, Facebook Pages, Google Buzz, LinkedIn, MySpace, Yammer, Yahoo, Identi.ca, etc.
-				<br/>Once setup, your Blog posts content automatically appears on the social networks as soon as you hit the Wordpress Publish button.
-				<br/><a href="http://www.linksalpha.com/user/networks" target="_blank">Click here</a> to get API Keys for your Social Networks.
-				You can <a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank">read more about this process at LinksAlpha.com</a>.
-			</div>
+<div class="outsideBorder">
+	<span style="font-weight: bold; font-size: 14px;"> Auto Publish to Social Networks (enter API key) </span>
 
-			<div>
-				<div id="la-networkpub_msg"></div>
-				<div class="rts_header"></div>
-				<table style="width:100%;">
-					<tr><td style="width:800px;">
-						<table style="width:800px;">
-							<tr><td style="padding-bottom:40px;">
-								<div class="rts_header2"><big><strong>Setup</strong></big></div>
-								<div style="padding-left:0px;">
-									<div class="la_content_box">
-										<form action="" method="post" id="networkpubadd" name="networkpubadd" style="width:90%;">
-											<fieldset class="rts_fieldset">
-												<legend>Additional API Key</legend>
-												<div>
-													<label for="<?php echo $field_name ?>"><?php echo $lacandsnw_networkpub_settings[$curr_field]['label'] ?>&nbsp;</label>
-												</div>
-												<div style="padding-bottom:10px">
-													<a href="http://www.linksalpha.com/user/networks" target="_blank" style="color:red">Click here</a> <b>to get API Key</b> and enter it in the box below. <br/>
-													<input style="width:400px; border-color:#ffd050" class="widefat" id="<?php echo $field_name ?>" name="<?php echo $field_name ?>" type="text" />
-												</div>
-												<div>
-													You need to get key from LinksAlpha and copy it here. You CANNOT generate your own key.
-													<a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank">Read more about the simple and quick process here</a>.
-												</div>
-											</fieldset>
-											<div style="padding-top:20px;"><input type="submit" name="AddAPIKey" class="button-primary" value="Add API Key" /></div>
-											<input type="hidden" value="<?php echo LACANDS_PLUGIN_URL ?>" id="la-networkpub_plugin_url" />
-										</form>
-									</div>
-								</div>
-							</td></tr>
-							<tr><td style="padding:0px 0px 0px 0px;vertical-align:top;">
-								<div class="rts_header2"><big><strong>Currently Publishing</strong></big></div>
+	<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
+	<div style="font-size: 12px;">
+		Enter API key to automatically publish your blog posts on 30 Social Networks including Twitter, Facebook Profile, Facebook Pages, Google Buzz, LinkedIn, MySpace, Yammer, Yahoo, Identi.ca, etc.
+		<br/>Once setup, your Blog posts content automatically appears on the social networks as soon as you hit the Wordpress Publish button.
+		<br/><br/><a href="http://www.linksalpha.com/user/networks" target="_blank">Click here</a> to get API Keys for your Social Networks.
+		You can <a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank">read more about this process at LinksAlpha.com</a>.
+	</div>
+	
+	<div>
+		<div class="rts_header"></div>
+		<table style="width:100%;">
+			<tr><td style="width:800px;">
+				<table style="width:800px;">
+					<tr>
+						<td style="padding-bottom:10px;">
+							<div class="rts_header2"><big><strong>Setup</strong></big></div>
+							<div class="la_content_box">
+								<form action="" method="post" id="networkpubadd" name="networkpubadd" style="width:90%;">
+									<fieldset class="rts_fieldset">
+										<legend>Additional API Key</legend>
+										<div>
+											<label for="<?php echo $field_name ?>"><?php echo $lacandsnw_networkpub_settings[$curr_field]['label'] ?>&nbsp;</label>
+										</div>
+										<div style="padding-bottom:10px">
+											<a href="http://www.linksalpha.com/user/networks" target="_blank" style="color:red">Click here</a> <b>to get API Key</b> and enter it in the box below. <br/>
+											<input style="width:400px; border-color:#ffd050" class="widefat" id="<?php echo $field_name ?>" name="<?php echo $field_name ?>" type="text" />
+										</div>
+										<div>
+											You need to get key from LinksAlpha and copy it here. You CANNOT generate your own key.
+											<a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank">Read more about the simple and quick process here</a>.
+										</div>
+									</fieldset>
+									<div style="padding-top:20px;"><input type="submit" name="AddAPIKey" class="button-primary" value="Add API Key" /></div>
+									<input type="hidden" value="<?php echo LACANDS_PLUGIN_URL ?>" id="la-networkpub_plugin_url" />
+								</form>
+							</div>
+							
+						</td>
+					</tr>
+					<tr>
+						<td style="padding:0px 0px 0px 0px;vertical-align:top;">
+							<div style="height:25px;margin-bottom:10px;">
+								<div id="la-networkpub_msg" style="display:none;"></div>
+							</div>
+							<div class="rts_header2"><big><strong>Currently Publishing</strong></big></div>
+							<div class="la_content_box">
 								<div id="la-idAPIBox">
 								 <?php echo lacandsnw_networkpub_load() ?>
 								</div>
-							</td></tr>
-						</table>
+							</div>
 					</td></tr>
 				</table>
-
-				<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
-					<input type="hidden" name="warning_msg" id="warning_msg" value="true" />
-
-					<div style="margin: 20px 10px 10px 10px; font-size:13px">
-						<input name="lacandsnw-html-warning-msg" type="checkbox"<?php if($lacandsnw_opt_warning_msg != "0") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; Do NOT show warning message: '1-click Retweet/Share/Like plugin is almost ready'
-						<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Warning Msg change' ); ?>" />
-					</div>
-				</form>
-
-				<div style="font-size:14px; margin: 50px 10px 10px 10px;">
- 			  		Note: If you decide to stop using this functionality permanently (after adding API key even once), pls also remove your blog URL by logging into <a href="http://www.linksalpha.com/user/tracked" target="_blank">http://www.linksalpha.com/user/tracked</a>.
- 			  	Otherwise, your blog posts may continue to get posted even after you do not use this functionality. If you have questions, pls email us at discuss@linksalpha.com.
-			  	</div>
-
-			</div>
-		</div>
-		
+			</td></tr>
+		</table>
 		
 		<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
-			<input type="hidden" name="lacands_widget_update" id="lacands_widget_update" value="true" />
-			
-			<div class="outsideBorder">
-			
-				<span style="float:right"><?php echo $lacands_combo_iconWidget?></span>	
-													
-				<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
-				<div style="font-size: 11px;">Edit position of 1-click Retweet/Share/Like widget on your blog. Select Manual option. </div>
-
-				<div>		
-					<div style="margin: 20px 10px 10px 10px; font-size:13px">
-						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">1-click Retweet/Share/Like Widget Location </span> <br/>
-						<input type="radio" name="lacands-html-widget-counters-location" value="beforeAndafter" <?php checked('beforeAndafter', $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Top and Bottom (default)</input>
-						<br/>						
-						<input type="radio" name="lacands-html-widget-counters-location" value="before" <?php checked('before', $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Top only</input>
-						<br/>	
-						<input type="radio" name="lacands-html-widget-counters-location" value="after"  <?php checked('after',  $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Bottom only</input>
-					</div>
-		
-					<div style="margin: 20px 10px 10px 10px; font-size:13px">
-						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">1-click Retweet/Share/Like Relative Position </span> <br/>			
-						<input name="lacands-html-widget-margin-top" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_top; ?>" style="border-color:#ffd050"> </input> Top <br />
-						<input name="lacands-html-widget-margin-right" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_right; ?>" style="border-color:#ffd050"> </input> Right <br />
-						<input name="lacands-html-widget-margin-bottom" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_bottom; ?>" style="border-color:#ffd050"> </input> Bottom <br />
-						<input name="lacands-html-widget-margin-left" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_left; ?>" style="border-color:#ffd050"> </input> Left <br />
-					</div>
-
-					<div style="margin: 20px 10px 10px 10px; font-size:13px">
-						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Colors for Counters shown next to Retweet and Share buttons (not applicable to Like button):</span> 
-						<br/>
-						Set font color of counters (default: 333333):
-						<div><input name="lacands-html-cntr-font-color" type="text" size="15" value="<?php echo $lacands_opt_cntr_font_color; ?>" style="border-color:#ffd050";></input></div>
-					</div>								
-					
-					<div style="margin: 20px 10px 10px 10px; font-size:13px">
-						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Select pages on which 1-click Retweet/Share/Like widget should show: </span> <br/>						
-						<input name="lacands-html-display-page-home" type="checkbox"<?php if($lacands_display_pages['home'] == "1") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Display on Home page </em><br/>
-						<input name="lacands-html-display-page-archive" type="checkbox"<?php if($lacands_display_pages['archive'] == "1") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Display on Archive page </em><br/>							
-						</span>						
-					</div>		
-					
-					<div style="margin: 20px 10px 10px 10px; font-size:13px">
-						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:333333;">Font Style for 'Retweet/Share/Like' buttons:</span> <br/>						
-						<select name="lacands-html-widget-font-style">
-							<option <?php if($lacands_opt_widget_font_style == 'arial') echo "selected"; ?> value="arial">arial</option>
-							<option <?php if($lacands_opt_widget_font_style == 'lucida grande') echo "selected"; ?> value="lucida grande">lucida grande</option>
-							<option <?php if($lacands_opt_widget_font_style == 'segoe ui') echo "selected"; ?> value="segoe ui">segoe ui</option>
-							<option <?php if($lacands_opt_widget_font_style == 'tahoma') echo "selected"; ?> value="tahoma">tahoma</option>
-							<option <?php if($lacands_opt_widget_font_style == 'trebuchet ms') echo "selected"; ?> value="trebuchet ms">trebuchet ms</option>
-							<option <?php if($lacands_opt_widget_font_style == 'verdana') echo "selected"; ?> value="verdana">verdana</option>						
-						</select>
-					</div>
-
-					<div style="margin: 20px 10px 10px 10px; font-size:13px">
-						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Text for 'Facebook Like' button:</span> <br/>
-						<select name="lacands-html-widget-fb-like">
-							<option <?php if($lacands_opt_widget_fb_like == 'like') echo "selected"; ?> value="like">Like</option>
-							<option <?php if($lacands_opt_widget_fb_like == 'recommend') echo "selected"; ?> value="recommend">Recommend</option>
-						</select>
-					</div>
-
-					<div style="margin: 20px 10px 10px 10px; font-size:13px">
-						<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Select checkbox for Manual option (this will disable the widgets): </span> <br/>
-						<input name="lacands-html-widget-disable-cntr-display" type="checkbox"<?php if($lacands_widget_disable_cntr_display != "0") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Disable displaying 1-click Retweet/Share/Like (for Manual Option Only - see readme.txt) </em><br/>
-						<br/>				
-						<span style="font-size:11px">Place the code <?php highlight_string("<?php lacands_wp_filter_content_widget(); ?>");?>
-						in one of the files single.php or index.php (note: or any other file - as the file name depends on the theme you are using). These files can be found under directory ...\wordpress\wp-content\themes\ 
-						</span>						
-					</div>									
-										
-					<div style="margin: 20px 20px 20px 250px">
-						<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" />
-					</div>			
-				</div>			
+			<input type="hidden" name="warning_msg" id="warning_msg" value="true" />
+			<div style="margin: 30px 10px 10px 10px; font-size:13px;color:gray;">
+				<input name="lacandsnw-html-warning-msg" type="checkbox"<?php if($lacandsnw_opt_warning_msg != "0") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; Do NOT show warning message: '1-click Retweet/Share/Like plugin is almost ready'
+				<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Warning Msg change' ); ?>" />
 			</div>
 		</form>
+		
+		<div style="font-size:12px; margin: 30px 10px 10px 10px;color:gray;">
+			Note: If you decide to stop using this functionality permanently (after adding API key even once), pls also remove your blog URL by logging into <a href="http://www.linksalpha.com/user/tracked" target="_blank">http://www.linksalpha.com/user/tracked</a>.
+			Otherwise, your blog posts may continue to get posted even after you do not use this functionality. If you have questions, pls email us at discuss@linksalpha.com.
+		</div>
 
-		<div class="outsideBorder">			
-			<span style="font-weight: bold; font-size: 14px;"> Your Suggestion </span>								
-			<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
-			<div style="font-size: 11px;">Email us at <a href="mailto:suggest@linksalpha.com">suggest@linksalpha.com</a> if you would like a particular functionality or have any recommendations. Thanks. </div>				
-		</div>
+	</div>
+</div>
+
+<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+	<input type="hidden" name="lacands_widget_update" id="lacands_widget_update" value="true" />
+	
+	<div class="outsideBorder">
+	
+		<span style="font-weight: bold; font-size: 14px;"> Widget Options </span>								
+		<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
 		
-		<div class="outsideBorder">			
-			<span style="font-weight: bold; font-size: 14px;"> FAQs / Help Pages </span>								
-			<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
-			<div style="font-size: 11px;">Go to <a href="http://help.linksalpha.com/1-click-retweet-share-like/faqs" target="_blank">1-click Retweet/Share/Like FAQs</a></div>				
-		</div>
-		
-	</body>
-</html>
+		<div>		
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">1-click Retweet/Share/Like Widget Location </span> <br/>
+				<input type="radio" name="lacands-html-widget-counters-location" value="beforeAndafter" <?php checked('beforeAndafter', $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Top and Bottom (default)</input>
+				<br/>						
+				<input type="radio" name="lacands-html-widget-counters-location" value="before" <?php checked('before', $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Top only</input>
+				<br/>	
+				<input type="radio" name="lacands-html-widget-counters-location" value="after"  <?php checked('after',  $lacands_opt_widget_counters_location); ?> >&nbsp;Show at Bottom only</input>
+			</div>
+
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">1-click Retweet/Share/Like Relative Position </span> <br/>			
+				<input name="lacands-html-widget-margin-top" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_top; ?>" style="border-color:#ffd050"> </input> Top <br />
+				<input name="lacands-html-widget-margin-right" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_right; ?>" style="border-color:#ffd050"> </input> Right <br />
+				<input name="lacands-html-widget-margin-bottom" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_bottom; ?>" style="border-color:#ffd050"> </input> Bottom <br />
+				<input name="lacands-html-widget-margin-left" type="text" size="3" value="<?php echo $lacands_opt_widget_margin_left; ?>" style="border-color:#ffd050"> </input> Left <br />
+			</div>
+
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Colors for Counters shown next to Retweet and Share buttons (not applicable to Facebook Like button):</span> 
+				<br/>
+				Set font color of counters (default: 333333):
+				<div><input name="lacands-html-cntr-font-color" type="text" size="15" value="<?php echo $lacands_opt_cntr_font_color; ?>" style="border-color:#ffd050";></input></div>
+			</div>								
+			
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Select pages on which 1-click Retweet/Share/Like widget should show: </span> <br/>						
+				<input name="lacands-html-display-page-home" type="checkbox"<?php if($lacands_display_pages['home'] == "1") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Display on Home page </em><br/>
+				<input name="lacands-html-display-page-archive" type="checkbox"<?php if($lacands_display_pages['archive'] == "1") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Display on Archive page </em><br/>							
+				</span>						
+			</div>		
+			
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:333333;">Font Style for 'Retweet/Share/Like' buttons:</span> <br/>						
+				<select name="lacands-html-widget-font-style">
+					<option <?php if($lacands_opt_widget_font_style == 'arial') echo "selected"; ?> value="arial">arial</option>
+					<option <?php if($lacands_opt_widget_font_style == 'lucida grande') echo "selected"; ?> value="lucida grande">lucida grande</option>
+					<option <?php if($lacands_opt_widget_font_style == 'segoe ui') echo "selected"; ?> value="segoe ui">segoe ui</option>
+					<option <?php if($lacands_opt_widget_font_style == 'tahoma') echo "selected"; ?> value="tahoma">tahoma</option>
+					<option <?php if($lacands_opt_widget_font_style == 'trebuchet ms') echo "selected"; ?> value="trebuchet ms">trebuchet ms</option>
+					<option <?php if($lacands_opt_widget_font_style == 'verdana') echo "selected"; ?> value="verdana">verdana</option>						
+				</select>
+			</div>
+			
+			<!--Facebook Like button text-->
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Facebook Like button text:</span> <br/>
+				<select name="lacands-html-widget-fb-like">
+					<option <?php if($lacands_opt_widget_fb_like == 'like') echo "selected"; ?> value="like">Like</option>
+					<option <?php if($lacands_opt_widget_fb_like == 'recommend') echo "selected"; ?> value="recommend">Recommend</option>
+				</select>
+			</div>
+			
+			<!--Facebook Like button ref-->
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Facebook Like button referral tracking label:</span> 
+				<br/>
+				Max 50 characters and can contain alphanumeric characters and some punctuation (currently +/=-.:_):
+				<div><input name="lacands-html-widget-fb-ref" type="text" size="15" value="<?php echo $lacands_opt_widget_fb_ref; ?>" style="border-color:#ffd050";></input></div>
+			</div>
+			
+			<!--Facebook Like button lang-->
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Facebook Like button language:</span> <br/>
+				<select name="lacands-html-widget-fb-like-lang">
+					<?php
+						$langs = lacands_la_langs();
+						asort($langs);
+						foreach($langs as $key=>$val) {
+							if($lacands_opt_widget_fb_like_lang == $key) {
+								echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+							} else{
+								echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+							}
+						}
+					?>
+				</select>
+			</div>
+			
+			<!--Twitter button lang-->
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Twitter button language:</span> <br/>
+				<select name="lacands-html-widget-twitter-lang">
+					<?php
+						$langs = array('en'=>'English', 'fr'=>'French', 'de'=>'German', 'es'=>'Spanish', 'ja'=>'Japanese');
+						foreach($langs as $key=>$val) {
+							if($lacands_opt_widget_twitter_lang == $key) {
+								echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+							} else{
+								echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+							}
+						}
+					?>
+				</select>
+			</div>
+			
+			<!--Twitter button mention-->
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">@mention Twitter handle to be used in Tweets:</span> 
+				<br/>
+				Twitter username:
+				<div><input name="lacands-html-widget-twitter-mention" type="text" size="15" value="<?php echo $lacands_opt_widget_twitter_mention; ?>" style="border-color:#ffd050";></input></div>
+			</div>
+
+			<!--Twitter button related-->
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Recommended Twitter accounts for users to follow after they share content from your website:</span>
+				<br/>
+				Twitter usernames:
+				<div>
+					<input name="lacands-html-widget-twitter-related1" type="text" size="15" value="<?php echo $lacands_opt_widget_twitter_related1; ?>" style="border-color:#ffd050";></input>
+					<input name="lacands-html-widget-twitter-related2" type="text" size="15" value="<?php echo $lacands_opt_widget_twitter_related2; ?>" style="border-color:#ffd050";></input>
+				</div>
+			</div>
+			
+			<!--Disable-->
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Select checkbox for Manual option (this will disable the widgets): </span> <br/>
+				<input name="lacands-html-widget-disable-cntr-display" type="checkbox"<?php if($lacands_widget_disable_cntr_display != "0") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Disable displaying 1-click Retweet/Share/Like (for Manual Option Only - see readme.txt) </em><br/>
+				<br/>				
+				<span style="font-size:11px">Place the code <?php highlight_string("<?php lacands_wp_filter_content_widget(); ?>");?>
+				in one of the files single.php or index.php (note: or any other file - as the file name depends on the theme you are using). These files can be found under directory ...\wordpress\wp-content\themes\ 
+				</span>						
+			</div>
+								
+			<div style="margin: 20px 20px 20px 250px">
+				<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" />
+			</div>			
+		</div>			
+	</div>
+</form>
+
+<div class="outsideBorder">			
+	<span style="font-weight: bold; font-size: 14px;"> Your Suggestion </span>								
+	<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
+	<div style="font-size: 11px;">Email us at <a href="mailto:suggest@linksalpha.com">suggest@linksalpha.com</a> if you would like a particular functionality or have any recommendations. Thanks. </div>				
+</div>
+
+<div class="outsideBorder">			
+	<span style="font-weight: bold; font-size: 14px;"> FAQs / Help Pages </span>								
+	<div style="border-color:#FEECA1;border-style:solid; border-width:1px; padding:'15px 0px 0px 0px;'"> </div>
+	<div style="font-size: 11px;">Go to <a href="http://help.linksalpha.com/1-click-retweet-share-like/faqs" target="_blank">1-click Retweet/Share/Like FAQs</a></div>				
+</div>
