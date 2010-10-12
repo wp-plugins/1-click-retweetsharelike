@@ -1,0 +1,30 @@
+table.networkpub_added {border-collapse:collapse;width:100%;}
+table.networkpub_added th {padding:3px 10px 3px 10px;border:1px solid #DFDFDF;background-color:#F0F0F0;font-weight:bold;text-align:center;}
+table.networkpub_added td {padding:3px 10px 3px 10px;border:1px solid #DFDFDF;text-align:center;}
+
+.rts_header {padding:20px 0px 20px 0px;}
+.rts_header2{padding:5px 0px 3px 10px;border-bottom:1px solid #BFBFBF;margin-bottom:0px;background-color:#bdc7d8; width:900px}
+.la_content_box {text-align:left;background-color:#FFF;padding:20px;border:1px solid #eceff5; width:868px}
+.la_content_box_2 {text-align:left;background-color:#FFF;padding:0px 20px 20px 20px;border:1px solid #eceff5;}
+.la_content_box_3 {text-align:left;background-color:#FFF;padding:10px 15px 15px 15px;border:1px solid #eceff5;}
+.la_image {width:16px;height:16px;}
+fieldset.rts_fieldset {padding:15px; border:1px solid #BFBFBF;width:100%;background-color:#FFF;}
+fieldset.rts_fieldset label {float:left;margin:0px;padding:0px;}
+.rts_tbl_main {padding:0px;margin:0px;border-collapse:collapse;width:100%}
+.rts_tbl_main td {vertical-align:top;}
+div.rts_error {text-align:center;background-color:#ffebe8;border:1px solid #dd3c10;padding:3px 10px 3px 10px;margin-top:10px;margin-right:20px;margin-left:20px;}
+div.rts_success {text-align:center;background-color:#F7F7F7;border:1px solid #7f93bc;padding:3px 10px 3px 10px;margin-top:10px;margin-right:20px;margin-left:20px;}
+
+div.rts_tweet_box {margin-bottom:3px;}
+div.rts_tweet_box div {margin:0px;padding:0px;}
+div.rts_tweet_box div table{border:0px;padding:0px;border-collapse:collapse;}
+div.rts_tweet_box div table td{vertical-align:top;padding:5px;background-color:#EFEFF7;}
+div.rts_tweet_box div table td img{height:35px;width:35px;border:2px solid #FFF;}
+
+div#rts_tweets_load_button {text-align:center;}
+#rts_tweets_load {background-color:#eceff5;border-top:1px solid #d8dfea;border-left:1px solid #d8dfea;border-bottom:1px solid #7f93bc;border-right:1px solid #7f93bc;}
+
+.msg_success {text-align:center;background-color:#d8dfea;padding:5px 10px 5px 10px;font-weight:bold;font-size:12px;  width:900px;margin:10px;}
+.msg_error {text-align:left;background-color:#ffebe8;padding:5px 10px 5px 10px;font-weight:normal;font-size:11px; border: 1px solid #dd3c10; width:825px; margin-left:10px; margin-top:10px;}
+
+#la-networkpub_msg {background-color:#FFF8CC;border:1px solid #FFE222;text-align:center;font-size:13px;width:905px;padding:5px 0px 5px 0px;}
