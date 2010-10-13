@@ -4,7 +4,7 @@ function lacandsnw_networkping($id) {
 	if(!$id) {
 		return FALSE;
 	}
-	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);	
+	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
 	$link = 'http://www.linksalpha.com/a/ping?id='.$options['lacandsnw_id'];
 	$response_full = lacandsnw_networkpub_http($link);
 	$response_code = $response_full[0];
@@ -29,9 +29,15 @@ function lacandsnw_networkpub_add($api_key) {
 		echo $errdesc;		
 		return FALSE;
 	}
+	$url_parsed = parse_url($url);
+	$url_host = $url_parsed['host'];
+	if( substr_count($url, 'localhost') or strpos($url_host, '192.168.') === 0 or (strpos($url_host, '172.') === 0 and (int)substr($url_host, 4, 2) > 15 and (int)substr($url_host, 4, 2) < 32 ) or strpos($url_host, '10.') === 0 ) {
+		$errdesc = lacandsnw_error_msgs('localhost url');
+		echo $errdesc;
+		return FALSE;
+	}
 	
-	$link   = 'http://www.linksalpha.com/a/networkpubadd';		
-	
+	$link   = 'http://www.linksalpha.com/a/networkpubadd';
 	$params = array('url'=>urlencode($url), 'key'=>$api_key, 'plugin'=>'sd-nw');
 	$response_full = lacandsnw_networkpub_http_post($link,$params);
 	
@@ -99,7 +105,7 @@ function lacandsnw_networkpub_load() {
 		foreach($response->results as $row) {
 			$html .= '<tr id="r_key_'.$row->api_key.'">';
 			$html .= '<td>'.$row->api_key.'</td><td><a href="'.$row->profile_url.'">'.$row->name.'</a></td>';
-			$html .= '<td style="text-align:center;"><a href="http://www.linksalpha.com/a/networkpuboptions?api_key='.$row->api_key.'&id='.$options['lacandsnw_id'].'&KeepThis=true&TB_iframe=true&height=430&width=650" title="Publish Options" class="thickbox" type="button" />Options</a></td>';
+			$html .= '<td style="text-align:center;"><a href="http://www.linksalpha.com/a/networkpuboptions?api_key='.$row->api_key.'&id='.$options['lacandsnw_id'].'&KeepThis=true&TB_iframe=true&height=465&width=650" title="Publish Options" class="thickbox" type="button" />Options</a></td>';
 			$html .= '<td><a href="#" id="key_'.$row->api_key.'" class="lanetworkpubre">Remove</a></td></tr>';
 		}
 	} else {
@@ -259,6 +265,13 @@ function lacandsnw_error_msgs($errMsg) {
 					  Also ensure that in <b>Settings->General->"Blog address (URL)"</b> the URL is filled-in correctly. 
 					  <br/>If you still face issues then email us at <a href="mailto:discuss@linksalpha.com">discuss@linksalpha.com</a> with error description.							
 					  </div>';			
+			return $html;
+			break;
+		
+		case 'localhost url':
+			$html  = '<div class="msg_error"><b>Website/Blog inaccessible</b>';
+			$html .= '<br/>You are trying to use the plugin on <b>localhost</b> or behind a <b>firewall</b>, which is not supported. Please install the plugin on a Wordpress blog on a live server.
+				  </div>';
 			return $html;
 			break;
 			

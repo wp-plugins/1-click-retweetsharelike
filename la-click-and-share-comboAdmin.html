@@ -203,6 +203,25 @@
 				</div>
 			</div>
 			
+			<!--LinkedIn button-->
+			<div style="margin: 20px 10px 10px 10px; font-size:13px">
+				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Show LinkedIn Button:</span>
+				<div>
+					<select name="lacands-html-widget-linkedin-button">
+						<?php
+							$linkedinbutton = array('show'=>'Show', 'noshow'=>"Don't Show");
+							foreach($linkedinbutton as $key=>$val) {
+								if($lacands_opt_widget_linkedin_button == $key) {
+									echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+								} else{
+									echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+								}
+							}
+						?>
+					</select>
+				</div>
+			</div>
+			
 			<!--Disable-->
 			<div style="margin: 20px 10px 10px 10px; font-size:13px">
 				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Select checkbox for Manual option (this will disable the widgets): </span> <br/>
