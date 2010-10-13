@@ -341,7 +341,7 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 		
     	$lacands_widget_display_cntrs = '<div style="'.$position.';">
 										<iframe
-											style="height:25px !important; border:none !important; overflow:hidden !important; width:350px !important;" frameborder="0" scrolling="no" allowTransparency="true"
+											style="height:25px !important; border:none !important; overflow:hidden !important; width:360px !important;" frameborder="0" scrolling="no" allowTransparency="true"
 											src="http://www.linksalpha.com/social?'.$args_data.'">
 										</iframe>
 										</div>';
