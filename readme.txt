@@ -1,7 +1,7 @@
 === Plugin Name ===
 
 Contributors: LinksAlpha
-Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack
+Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share
 Requires at least: 2.0.2
 Tested up to: 3.0.1
 Stable tag: 3.5.0
@@ -9,7 +9,15 @@ Stable tag: 3.5.0
 
 == Description ==
 
-Lets users Retweet, Share and Like pages from your site back to their Twitter followers and Facebook friends with just one click. *The user experience is similar to Facebook Like button but expanded to Twitter and Facebook Share as well ! Screenshot: http://cdn.linksalpha.com/static/1clickwidget.png*. You can interact with the plugin at http://dev30.linksalpha.com/?p=8
+Shows following 4 buttons on your blog posts:
+
+1. Facebook Like
+1. Facebook Share
+1. Twitter button
+1. LinkedIn Share
+
+Demo the plugin at - http://dev30.linksalpha.com/?p=8
+
 
 Plugin also enables you to `Automatically Publish` your `Blog Posts to 30 Networks`.
 
