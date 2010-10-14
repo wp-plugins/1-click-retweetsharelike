@@ -124,8 +124,12 @@
 			
 			<div style="margin: 20px 10px 10px 10px; font-size:13px">
 				<span style="font-weight:bold; font-size:12px; font-style:'Verdana Helvetica Arial'; color:#333333;">Select pages on which 1-click Retweet/Share/Like widget should show: </span> <br/>						
-				<input name="lacands-html-display-page-home" type="checkbox"<?php if($lacands_display_pages['home'] == "1") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Display on Home page </em><br/>
-				<input name="lacands-html-display-page-archive" type="checkbox"<?php if($lacands_display_pages['archive'] == "1") echo 'checked="checked"'; ?> value="1" /> &nbsp;&nbsp; <em> Display on Archive page </em><br/>							
+				<div><input name="lacands-html-display-page-home"    id="lacands-html-display-page-home"    type="checkbox"<?php if($lacands_display_pages['home'] == "1") echo 'checked="checked"'; ?>    value="1" />&nbsp;&nbsp;<label for="lacands-html-display-page-home">Home page</label></div>
+				<div><input name="lacands-html-display-page-archive" id="lacands-html-display-page-archive" type="checkbox"<?php if($lacands_display_pages['archive'] == "1") echo 'checked="checked"'; ?> value="1" />&nbsp;&nbsp;<label for="lacands-html-display-page-archive">Archives page</label></div>
+				<div><input name="lacands-html-display-page-date" id="lacands-html-display-page-date" type="checkbox"<?php if($lacands_display_pages['date'] == "1") echo 'checked="checked"'; ?> value="1" />&nbsp;&nbsp;<label for="lacands-html-display-page-date">Date archive pages</label></div>
+				<div><input name="lacands-html-display-page-category" id="lacands-html-display-page-category" type="checkbox"<?php if($lacands_display_pages['category'] == "1") echo 'checked="checked"'; ?> value="1" />&nbsp;&nbsp;<label for="lacands-html-display-page-category">Category archive pages</label></div>
+				<div><input name="lacands-html-display-page-tag" id="lacands-html-display-page-tag" type="checkbox"<?php if($lacands_display_pages['tag'] == "1") echo 'checked="checked"'; ?> value="1" />&nbsp;&nbsp;<label for="lacands-html-display-page-tag">Tag archive pages</label></div>
+				<div><input name="lacands-html-display-page-author" id="lacands-html-display-page-author" type="checkbox"<?php if($lacands_display_pages['author'] == "1") echo 'checked="checked"'; ?> value="1" />&nbsp;&nbsp;<label for="lacands-html-display-page-author">Author pages</label></div>
 				</span>						
 			</div>		
 			
