@@ -77,9 +77,9 @@ function lacands_readOptionsValuesFromWPDatabase() {
 	$lacands_opt_widget_twitter_mention       = get_option('lacands-html-widget-twitter-mention');
 	$lacands_opt_widget_twitter_related1      = get_option('lacands-html-widget-twitter-related1');
 	$lacands_opt_widget_twitter_related2      = get_option('lacands-html-widget-twitter-related2');
-	$lacands_opt_widget_linkedin_button		  = get_option('lacands-html-widget-linkedin-button');
-	$lacands_display_pages            	  	  = get_option('lacands-html-display-pages');
-	$lacands_like_layout            	  	  = get_option('lacands-html-like-layout');
+	$lacands_opt_widget_linkedin_button	  = get_option('lacands-html-widget-linkedin-button');
+	$lacands_display_pages            	  = get_option('lacands-html-display-pages');
+	$lacands_like_layout            	  = get_option('lacands-html-like-layout');
 	$lacandsnw_opt_warning_msg                = get_option('lacandsnw-html-warning-msg');
 }
 
@@ -93,7 +93,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		$lacands_lget = get_bloginfo('language'); $link='http://www.linksalpha.com/a/bloginfo';
 		$lacands_bloginfo = array('email'=>$lacands_eget, 'url'=>$lacands_uget, 'name'=>$lacands_nget, 'desc'=>$lacands_dget, 'charset'=>$lacands_cget, 'version'=>$lacands_vget, 'lang'=>$lacands_lget, 'plugin'=>'cs');
 		lacands_http_post($link, $lacands_bloginfo);
-		$lacands_display_pages = array('single' => '1','home' => '1','archive' => '1');
+		$lacands_display_pages = array('single' => '1','home' => '1','archive' => '1', 'category'=>'1', 'tags'=>'1', 'date'=>'1', 'author'=>'1', 'page'=>'1');
 		add_option('lacands-html-widget-counters-location', 'beforeAndafter');
 		add_option('lacands-html-widget-margin-top',    '5');
 		add_option('lacands-html-widget-margin-right',  '0');
@@ -228,18 +228,47 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		
 	    if(!empty($_POST['lacands-html-display-page-home'])) {
 		    $lacands_display_pages['home'] = '1';
-	    }
-	    else {
+	    } else {
 		    $lacands_display_pages['home'] = '0';
 	    }
 
 	    if(!empty($_POST['lacands-html-display-page-archive'])) {
 		    $lacands_display_pages['archive'] = '1';
-	    }
-	    else {
+	    } else {
 		    $lacands_display_pages['archive'] = '0';
 	    }
-	   	update_option('lacands-html-display-pages', $lacands_display_pages);
+		
+	    if(!empty($_POST['lacands-html-display-page-page'])) {
+		    $lacands_display_pages['page'] = '1';
+	    } else {
+		    $lacands_display_pages['page'] = '0';
+	    }
+		
+	    if(!empty($_POST['lacands-html-display-page-date'])) {
+		    $lacands_display_pages['date'] = '1';
+	    } else {
+		    $lacands_display_pages['date'] = '0';
+	    }
+		
+	    if(!empty($_POST['lacands-html-display-page-category'])) {
+		    $lacands_display_pages['category'] = '1';
+	    } else {
+		    $lacands_display_pages['category'] = '0';
+	    }
+		
+	    if(!empty($_POST['lacands-html-display-page-tag'])) {
+		    $lacands_display_pages['tag'] = '1';
+	    } else {
+		    $lacands_display_pages['tag'] = '0';
+	    }
+		
+	    if(!empty($_POST['lacands-html-display-page-author'])) {
+		    $lacands_display_pages['author'] = '1';
+	    } else {
+		    $lacands_display_pages['author'] = '0';
+	    }
+		
+	    update_option('lacands-html-display-pages', $lacands_display_pages);
 
 	    if(!empty($_POST['lacands-html-like-layout'])) {
 	    	update_option('lacands-html-like-layout', (string)$_POST['lacands-html-like-layout']);
@@ -280,24 +309,31 @@ function lacands_wp_filter_post_content ( $related_content ) {
 	
 	$lacands_widget_disable_cntr_display  = get_option('lacands-html-widget-disable-cntr-display');
 	$lacands_opt_widget_counters_location = get_option('lacands-html-widget-counters-location');
-
+	$lacands_display_pages = get_option('lacands-html-display-pages');
+	
 	if($lacands_widget_disable_cntr_display == '0') {
 		if($lacands_opt_widget_counters_location == "beforeAndafter") {
 			$related_content_beforeAndafter = lacands_wp_filter_content_widget(FALSE);
-			$related_content                = $related_content_beforeAndafter.$related_content.$related_content_beforeAndafter;
-		}
-
-		else if($lacands_opt_widget_counters_location == "before") {
-			$related_content = lacands_wp_filter_content_widget(FALSE).$related_content;
-		}
-
-		else if($lacands_opt_widget_counters_location == "after") {
-			$related_content = $related_content.lacands_wp_filter_content_widget(FALSE);
+			if ((is_tag()  && ($lacands_display_pages['tag'])) || (is_category()  && ($lacands_display_pages['category'])) || (is_author() && ($lacands_display_pages['author'])) || (is_date()  && ($lacands_display_pages['date']))) {
+				echo $related_content_beforeAndafter;
+			} else {
+				$related_content = $related_content_beforeAndafter.$related_content.$related_content_beforeAndafter;
+			}
+		} else if($lacands_opt_widget_counters_location == "before") {
+			if ((is_tag()  && ($lacands_display_pages['tag'])) || (is_category()  && ($lacands_display_pages['category'])) || (is_author() && ($lacands_display_pages['author'])) || (is_date()  && ($lacands_display_pages['date']))) {
+				echo lacands_wp_filter_content_widget(FALSE);
+			} else {
+				$related_content = lacands_wp_filter_content_widget(FALSE).$related_content;
+			}
+		} else if($lacands_opt_widget_counters_location == "after") {
+			if ((is_tag()  && ($lacands_display_pages['tag'])) || (is_category()  && ($lacands_display_pages['category'])) || (is_author() && ($lacands_display_pages['author'])) || (is_date()  && ($lacands_display_pages['date']))) {
+				echo lacands_wp_filter_content_widget(FALSE);
+			} else {
+				$related_content = $related_content.lacands_wp_filter_content_widget(FALSE);
+			}
 		}
 	}
-
 	return ($related_content);
-
 }
 
 function lacands_wp_filter_content_widget ($show=TRUE) {
@@ -308,25 +344,22 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 	global $lacands_opt_widget_fb_ref, $lacands_opt_widget_fb_like_lang, $lacands_opt_widget_twitter_lang, $lacands_opt_widget_twitter_mention, $lacands_opt_widget_twitter_related1, $lacands_opt_widget_twitter_related2, $lacands_opt_widget_linkedin_button;
 	global $post;
 
-	$p          = $post;
-
+	$p = $post;
 	lacands_readOptionsValuesFromWPDatabase();
-
 	$position = '';
-
 	if( $lacands_widget_disable_cntr_display == '0') {
 		$position = 'padding-top:'.$lacands_opt_widget_margin_top.'px;padding-right:'.$lacands_opt_widget_margin_right.'px;padding-bottom:'.$lacands_opt_widget_margin_bottom.'px;padding-left:'.$lacands_opt_widget_margin_left.'px;';
 	}
-
-	if ((is_single())  ||   (is_home() && ($lacands_display_pages['home'])) || (is_archive() && ($lacands_display_pages['archive'])) )
+	
+	if ((is_single()) ||  (is_home() && ($lacands_display_pages['home'])) || (is_archive() && ($lacands_display_pages['archive'])) || (is_category()) || (is_tag()) || (is_author()) || (is_date() ) || (is_feed()) || (is_page()) )
 	{
 		$link1 = urlencode(urldecode(get_permalink($p)));
-
 		$lacands_opt_cntr_font_color = str_replace('#', '', $lacands_opt_cntr_font_color);
 		$lacands_opt_cntr_font_color = trim($lacands_opt_cntr_font_color);
-
 		$args = array();
 		$args['link'] = htmlentities($link1);
+		$args['title'] = substr(strip_tags($post->post_title), 0, 120);
+		$args['desc'] = substr(strip_tags($post->post_content), 0, 200);
 		$args['fc'] = $lacands_opt_cntr_font_color;
 		$args['fs'] = $lacands_opt_widget_font_style;
 		$args['fblname'] = $lacands_opt_widget_fb_like;
@@ -335,18 +368,17 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 		$args['twitterlang'] = $lacands_opt_widget_twitter_lang;
 		$args['twittermention'] = $lacands_opt_widget_twitter_mention;
 		$args['twitterrelated1'] = $lacands_opt_widget_twitter_related1;
-		$args['twitterrelated12'] = $lacands_opt_widget_twitter_related2;
+		$args['twitterrelated2'] = $lacands_opt_widget_twitter_related2;
 		$args['linkedinbutton'] = $lacands_opt_widget_linkedin_button;
 		$args_data = http_build_query($args);
+		$lacands_widget_display_cntrs = '<div style="'.$position.';">
+							<iframe
+								style="height:25px !important; border:none !important; overflow:hidden !important; width:360px !important;" frameborder="0" scrolling="no" allowTransparency="true"
+								src="http://www.linksalpha.com/social?'.$args_data.'">
+							</iframe>
+						</div>';
 		
-    	$lacands_widget_display_cntrs = '<div style="'.$position.';">
-										<iframe
-											style="height:25px !important; border:none !important; overflow:hidden !important; width:360px !important;" frameborder="0" scrolling="no" allowTransparency="true"
-											src="http://www.linksalpha.com/social?'.$args_data.'">
-										</iframe>
-										</div>';
-
-   		if($show) {
+		if($show) {
 			echo $lacands_widget_display_cntrs;
 			return;
 		}
