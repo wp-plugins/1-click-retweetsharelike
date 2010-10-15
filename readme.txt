@@ -16,6 +16,9 @@ Shows following 4 buttons on your blog posts:
 1. Twitter button
 1. LinkedIn Share
 
+AND, Facebook Recommendations in the Widgets Sidebar
+
+
 Demo the plugin at - http://dev30.linksalpha.com/?p=8
 
 
