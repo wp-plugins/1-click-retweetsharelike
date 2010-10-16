@@ -2,7 +2,7 @@
 /*
 Plugin Name: 1-click Retweet/Share/Like
 Plugin URI: http://wwww.linksalpha.com/publish
-Description: Adds Facebook Like, Facebook Share, Twitter, LinkedIn Share, Facebook Recommendations to your wordpress blog. Automatic publishing of content to 30 Social Networks.
+Description: Adds Facebook Like, Facebook Share, Twitter, LinkedIn Share, Facebook Recommendations. Automatic publishing of content to 30 Social Networks.
 Author: LinksAlpha
 Author URI: http://www.linksalpha.com/publish
 Version: 3.5.0
