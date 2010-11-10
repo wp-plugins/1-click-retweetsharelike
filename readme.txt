@@ -1,10 +1,10 @@
 === Plugin Name ===
 
 Contributors: LinksAlpha
-Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share
+Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live
 Requires at least: 2.0.2
 Tested up to: 3.0.1
-Stable tag: 3.5.0
+Stable tag: 3.6.0
 
 
 == Description ==
@@ -22,7 +22,7 @@ AND, Facebook Recommendations in the Widgets Sidebar
 Demo the plugin at - http://dev30.linksalpha.com/?p=8
 
 
-Plugin also enables you to `Automatically Publish` your `Blog Posts to 30 Networks`.
+Plugin also enables you to `Automatically Publish` or `Self Publish` your `Blog Posts to 30+ Networks`.
 
 1. Facebook Profile/Wall
 1. Facebook Pages
@@ -54,8 +54,13 @@ Plugin also enables you to `Automatically Publish` your `Blog Posts to 30 Networ
 1. Yahoo Meme
 1. Basecamp
 1. Backpack
+1. Windows Live
 
-Plugin also supports `Publishing your Blog Posts to Twitter` via `OAuth`. Go to http://www.linksalpha.com/publish for a quick 2mins. setup.
+
+**Postbox**
+
+* Postbox enables you to self/manually post to your Connected LinksAlpha.com Networks. This gives you more control over the content you want to publish
+* To self post from your wordpress blog, click on `Postbox` menu option located under `Posts` in Admin Console 
 
 
 **List of Features**
@@ -131,6 +136,11 @@ Email us at discuss@linksalpha.com
 
 
 == Changelog ==
+
+= 3.6.0 =
+* Adds Support to self Post content to connected Networks. Submenu option under - Posts - in Admin console
+* Added option to show/hide Twitter and Facebook Share counters
+* Minor bug fixes
 
 = 3.5.0 =
 

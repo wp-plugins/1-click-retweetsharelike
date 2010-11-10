@@ -5,15 +5,6 @@ jQuery.noConflict();
 jQuery(document).ready(function()
 {
 	blog_url = jQuery("#la-networkpub_plugin_url").val();
-	
-	//jQuery.post(blog_url+"la-click-and-share-networkpub_ajax.php", {type:'load'}, function(data) {
-	//	if(data == '500') {
-	//		jQuery("#la-idAPIBox").html('<div class="msg_error">Error occured while removing the API Key. As a workaround, you can remove this publishing at the following link: <a href="http://www.linksalpha.com/user/publish">LinksAlpha Publisher</a> </div>');
-	//	} else {
-	//		//jQuery("#la-idAPIBox").html(data);	
-	//	}
-	//});
-
 	jQuery(".lanetworkpubre").live("click", function(e) {
 		jQuery("#la-networkpub_msg").css('display', 'block');
 		jQuery("#la-networkpub_msg").html('Removing...');	
@@ -32,5 +23,11 @@ jQuery(document).ready(function()
 		return false;
 	});	
 	
+	jQuery.receiveMessage(
+		function(e){
+			jQuery("#networkpub_postbox").height(e.data.split("=")[1]+'px');
+		},
+		'http://www.linksalpha.com'
+	);
 		
 });

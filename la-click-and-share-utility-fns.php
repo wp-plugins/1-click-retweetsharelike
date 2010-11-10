@@ -19,12 +19,16 @@ function lacands_http_post($link, $body) {
 	}
 		
 	require_once(ABSPATH.WPINC.'/class-snoopy.php');
-	$snoop = new Snoopy;	
-	if($snoop->submit($link, $body)){
-		if (strpos($snoop->response_code, '200')) {
-			$response = $snoop->results;
-			return array(200, $response);
+	$snoop = new Snoopy;
+	try {
+		if($snoop->submit($link, $body)){
+			if (strpos($snoop->response_code, '200')) {
+				$response = $snoop->results;
+				return array(200, $response);
+			}
 		}
+	} catch (Exception $e) {
+		return array(500, 'internal error');
 	}
 		
 	if( !class_exists( 'WP_Http' ) ) {
@@ -33,8 +37,7 @@ function lacands_http_post($link, $body) {
 	if (!class_exists('WP_Http')) {
 		return array(500, $snoop->response_code);
 	}
-	$request = new WP_Http;	
-	
+	$request = new WP_Http;
 	$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body, 'headers'=>$headers) );
 	if(isset($response_full->errors)) {			
 		return array(500, 'Unknown Error');				
