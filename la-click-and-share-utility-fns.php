@@ -17,41 +17,35 @@ function lacands_http_post($link, $body) {
 	if (!$link) {
 		return array(500, 'Invalid Link');
 	}
-		
-	require_once(ABSPATH.WPINC.'/class-snoopy.php');
-	$snoop = new Snoopy;
-	try {
-		if($snoop->submit($link, $body)){
-			if (strpos($snoop->response_code, '200')) {
-				$response = $snoop->results;
-				return array(200, $response);
-			}
-		}
-	} catch (Exception $e) {
-		return array(500, 'internal error');
-	}
-		
+	//Try using WP_Http
 	if( !class_exists( 'WP_Http' ) ) {
 		include_once( ABSPATH . WPINC. '/class-http.php' );
 	}
-	if (!class_exists('WP_Http')) {
-		return array(500, $snoop->response_code);
+	if (class_exists('WP_Http')) {
+		$request = new WP_Http;
+		$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body, 'headers'=>$headers) );
+		if(isset($response_full->errors)) {			
+			return array(500, 'Unknown Error');				
+		}
+		$response_code = $response_full['response']['code'];
+			
+		if ($response_code === 200) {
+			$response = $response_full['body'];
+			return array($response_code, $response);
+		}
+		$response_msg = $response_full['response']['message'];
+		return array($response_code, $response_msg);
 	}
-	$request = new WP_Http;
-	$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body, 'headers'=>$headers) );
-	if(isset($response_full->errors)) {			
-		return array(500, 'Unknown Error');				
+	//Try using snoopy
+	require_once(ABSPATH.WPINC.'/class-snoopy.php');
+	$snoop = new Snoopy;
+	if($snoop->submit($link, $body)){
+		if (strpos($snoop->response_code, '200')) {
+			$response = $snoop->results;
+			return array(200, $response);
+		}
 	}
-	
-	$response_code = $response_full['response']['code'];
-		
-	if ($response_code === 200) {
-		$response = $response_full['body'];
-		return array($response_code, $response);
-	}
-	
-	$response_msg = $response_full['response']['message'];
-	return array($response_code, $response_msg);	
+	return array(500, 'internal error');
 }
 
 function lacands_http_process($response_full) {
