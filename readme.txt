@@ -106,7 +106,7 @@ For Manually positioning the 1-click Retweet/Share/Like on your blog you need to
 
 **Misc**
 
-* For getting support, email us at: discuss@linksalpha.com
+* For getting support, email us at: post@linksalpha.com
 * Note: We encourage you to download the latest version of the plugin as soon as it becomes available - as it may have additional extremely useful features for your blog.
 
 
@@ -127,7 +127,7 @@ Go to http://help.linksalpha.com/1-click-retweet-share-like/faqs for list of FAQ
 
 = Question still not answered? =
 
-Email us at discuss@linksalpha.com
+Email us at post@linksalpha.com
 
 
 == Screenshots ==
