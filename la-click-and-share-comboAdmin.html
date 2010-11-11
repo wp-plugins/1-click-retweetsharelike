@@ -277,23 +277,6 @@
 			<fieldset class="lacands_fieldset">
 				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/twitter_icon.png" style="vertical-align:bottom;" />&nbsp;Twitter</legend>
 				
-				<!--Twitter button lang-->
-				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Twitter&nbsp;<?php _e("button language"); ?>:</div>
-					<select name="lacands-html-widget-twitter-lang">
-						<?php
-							$langs = array('en'=>'English', 'fr'=>'<?php _e("French"); ?>', 'de'=>'<?php _e("German"); ?>', 'es'=>'<?php _e("Spanish"); ?>', 'ja'=>'<?php _e("Japanese"); ?>');
-							foreach($langs as $key=>$val) {
-								if($lacands_opt_widget_twitter_lang == $key) {
-									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
-								} else{
-									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
-								}
-							}
-						?>
-					</select>
-				</div>
-				
 				<!--Twitter button mention-->
 				<div class="lacands_input_header">
 					<div class="lacands_input_headers"><?php _e("@mention"); ?>&nbsp;Twitter&nbsp;<?php _e("handle to be used in Tweets"); ?>:</div> 
@@ -311,6 +294,23 @@
 						<input name="lacands-html-widget-twitter-related1" id="lacands-html-widget-twitter-related1" type="text" size="15" value="<?php echo $lacands_opt_widget_twitter_related1; ?>" ></input>
 						<input name="lacands-html-widget-twitter-related2" type="text" size="15" value="<?php echo $lacands_opt_widget_twitter_related2; ?>" ></input>
 					</div>
+				</div>
+				
+				<!--Twitter button lang-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers">Twitter&nbsp;<?php _e("button language"); ?>:</div>
+					<select name="lacands-html-widget-twitter-lang">
+						<?php
+							$langs = array('en'=>'English', 'fr'=>__("French"), 'de'=>__("German"), 'es'=>__("Spanish"), 'ja'=>__("Japanese"));
+							foreach($langs as $key=>$val) {
+								if($lacands_opt_widget_twitter_lang == $key) {
+									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+								} else{
+									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+								}
+							}
+						?>
+					</select>
 				</div>
 				
 				<!--Twitter Retweet Count-->
