@@ -1,12 +1,12 @@
 <?php
 
-
-define('LACANDSNW_YOU_HAVE_NOT_ADDED_ANY_API_KEY',        		__('You have not added any API Key'));
+define('LACANDSNW_YOU_HAVE_NOT_ADDED_ANY_API_KEY',      __('You have not added any API Key'));
 define('LACANDSNW_API_KEY_ADDED',        				__('API Key has been added successfully'));
-define('LACANDSNW_ERROR_LOADING_API_KEYS',        			__('Error occured while trying to load the API Keys. Please try again later'));
-define('LACANDSNW_CURRENTLY_PUBLISHING',        			__('You are currently Publishing your Blog to'));
-define('LACANDSNW_SOCIAL_NETWORKS',        				__('Social Networks'));
-define('LACANDSNW_SOCIAL_NETWORK',        				__('Social Network'));
+define('LACANDSNW_ERROR_LOADING_API_KEYS',        		__('Error occured while trying to load the API Keys. Please try again later'));
+define('LACANDSNW_CURRENTLY_PUBLISHING',        		__('You are currently Publishing your Blog to'));
+define('LACANDSNW_SOCIAL_NETWORKS',        				__('Networks'));
+define('LACANDSNW_SOCIAL_NETWORK',        				__('Network'));
+define('LACANDSNW_PLUGIN_NAME',        					__('cs'));
 
 
 function lacandsnw_networkping($id) {
@@ -14,30 +14,132 @@ function lacandsnw_networkping($id) {
 		return FALSE;
 	}
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
+	if(empty($options['lacandsnw_id']) or empty($options['api_key'])) {
+		return;
+	}
 	$link = 'http://www.linksalpha.com/a/ping?id='.$options['lacandsnw_id'];
 	$response_full = lacandsnw_networkpub_http($link);
-	$response_code = $response_full[0];
-	if ($response_code === 200) {
-		return TRUE;
-	}
-	return FALSE;
+	return;
 }
 
-function lacandsnw_networkpub_add($api_key) {
+function lacandsnw_convert($id) {
+	if(!$id) {
+		return;
+	}
+	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
+	if(!empty($options['id_2'])) {
+		return;
+	}
+	if(empty($options['lacandsnw_id']) or empty($options['api_key'])) {
+		return;
+	}
+	// Build Params
+	$link = 'http://www.linksalpha.com/a/networkpubconvert';
+	$params = array('id'=>$options['lacandsnw_id'],
+					'api_key'=>$options['api_key'],
+					'plugin'=>LACANDSNW_PLUGIN_NAME,
+					);
+	//HTTP Call
+	$response_full = lacandsnw_networkpub_http_post($link, $params);
+	$response_code = $response_full[0];
+	if ($response_code != 200) {
+		return;
+	}
+	$response = lacandsnw_networkpub_json_decode($response_full[1]);
+	if ($response->errorCode > 0) {
+		return;
+	}
+	//Update options
+	$options['id_2'] = $response->results;
+	//Save
+	update_option(LAECHONW_WIDGET_NAME_INTERNAL, $options);
+	return;
+}
 
+
+function lacandsnw_post($post_id) {
+	//Network keys
+	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
+	if (empty($options['api_key']) or empty($options['id_2'])) {
+		return;
+	}
+	$id = $options['id_2'];
+	$api_key = $options['api_key'];
+	//Post Published?
+	$post_data = get_post( $post_id, ARRAY_A );
+	if($post_data['post_status'] != 'publish') {
+		return;
+	}
+	//Post data: id, content and title
+	$post_title = $post_data['post_title'];
+	$post_content = $post_data['post_content'];
+	//Post data: Permalink
+	$post_link = get_permalink($post_id);
+	//Post data: Categories
+	$post_categories_array = array();
+	$post_categories_data = get_the_category( $post_id );
+	foreach($post_categories_data as $category) {
+		$post_categories_array[] = $category->cat_name;
+	}
+	$post_categories = implode(",", $post_categories_array);
+	//Post tags
+	$post_tags_array = array();
+	$post_tags_data = wp_get_post_tags( $post_id );
+	foreach($post_tags_data as $tag) {
+		$post_tags_array[] = $tag->name;
+	}
+	$post_tags = implode(",", $post_tags_array);
+	//Post Geo
+	if(function_exists('get_wpgeo_latitude')) {
+		if(get_wpgeo_latitude( $post_id ) and get_wpgeo_longitude( $post_id )) {
+			$post_geotag = get_wpgeo_latitude( $post_id ).' '.get_wpgeo_longitude( $post_id );
+		}
+	}
+	if(!isset($post_geotag)) {
+		$post_geotag = '';
+	}
+	// Build Params
+	$link = 'http://www.linksalpha.com/a/networkpubpost';
+	$params = array('id'=>$id,
+					'api_key'=>$api_key,
+					'post_id'=>$post_id,
+					'post_link'=>$post_link,
+					'post_title'=>$post_title,
+					'post_content'=>$post_content,
+					'plugin'=>LACANDSNW_PLUGIN_NAME,
+					'plugin_version'=>lacandsnw_version(),
+					'post_categories'=>$post_categories,
+					'post_tags'=>$post_tags,
+					'post_geotag'=>$post_geotag
+					);
+	//HTTP Call
+	$response_full = lacandsnw_networkpub_http_post($link,$params);
+	return;
+}
+
+
+function lacandsnw_networkpub_add($api_key) {
 	if (!$api_key) {
 		$errdesc = lacandsnw_error_msgs('invalid key');
-		echo $errdesc;		
-		return FALSE;
+		echo $errdesc;
+		return;
 	}
-
-	$url  = get_bloginfo('url');	
-	$desc = get_bloginfo('description');	
+	$url = get_bloginfo('url');
 	if (!$url) {
 		$errdesc = lacandsnw_error_msgs('invalid url');
-		echo $errdesc;		
-		return FALSE;
+		echo $errdesc;
+		return;
 	}
+	$desc = get_bloginfo('description');
+	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
+	if(!empty($options['lacandsnw_id'])) {
+		$id = $options['lacandsnw_id'];
+	} elseif (!empty($options['id_2'])) {
+		$id = $options['id_2'];
+	} else {
+		$id = '';
+	}
+	
 	$url_parsed = parse_url($url);
 	$url_host = $url_parsed['host'];
 	if( substr_count($url, 'localhost') or strpos($url_host, '192.168.') === 0 or strpos($url_host, '127.0.0') === 0 or (strpos($url_host, '172.') === 0 and (int)substr($url_host, 4, 2) > 15 and (int)substr($url_host, 4, 2) < 32 ) or strpos($url_host, '10.') === 0 ) {
@@ -45,41 +147,48 @@ function lacandsnw_networkpub_add($api_key) {
 		echo $errdesc;
 		return FALSE;
 	}
-	
-	$link   = 'http://www.linksalpha.com/a/networkpubadd';
-	$params = array('url'=>urlencode($url), 'key'=>$api_key, 'plugin'=>'sd-nw');
+	$link   = 'http://www.linksalpha.com/a/networkpubaddone';
+	// Build Params
+	$params = array('url'=>urlencode($url),
+					'key'=>$api_key,
+					'plugin'=>LACANDSNW_PLUGIN_NAME,
+					'id'=>$id);
+	//HTTP Call
 	$response_full = lacandsnw_networkpub_http_post($link,$params);
-	
 	$response_code = $response_full[0];
-	
 	if ($response_code != 200) {
-		$errdesc = lacandsnw_error_msgs($response_full[1]); 
-		echo $errdesc;		
+		$errdesc = lacandsnw_error_msgs($response_full[1]);
+		echo $errdesc;
 		return FALSE;
 	}
-	
 	$response = lacandsnw_networkpub_json_decode($response_full[1]);
-	if ($response->errorCode > 0) {	
+	if ($response->errorCode > 0) {
 		$errdesc = lacandsnw_error_msgs($response->errorMessage);
-		echo $errdesc;		
+		echo $errdesc;
 		return FALSE;
 	}
-	
-	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
+	//Update options - Site id
+	$options['id_2'] = $response->results->id;
+	//Update options - Network Keys
 	if(empty($options['api_key'])) {
-		$options['api_key'] = $api_key;	
-	} else {		
-		$options_array = explode(',', $options['api_key']);
-		if(!in_array($api_key, $options_array)) {
-			$options['api_key'] = $options['api_key'].','.$api_key;	
+		$options['api_key'] = $response->results->api_key;	
+	} else {
+		$option_api_key_array = explode(',', $options['api_key']);
+		$option_api_key_new = $response->results->api_key;
+		$option_api_key_new_array = explode(',', $option_api_key_new);
+		foreach($option_api_key_new_array as $key=>$val) {
+			if(!in_array($val, $option_api_key_array)) {
+				$options['api_key'] = $options['api_key'].','.$val;
+			}
 		}
 	}
-	$options['lacandsnw_id'] = $response->results->id;
-
+	//Save
 	update_option(LAECHONW_WIDGET_NAME_INTERNAL, $options);
-	echo '<div class="updated fade" style="width:94%;margin-left:5px;padding:5px;text-align:center">'.LACANDSNW_API_KEY_ADDED.'</div>';
-	return TRUE;	
+	//Return
+	echo '<div class="updated fade" style="width:94%;margin-left:5px;padding:5px;text-align:center">API Key has been added successfully</div>';
+	return;
 }
+
 
 function lacandsnw_networkpub_load() {
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
@@ -88,46 +197,71 @@ function lacandsnw_networkpub_load() {
 		echo $html;
 		return;
 	}
-	
 	$link = 'http://www.linksalpha.com/a/networkpubget';
-	
 	$body = array('key'=>$options['api_key'], 'version'=>2);	
-	
 	$response_full = lacandsnw_networkpub_http_post($link, $body);
 	$response_code = $response_full[0];
-
 	if ($response_code != 200) {
 		$errdeschtml = lacandsnw_error_msgs($response_full[1]); 
 		echo $errdeschtml;
 		return;		
 	}
-	
 	$response = lacandsnw_networkpub_json_decode($response_full[1]);
 	if($response->errorCode > 0) {
 		$html = '<div class="msg_error">'.LACANDSNW_ERROR_LOADING_API_KEYS.'.</div>';
 		echo $html;
 		return;
 	}
+	if(count($response->results_deleted)) {
+		$option_api_key_array = explode(',', $options['api_key']);
+		foreach($response->results_deleted as $row) {
+			if(in_array($row, $option_api_key_array)) {
+				$pos = $option_api_key_array[$row];
+				unset($option_api_key_array[$pos]);
+			}
+		}
+		$api_key = implode(",", $option_api_key_array);
+		$options['api_key'] = $api_key;
+		update_option(LAECHONW_WIDGET_NAME_INTERNAL, $options);
+	}
+	if(!count($response->results)) {
+		return '<div class="msg_error">You have not added an API Key</div>';
+	}
 	if(count($response->results) == 1) {
 		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORK.'</div>';	
 	} else {
 		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORKS.'</div>';
 	}
-	$html .= '<table class="networkpub_added"><tr><th>'.__('API Key').'</th><th>'.__('Network').'</th><th>'.__('Option').'</th><th>'.__('Remove').'</th></tr>';
-	if (count($response->results)) {
-		foreach($response->results as $row) {
-			$html .= '<tr id="r_key_'.$row->api_key.'">';
-			$html .= '<td>'.$row->api_key.'</td><td><a href="'.$row->profile_url.'">'.$row->name.'</a></td>';
-			$html .= '<td style="text-align:center;"><a href="http://www.linksalpha.com/a/networkpuboptions?api_key='.$row->api_key.'&id='.$options['lacandsnw_id'].'&KeepThis=true&TB_iframe=true&height=465&width=650" title="Publish Options" class="thickbox" type="button" />'.__('Options').'</a></td>';
-			$html .= '<td><a href="#" id="key_'.$row->api_key.'" class="lanetworkpubre">'.__('Remove').'</a></td></tr>';
+	$html .= '<table class="networkpub_added"><tr><th>'.__('Network').'</th><th>'.__('Option').'</th><th>'.__('Remove').'</th></tr>';
+	$i = 1;
+	foreach($response->results as $row) {
+		$html .= '<tr id="r_key_'.$row->api_key.'">';
+		if($i&1) {
+			$html .= '<td>';
+		} else {
+			$html .= '<td style="background-color:#F7F7F7;">';
 		}
-	} else {
-		$html .= '<tr><td colspan="3" style="text-align:center;padding:5px 0px 5px 0px;">'.__('No API Keys have been added').'</td></tr>';
+		$html .= '<a target="_blank" href="'.$row->profile_url.'">'.$row->name.'</a></td>';
+		if($i&1) {
+			$html .= '<td style="text-align:center;">';
+		} else {
+			$html .= '<td style="text-align:center;background-color:#F7F7F7;">';
+		}
+		$html .= '<a href="http://www.linksalpha.com/a/networkpuboptions?api_key='.$row->api_key.'&id='.$options['id_2'].'&version='.lacandsnw_version().'&KeepThis=true&TB_iframe=true&height=465&width=650" title="Publish Options" class="thickbox" type="button" />'.__('Options').'</a></td>';
+		if($i&1) {
+			$html .= '<td style="text-align:center;">';
+		} else {
+			$html .= '<td style="text-align:center;background-color:#F7F7F7;">';
+		}
+		$html .= '<a href="#" id="key_'.$row->api_key.'" class="lanetworkpubre">'.__('Remove').'</a></td>';
+		$html .= '</tr>';
+		$i++;
 	}
 	$html .= '</table>';
 	echo $html;
 	return;
 }
+
 
 function lacandsnw_networkpub_ajax() {
 	if(!empty($_POST['type'])) {
@@ -142,18 +276,20 @@ function lacandsnw_networkpub_ajax() {
 	}
 }
 
+
 function lacandsnw_networkpub_remove() {
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
-	if (!empty($_POST['key'])) {
-		$key_full = $_POST['key'];
+	if (!empty($_POST['lacandsnw_networkpub_key'])) {
+		$key_full = $_POST['lacandsnw_networkpub_key'];
 		$key_only = trim(substr($key_full, 4));
-		$link = 'http://www.linksalpha.com/a/networkpubremove?id='.$options['lacandsnw_id'].'&key='.$key_only;
-		$response_full = lacandsnw_networkpub_http($link);
+		$link = 'http://www.linksalpha.com/a/networkpubremove';
+		$body = array('id'=>$options['id_2'], 'key'=>$key_only);
+		$response_full = lacandsnw_networkpub_http_post($link, $body);
 		$response_code = $response_full[0];
 		if ($response_code != 200) {
 			$errdesc = lacandsnw_error_msgs($response_full[1]); 
 			echo $errdesc;		
-			return FALSE;
+			return;
 		}
 		$api_key = $options['api_key'];
 		$api_key_array = explode(',', $api_key);
@@ -169,6 +305,7 @@ function lacandsnw_networkpub_remove() {
 	}
 }
 
+
 function lacandsnw_networkpub_json_decode($str) {
 	if (function_exists("json_decode")) {
 	    return json_decode($str);
@@ -181,9 +318,25 @@ function lacandsnw_networkpub_json_decode($str) {
 	}
 }
 
+
 function lacandsnw_networkpub_http($link) {
 	if (!$link) {
 		return array(500, 'invalid url');
+	}
+	if( !class_exists( 'WP_Http' ) ) {
+		include_once( ABSPATH . WPINC. '/class-http.php' );
+	}
+	if (class_exists('WP_Http')) {
+		$request = new WP_Http;
+		$headers = array( 'Agent' => LAECHONW_WIDGET_NAME.' - '.get_bloginfo('url') );
+		$response_full = $request->request( $link );
+		$response_code = $response_full['response']['code'];
+		if ($response_code === 200) {
+			$response = $response_full['body'];
+			return array($response_code, $response);
+		}
+		$response_msg = $response_full['response']['message'];
+		return array($response_code, $response_msg);
 	}
 	require_once(ABSPATH.WPINC.'/class-snoopy.php');
 	$snoop = new Snoopy;
@@ -192,35 +345,34 @@ function lacandsnw_networkpub_http($link) {
 		if (strpos($snoop->response_code, '200')) {
 			$response = $snoop->results;
 			return array(200, $response);
-		} 
+		}
 	}
-	if( !class_exists( 'WP_Http' ) ) {
-		include_once( ABSPATH . WPINC. '/class-http.php' );	
-	}
-	if (!class_exists('WP_Http')) {
-		return array(500, 'internal error');	
-	}
-	$request = new WP_Http;
-	$headers = array( 'Agent' => LAECHONW_WIDGET_NAME.' - '.get_bloginfo('url') );
-	$response_full = $request->request( $link );
-	
-	if(isset($response_full->errors)) {			
-		return array(500, 'internal error');				
-	}	
-	
-	$response_code = $response_full['response']['code'];
-	if ($response_code === 200) {
-		$response = $response_full['body'];
-		return array($response_code, $response);
-	}
-	$response_msg = $response_full['response']['message'];
-	return array($response_code, $response_msg);
+	return array(500, 'internal error');
 }
+
 
 function lacandsnw_networkpub_http_post($link, $body) {
 	if (!$link) {
 		return array(500, 'invalid url');
-	}	
+	}
+	if( !class_exists( 'WP_Http' ) ) {
+		include_once( ABSPATH . WPINC. '/class-http.php' );
+	}
+	if (class_exists('WP_Http')) {
+		$request = new WP_Http;
+		$headers = array( 'Agent' => LAECHONW_WIDGET_NAME.' - '.get_bloginfo('url') );
+		$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body, 'headers'=>$headers) );
+		if(isset($response_full->errors)) {
+			return array(500, 'internal error');
+		}
+		$response_code = $response_full['response']['code'];
+		if ($response_code === 200) {
+			$response = $response_full['body'];
+			return array($response_code, $response);
+		}
+		$response_msg = $response_full['response']['message'];
+		return array($response_code, $response_msg);
+	}
 	require_once(ABSPATH.WPINC.'/class-snoopy.php');
 	$snoop = new Snoopy;
 	$snoop->agent = LAECHONW_WIDGET_NAME.' - '.get_bloginfo('url');
@@ -230,27 +382,7 @@ function lacandsnw_networkpub_http_post($link, $body) {
 			return array(200, $response);
 		} 
 	}	
-	if( !class_exists( 'WP_Http' ) ) {
-		include_once( ABSPATH . WPINC. '/class-http.php' );	
-	}	
-	if (!class_exists('WP_Http')) {
-		return array(500, 'internal error');	
-	}	
-	$request = new WP_Http;
-	$headers = array( 'Agent' => LAECHONW_WIDGET_NAME.' - '.get_bloginfo('url') );
-	$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body, 'headers'=>$headers) );
-	
-	if(isset($response_full->errors)) {			
-		return array(500, 'internal error');				
-	}	
-	
-	$response_code = $response_full['response']['code'];
-	if ($response_code === 200) {
-		$response = $response_full['body'];
-		return array($response_code, $response);
-	}
-	$response_msg = $response_full['response']['message'];
-	return array($response_code, $response_msg);
+	return array(500, 'internal error');
 }
 
 
@@ -263,7 +395,7 @@ function lacandsnw_error_msgs($errMsg) {
 	
 		case 'internal error':
 			$html = '<div class="msg_error">	
-					<b>'.__('Please try again. Wait for sometime and try again').'</b>&nbsp;'.__('There was an unknown error. We will keep re-trying and send you an email when the request is successful. 
+					<b>'.__('Please try again. Wait for sometime and try again').'</b>&nbsp;'.__('There was an unknown error. Please try again.
 					You can also email us at').'&nbsp;<a href="mailto:post@linksalpha.com">post@linksalpha.com</a>&nbsp;'.__('with error description (your blog URL and the error)').'.
 				</div>';
 			return $html;		
@@ -296,7 +428,7 @@ function lacandsnw_error_msgs($errMsg) {
 			$html .= '</div>
 					<div>
 						<b>'.__('Description:').'</b>
-						<b>'.__('Please try again. Wait for sometime and try again').'. </b> '.__('Your site either did not respond (it is extremely slow) or it is not operational').'.
+						<b>'.__('Please try again').'. </b> '.__('Your site either did not respond (it is extremely slow) or it is not operational').'.
 					</div>
 					<div>
 						'.__('You can also').' <a href="http://www.linksalpha.com/user/siteadd" target="_blank">'.__('Click here').'</a> '.__('to enter blog URL on LinksAlpha manually').'. 
@@ -376,6 +508,7 @@ function lacandsnw_error_msgs($errMsg) {
 	}	
 }
 
+
 function lacandsnw_pushpresscheck() {
 	$active_plugins = get_option('active_plugins');
 	$pushpress_plugin = 'pushpress/pushpress.php';
@@ -428,6 +561,13 @@ function lacandsnw_postbox(){
 		  </div>';
 	echo $html;
 	return;
+}
+
+
+function lacandsnw_version() {
+	$all_plugins = get_plugins();
+	$plugin_version = $all_plugins['1-click-retweetsharelike/la-click-and-share.php']['Version'];
+	return $plugin_version;
 }
 
 ?>

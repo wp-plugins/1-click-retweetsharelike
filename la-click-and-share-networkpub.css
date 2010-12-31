@@ -1,10 +1,11 @@
-table.networkpub_added {border-collapse:collapse;width:100%;}
-table.networkpub_added th {padding:3px 10px 3px 10px;border:1px solid #DFDFDF;background-color:#F0F0F0;font-weight:bold;text-align:center;}
-table.networkpub_added td {padding:3px 10px 3px 10px;border:1px solid #DFDFDF;text-align:center;}
+table.networkpub_added {border-collapse:collapse;width:785px;}
+table.networkpub_added th {padding:5px 10px 5px 10px;border:1px solid #BFBFBF;background-color:#DCDCD8;font-weight:bold;font-size:14px;text-align:center;}
+table.networkpub_added td {padding:4px 10px 4px 10px;border:1px solid #BFBFBF;}
+table.networkpub_added td a{text-decoration:none;}
 
 .rts_header {padding:20px 0px 20px 0px;}
-.rts_header2{padding:5px 0px 3px 10px;border-bottom:1px solid #BFBFBF;margin-bottom:0px;background-color:#bdc7d8; width:900px}
-.la_content_box {text-align:left;background-color:#FFF;padding:20px;border:1px solid #eceff5; width:868px}
+.rts_header2{padding:5px 0px 3px 10px;border-bottom:1px solid #BFBFBF;margin-bottom:0px;background-color:#bdc7d8;}
+.la_content_box {text-align:left;background-color:#FFF;padding:20px;border:1px solid #eceff5;}
 .la_content_box_2 {text-align:left;background-color:#FFF;padding:0px 20px 20px 20px;border:1px solid #eceff5;}
 .la_content_box_3 {text-align:left;background-color:#FFF;padding:10px 15px 15px 15px;border:1px solid #eceff5;}
 .la_image {width:16px;height:16px;}
@@ -39,3 +40,5 @@ div#rts_tweets_load_button {text-align:center;}
 .lacands_header_border_bottom {border-color:#FEECA1;border-style:solid; border-width:1px; padding:0px;margin-bottom:5px;}
 
 .outsideBorder {width:1000px;height:auto;border-width:1px;border-color:#DCDCD8;border-style:solid;margin:20px 10px; padding:10px;}
+
+.lacands_started {padding:20px;background-color:#FFF9D7;margin-bottom:15px;;-moz-border-radius: 3px;border-radius: 3px;-webkit-border-radius: 3px;border:1px solid #e6db55;}

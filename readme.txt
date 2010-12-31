@@ -3,18 +3,21 @@
 Contributors: LinksAlpha
 Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live
 Requires at least: 2.0.2
-Tested up to: 3.0.1
-Stable tag: 3.6.0
+Tested up to: 3.0.4
+Stable tag: 4.0.0
 
 
 == Description ==
 
-Shows following 4 buttons on your blog posts:
+Shows following 7 buttons on your blog posts:
 
 1. Facebook Like
 1. Facebook Share
 1. Twitter button
 1. LinkedIn Share
+1. Google Buzz
+1. Digg
+1. StumbleUpon
 
 AND, Facebook Recommendations in the Widgets Sidebar
 
@@ -136,6 +139,10 @@ Email us at post@linksalpha.com
 
 
 == Changelog ==
+
+= 4.0.0 =
+* Adds Support for Google Buzz, Digg, and StumbleUpon
+* Users will now have to add their LinksAlpha user key, instead of network key
 
 = 3.6.0 =
 * Adds Support to self Post content to connected Networks. Submenu option under - Posts - in Admin console

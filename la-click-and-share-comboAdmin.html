@@ -6,106 +6,100 @@
 	<div class="lacands_font_bold14"><?php _e("Preview"); ?></div>
 	<div class="lacands_header_border_bottom"></div>
 	<div style="padding-top:5px;">
-		<iframe style="height:25px !important; border:none !important; overflow:hidden !important; width:380px !important;" frameborder="0" scrolling="no" allowTransparency="true" src="http://www.linksalpha.com/social?link=http%253A%252F%252Fdev30.linksalpha.com%252F%253Fp%253D8&fc=333333&fs=lucida+grande&fblname=like&fblref=fb&fbllang=en_US&twitterlang=en&twittermention=vivekpuri&twitterrelated1=vivekpuri&twitterrelated12=twitfn&linkedinbutton=show"></iframe>
+		<iframe style="height:25px !important; border:none !important; overflow:hidden !important; width:500px !important;" frameborder="0" scrolling="no" allowTransparency="true" src="http://www.linksalpha.com/social?link=http%253A%252F%252Fdev30.linksalpha.com%252F%253Fp%253D8&fc=333333&fs=lucida+grande&fblname=like&fblref=fb&fbllang=en_US&twitterlang=en&twittermention=vivekpuri&twitterrelated1=vivekpuri&twitterrelated12=twitfn&linkedinbutton=show"></iframe>
 	</div>
 </div>
 
 <div class="outsideBorder">
 	<div class="lacands_font_bold14"><?php echo LACANDS_AUTO_PUBLISH_ON_NETWORKS; ?>&nbsp;(<?php echo LACANDS_ENTER_API_KEY;?>)</div>
 	<div class="lacands_header_border_bottom"></div>
-	<div style="padding-left:10px;">
-		<div>
-			<?php echo LACANDS_ENTER_API_KEY_UPPER."&nbsp;".LACANDS_TO."&nbsp;".LACANDSNW_NETWORKPUB; ?>
-		</div>
-		<div>
-			<?php _e("Once setup, your Blog posts content automatically appears on the social networks as soon as you hit the Wordpress Publish button."); ?>
-		</div>
-		<div style="padding-top:10px;">
-			<a href="http://www.linksalpha.com/user/networks" target="_blank"><?php _e("Click here"); ?></a>&nbsp;<?php _e("to get API Keys for your Social Networks."); ?>
-			<?php _e("You can"); ?>&nbsp;<a href="http://help.linksalpha.com/networks/wordpress-plugin-network-publisher" target="_blank"><?php _e("read more about this process at LinksAlpha.com"); ?></a>.
-		</div>
+	<div class="lacands_started" style="margin:20px;">
+		<div style="padding:0px 0px 5px 0px;"><?php _e(LACANDSNW_NETWORKPUB.". To configure:"); ?></div>
+		<div><b>1.</b>&nbsp;<?php _e("Connect to your Social Networks at"); ?>&nbsp;<a target="_blank" href="http://www.linksalpha.com/user/networks">LinksAlpha.com</a></div>
+		<div><b>2.</b>&nbsp;<?php _e("Get"); ?>&nbsp;<a target="_blank" href="http://www.linksalpha.com/user/your_api_key"><?php _e("your API Key"); ?></a>&nbsp;<?php _e("and enter it below."); ?></div>
+		<div style="padding:5px 0px 0px 0px;"><?php _e("Once setup, your Blog posts content appears on the social networks as soon as you hit the Publish button."); ?></div>
+		<div><?php _e("You can"); ?>&nbsp;<a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank"><?php _e("read more about this process at LinksAlpha.com."); ?></a></div>
 	</div>
-	
-	<div>
-		<div class="rts_header"></div>
+	<div style="margin:20px;">
 		<table style="width:100%;">
 			<tr>
-				<td style="width:800px;">
-					<table style="width:800px;">
-						<tr>
-							<td style="padding-bottom:10px;">
-								<div class="rts_header2"><big><strong><?php _e("Setup"); ?></strong></big></div>
-								<div class="la_content_box">
-									<form action="" method="post" id="networkpubadd" name="networkpubadd" style="width:90%;">
-										<fieldset class="rts_fieldset">
-											<legend><?php _e("Additional API Key"); ?></legend>
-											<div>
-												<label for="<?php echo $field_name ?>"><?php echo $lacandsnw_networkpub_settings[$curr_field]['label'] ?>&nbsp;</label>
-											</div>
+				<td style="padding-bottom:10px;">
+					<div class="rts_header2"><big><strong><?php _e("Setup"); ?></strong></big></div>
+					<div class="la_content_box">
+						<form action="" method="post" id="networkpubadd" name="networkpubadd" style="width:90%;">
+							<fieldset class="rts_fieldset">
+								<legend><?php _e("API Key"); ?></legend>
+								<table style="width:100%;">
+									<tr>
+										<td>
+											<label for="<?php echo $field_name ?>">
+												<a href="http://www.linksalpha.com/user/your_api_key" target="_blank" style="color:red"><?php _e("Click here"); ?></a>&nbsp;<b><?php _e("to get your API Key"); ?></b>&nbsp;<?php _e("and enter it in the box below"); ?>
+											</label>
+										</td>
+									</tr>
+									<tr>
+										<td>
 											<div style="padding-bottom:10px">
-												<div>
-													<a href="http://www.linksalpha.com/user/networks" target="_blank" style="color:red"><?php _e("Click here"); ?></a>&nbsp;<b><?php _e("to get API Key"); ?></b>&nbsp;<?php _e("and enter it in the box below"); ?>
-												</div>
-												<div>
-													<input style="width:400px;" class="widefat" id="<?php echo $field_name ?>" name="<?php echo $field_name ?>" type="text" />
-												</div>
+												<input style="width:400px;" class="widefat" id="<?php echo $field_name ?>" name="<?php echo $field_name ?>" type="text" />
 											</div>
-											<div>
-												<?php _e("You need to get key from LinksAlpha and copy it here. You CANNOT generate your own key"); ?>.
-												<a href="http://help.linksalpha.com/networks/wordpress-plugin-network-publisher" target="_blank"><?php _e("Read more about the simple and quick process here"); ?></a>
-											</div>
-										</fieldset>
-										<div style="padding-top:20px;"><input type="submit" name="AddAPIKey" class="button-primary" value="Add API Key" /></div>
-										<input type="hidden" value="<?php echo LACANDS_PLUGIN_URL ?>" id="la-networkpub_plugin_url" />
-									</form>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td style="padding:0px 0px 0px 0px;vertical-align:top;">
-								<div style="height:25px;margin-bottom:10px;">
-									<div id="la-networkpub_msg" style="display:none;"></div>
-								</div>
-								<div class="rts_header2"><big><strong><?php _e("Currently Publishing"); ?></strong></big></div>
-								<div class="la_content_box">
-									<div id="la-idAPIBox">
-									 <?php echo lacandsnw_networkpub_load() ?>
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div style="margin:20px 10px 20px 10px;color:gray;">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<?php _e("You need to get key from LinksAlpha and copy it here. You CANNOT generate your own key"); ?>.
+											<a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank"><?php _e("Read more about the simple and quick process here"); ?></a>
+										</td>
+									</tr>
+								</table>
+							</fieldset>
+							<div style="padding-top:20px;"><input type="submit" name="AddAPIKey" class="button-primary" value="Add API Key" /></div>
+							<input type="hidden" value="<?php echo LACANDS_PLUGIN_URL ?>" id="la-networkpub_plugin_url" />
+						</form>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding:0px 0px 0px 0px;vertical-align:top;">
+					<div style="height:25px;margin-bottom:10px;">
+						<div id="la-networkpub_msg" style="display:none;"></div>
+					</div>
+					<div class="rts_header2"><big><strong><?php _e("Currently Publishing"); ?></strong></big></div>
+					<div class="la_content_box">
+						<div id="la-idAPIBox">
+						 <?php echo lacandsnw_networkpub_load() ?>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div style="margin:20px 10px 20px 10px;color:gray;">
+						<div>
+							<?php _e("Note: If you decide to stop using this functionality permanently (after adding API key even once), pls also remove your blog URL by logging into"); ?>&nbsp;<a href="http://www.linksalpha.com/user/tracked" target="_blank">http://www.linksalpha.com/user/tracked</a>.
+							<?php _e("Otherwise, your blog posts may continue to get posted even after you do not use this functionality."); ?>
+						</div>
+						<div>
+							<?php _e("If you have questions, pls email us at"); ?>&nbsp;<a href="mailto:post@linksalpha.com">post@linksalpha.com</a>.
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="rts_header2"><big><strong>Postbox</strong></big></div>
+					<div class="la_content_box">
+						<table>
+							<tr>
+								<td>
 									<div>
-										<?php _e("Note: If you decide to stop using this functionality permanently (after adding API key even once), pls also remove your blog URL by logging into"); ?>&nbsp;<a href="http://www.linksalpha.com/user/tracked" target="_blank">http://www.linksalpha.com/user/tracked</a>.
-										<?php _e("Otherwise, your blog posts may continue to get posted even after you do not use this functionality."); ?>
+										<a href="<?php echo lacandsnw_postbox_url(); ?>" style="text-decoration:none;">
+											<div class="lacands_button_yellow"><?php _e("View"); ?> Postbox</div>
+										</a>
 									</div>
-									<div>
-										<?php _e("If you have questions, pls email us at"); ?>&nbsp;<a href="mailto:post@linksalpha.com">post@linksalpha.com</a>.
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="rts_header2"><big><strong>Postbox</strong></big></div>
-								<div class="la_content_box">
-									<table>
-										<tr>
-											<td>
-												<div>
-													<a href="<?php echo lacandsnw_postbox_url(); ?>" style="text-decoration:none;">
-														<div class="lacands_button_yellow"><?php _e("View"); ?> Postbox</div>
-													</a>
-												</div>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</td>
-						</tr>
-					</table>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</td>
 			</tr>
 		</table>
@@ -236,6 +230,24 @@
 					</div>
 				</div>
 				
+				<!--Facebook Share button lang-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers">Facebook&nbsp;<?php _e("Share button language"); ?>:</div>
+					<select name="lacands-html-widget-fb-share-lang">
+						<?php
+							$langs = lacands_fbs_langs();
+							asort($langs);
+							foreach($langs as $key=>$val) {
+								if($lacands_opt_widget_fb_share_lang == $key) {
+									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+								} else{
+									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+								}
+							}
+						?>
+					</select>
+				</div>
+				
 				<!--Facebook Like button lang-->
 				<div class="lacands_input_header">
 					<div class="lacands_input_headers">Facebook&nbsp;<?php _e("Like button language"); ?>:</div>
@@ -245,6 +257,23 @@
 							asort($langs);
 							foreach($langs as $key=>$val) {
 								if($lacands_opt_widget_fb_like_lang == $key) {
+									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+								} else{
+									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+								}
+							}
+						?>
+					</select>
+				</div>
+				
+				<!--Facebook Like Button Show -->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers">Facebook&nbsp;<?php _e("Like button Show/Hide"); ?>:</div>
+					<select name="lacands-html-widget-fb-like-show">
+						<?php
+							$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
+							foreach($options as $key=>$val) {
+								if($lacands_opt_widget_fb_like_show == $key) {
 									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
 								} else{
 									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
@@ -345,6 +374,94 @@
 								$options = array('show'=>LACANDS_SHOW, 'noshow'=>LACANDS_DONT_SHOW);
 								foreach($options as $key=>$val) {
 									if($lacands_opt_widget_linkedin_button == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+				
+				<!--LinkedIn Counter-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers">LinkedIn&nbsp;<?php _e("Share Count Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-linkedin-counter">
+							<?php
+								$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_linkedin_counter == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+			</fieldset>
+			
+			<!--Google Buzz-->
+			<fieldset class="lacands_fieldset">
+				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/buzz_icon.png" style="vertical-align:bottom;" />&nbsp;Google Buzz</legend>
+				<!--LinkedIn Counter-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers">Google Buzz&nbsp;<?php _e("Share Count Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-buzz-counter">
+							<?php
+								$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_buzz_counter == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+			</fieldset>
+			
+			<!--Digg-->
+			<fieldset class="lacands_fieldset">
+				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/digg_icon.png" style="vertical-align:bottom;" />&nbsp;Digg.com</legend>
+				<!--Digg Counter-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers">Digg&nbsp;<?php _e("Count Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-digg-counter">
+							<?php
+								$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_digg_counter == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+			</fieldset>
+			
+			<!--StumbleUpon-->
+			<fieldset class="lacands_fieldset">
+				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/stumbleupon_icon.png" style="vertical-align:bottom;" />&nbsp;StumbleUpon</legend>
+				<!--StumbleUpon Counter-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers">StumbleUpon&nbsp;<?php _e("Stumble Count Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-stumble-counter">
+							<?php
+								$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_stumble_counter == $key) {
 										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
 									} else{
 										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
