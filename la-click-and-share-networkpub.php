@@ -7,6 +7,7 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        		__('You are currently Publishi
 define('LACANDSNW_SOCIAL_NETWORKS',        				__('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',        				__('Network'));
 define('LACANDSNW_PLUGIN_NAME',        					__('cs'));
+define('LACANDSNW_PLUGIN_VERSION', 						'4.0.0');
 
 
 function lacandsnw_networkping($id) {
@@ -67,53 +68,52 @@ function lacandsnw_post($post_id) {
 	$api_key = $options['api_key'];
 	//Post Published?
 	$post_data = get_post( $post_id, ARRAY_A );
-	if($post_data['post_status'] != 'publish') {
-		return;
-	}
-	//Post data: id, content and title
-	$post_title = $post_data['post_title'];
-	$post_content = $post_data['post_content'];
-	//Post data: Permalink
-	$post_link = get_permalink($post_id);
-	//Post data: Categories
-	$post_categories_array = array();
-	$post_categories_data = get_the_category( $post_id );
-	foreach($post_categories_data as $category) {
-		$post_categories_array[] = $category->cat_name;
-	}
-	$post_categories = implode(",", $post_categories_array);
-	//Post tags
-	$post_tags_array = array();
-	$post_tags_data = wp_get_post_tags( $post_id );
-	foreach($post_tags_data as $tag) {
-		$post_tags_array[] = $tag->name;
-	}
-	$post_tags = implode(",", $post_tags_array);
-	//Post Geo
-	if(function_exists('get_wpgeo_latitude')) {
-		if(get_wpgeo_latitude( $post_id ) and get_wpgeo_longitude( $post_id )) {
-			$post_geotag = get_wpgeo_latitude( $post_id ).' '.get_wpgeo_longitude( $post_id );
+	if(in_array($post_data['post_status'], array('future', 'publish'))) {
+		//Post data: id, content and title
+		$post_title = $post_data['post_title'];
+		$post_content = $post_data['post_content'];
+		//Post data: Permalink
+		$post_link = get_permalink($post_id);
+		//Post data: Categories
+		$post_categories_array = array();
+		$post_categories_data = get_the_category( $post_id );
+		foreach($post_categories_data as $category) {
+			$post_categories_array[] = $category->cat_name;
 		}
+		$post_categories = implode(",", $post_categories_array);
+		//Post tags
+		$post_tags_array = array();
+		$post_tags_data = wp_get_post_tags( $post_id );
+		foreach($post_tags_data as $tag) {
+			$post_tags_array[] = $tag->name;
+		}
+		$post_tags = implode(",", $post_tags_array);
+		//Post Geo
+		if(function_exists('get_wpgeo_latitude')) {
+			if(get_wpgeo_latitude( $post_id ) and get_wpgeo_longitude( $post_id )) {
+				$post_geotag = get_wpgeo_latitude( $post_id ).' '.get_wpgeo_longitude( $post_id );
+			}
+		}
+		if(!isset($post_geotag)) {
+			$post_geotag = '';
+		}
+		// Build Params
+		$link = 'http://www.linksalpha.com/a/networkpubpost';
+		$params = array('id'=>$id,
+						'api_key'=>$api_key,
+						'post_id'=>$post_id,
+						'post_link'=>$post_link,
+						'post_title'=>$post_title,
+						'post_content'=>$post_content,
+						'plugin'=>LACANDSNW_PLUGIN_NAME,
+						'plugin_version'=>lacandsnw_version(),
+						'post_categories'=>$post_categories,
+						'post_tags'=>$post_tags,
+						'post_geotag'=>$post_geotag
+						);
+		//HTTP Call
+		$response_full = lacandsnw_networkpub_http_post($link,$params);
 	}
-	if(!isset($post_geotag)) {
-		$post_geotag = '';
-	}
-	// Build Params
-	$link = 'http://www.linksalpha.com/a/networkpubpost';
-	$params = array('id'=>$id,
-					'api_key'=>$api_key,
-					'post_id'=>$post_id,
-					'post_link'=>$post_link,
-					'post_title'=>$post_title,
-					'post_content'=>$post_content,
-					'plugin'=>LACANDSNW_PLUGIN_NAME,
-					'plugin_version'=>lacandsnw_version(),
-					'post_categories'=>$post_categories,
-					'post_tags'=>$post_tags,
-					'post_geotag'=>$post_geotag
-					);
-	//HTTP Call
-	$response_full = lacandsnw_networkpub_http_post($link,$params);
 	return;
 }
 
@@ -565,9 +565,8 @@ function lacandsnw_postbox(){
 
 
 function lacandsnw_version() {
-	$all_plugins = get_plugins();
-	$plugin_version = $all_plugins['1-click-retweetsharelike/la-click-and-share.php']['Version'];
-	return $plugin_version;
+	return LACANDSNW_PLUGIN_VERSION;
 }
+
 
 ?>
