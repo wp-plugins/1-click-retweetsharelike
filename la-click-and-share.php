@@ -715,7 +715,6 @@ add_action ( '{$new_status}_{$post->post_type}', 	'lacandsnw_convert');
 add_action ( 'publish_post', 						'lacandsnw_convert');
 add_action ( 'future_to_publish', 					'lacandsnw_convert');
 
-
 lacands_main();
 
 ?>
