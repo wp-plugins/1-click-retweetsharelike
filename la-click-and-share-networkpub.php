@@ -111,6 +111,11 @@ function lacandsnw_post($post_id) {
 						'post_tags'=>$post_tags,
 						'post_geotag'=>$post_geotag
 						);
+		//Featured Image
+		$post_image = lacandsnw_thumbnail_link( $post_id );
+		if($post_image) {
+			$params['post_image'] = $post_image;
+		}
 		//HTTP Call
 		$response_full = lacandsnw_networkpub_http_post($link,$params);
 	}
@@ -561,6 +566,17 @@ function lacandsnw_postbox(){
 		  </div>';
 	echo $html;
 	return;
+}
+
+
+function lacandsnw_thumbnail_link( $post_id ) {
+	$src = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'full');
+	if($src) {
+		$src = $src[0];
+		return $src;	
+	} else {
+		return False;
+	}
 }
 
 
