@@ -445,6 +445,7 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 		$lacands_opt_cntr_font_color = 	str_replace('#', '', $lacands_opt_cntr_font_color);
 		$lacands_opt_cntr_font_color = 	trim($lacands_opt_cntr_font_color);
 		$args = array();
+		$args['blog'] =				get_bloginfo('name');
 		$args['link'] = 			htmlentities($link1);
 		$args['title'] = 			substr(strip_tags($post->post_title), 0, 120);
 		$args['desc'] = 			substr(strip_tags($post->post_content), 0, 200);
