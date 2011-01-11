@@ -570,6 +570,9 @@ function lacandsnw_postbox(){
 
 
 function lacandsnw_thumbnail_link( $post_id ) {
+	if(!function_exists('get_post_thumbnail_id')) {
+		return False;
+	}
 	$src = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'full');
 	if($src) {
 		$src = $src[0];
