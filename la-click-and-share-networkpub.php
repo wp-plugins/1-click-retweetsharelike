@@ -336,7 +336,7 @@ function lacandsnw_networkpub_http($link) {
 		$headers = array( 'Agent' => LAECHONW_WIDGET_NAME.' - '.get_bloginfo('url') );
 		$response_full = $request->request( $link );
 		$response_code = $response_full['response']['code'];
-		if ($response_code === 200) {
+		if ($response_code == 200) {
 			$response = $response_full['body'];
 			return array($response_code, $response);
 		}
@@ -371,7 +371,7 @@ function lacandsnw_networkpub_http_post($link, $body) {
 			return array(500, 'internal error');
 		}
 		$response_code = $response_full['response']['code'];
-		if ($response_code === 200) {
+		if ($response_code == 200) {
 			$response = $response_full['body'];
 			return array($response_code, $response);
 		}
