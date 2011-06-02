@@ -208,13 +208,13 @@
 				</div>
 			</fieldset>
 			
-			<!--Facebook-->
+			<!--Facebook Like -->
 			<fieldset class="lacands_fieldset">
-				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/facebook_icon.png" style="vertical-align:bottom;" />&nbsp;Facebook</legend>
+				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/facebook_icon.png" style="vertical-align:bottom;" />&nbsp;Facebook Like</legend>
 				
 				<!--Facebook Like button text-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Facebook&nbsp;<?php _e("Like button text"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Button text"); ?>:</div>
 					<select name="lacands-html-widget-fb-like">
 						<option <?php if($lacands_opt_widget_fb_like == 'like') echo "selected"; ?> value="like"><?php _e("Like"); ?></option>
 						<option <?php if($lacands_opt_widget_fb_like == 'recommend') echo "selected"; ?> value="recommend"><?php _e("Recommend"); ?></option>
@@ -223,34 +223,16 @@
 				
 				<!--Facebook Like button ref-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Facebook&nbsp;<?php _e("Like button referral tracking label"); ?>:</div> 
+					<div class="lacands_input_headers"><?php _e("Button referral tracking label"); ?>:</div> 
 					<div>
 						<input name="lacands-html-widget-fb-ref" id="lacands-html-widget-fb-ref" type="text" size="15" value="<?php echo $lacands_opt_widget_fb_ref; ?>" ></input>
 						<label for="lacands-html-widget-fb-ref"><?php _e("Max 50 characters and can contain alphanumeric characters and some punctuation (currently +/=-.:_)"); ?></label>
 					</div>
 				</div>
 				
-				<!--Facebook Share button lang-->
-				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Facebook&nbsp;<?php _e("Share button language"); ?>:</div>
-					<select name="lacands-html-widget-fb-share-lang">
-						<?php
-							$langs = lacands_fbs_langs();
-							asort($langs);
-							foreach($langs as $key=>$val) {
-								if($lacands_opt_widget_fb_share_lang == $key) {
-									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
-								} else{
-									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
-								}
-							}
-						?>
-					</select>
-				</div>
-				
 				<!--Facebook Like button lang-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Facebook&nbsp;<?php _e("Like button language"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Button language"); ?>:</div>
 					<select name="lacands-html-widget-fb-like-lang">
 						<?php
 							$langs = lacands_la_langs();
@@ -268,7 +250,7 @@
 				
 				<!--Facebook Like Button Show -->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Facebook&nbsp;<?php _e("Like button Show/Hide"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
 					<select name="lacands-html-widget-fb-like-show">
 						<?php
 							$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
@@ -283,9 +265,52 @@
 					</select>
 				</div>
 				
+			</fieldset>
+			
+			<!--Facebook Share -->
+			<fieldset class="lacands_fieldset">
+				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/facebook_icon.png" style="vertical-align:bottom;" />&nbsp;Facebook Share</legend>
+				
+				<!--Faebook Share Button-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-fb-share-button">
+							<?php
+								$options = array(1=>LACANDS_SHOW, 0=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_fb_share_button == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+				
+				<!--Facebook Share button lang-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button language"); ?>:</div>
+					<select name="lacands-html-widget-fb-share-lang">
+						<?php
+							$langs = lacands_fbs_langs();
+							asort($langs);
+							foreach($langs as $key=>$val) {
+								if($lacands_opt_widget_fb_share_lang == $key) {
+									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+								} else{
+									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+								}
+							}
+						?>
+					</select>
+				</div>
+				
 				<!--Facebook Share Count-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Facebook&nbsp;<?php _e("Share Count Show/Hide"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Share Count Show/Hide"); ?>:</div>
 					<select name="lacands-html-widget-fb-share-counter">
 						<?php
 							$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
@@ -327,7 +352,7 @@
 				
 				<!--Twitter button lang-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Twitter&nbsp;<?php _e("button language"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Button language"); ?>:</div>
 					<select name="lacands-html-widget-twitter-lang">
 						<?php
 							$langs = array('en'=>'English', 'fr'=>__("French"), 'de'=>__("German"), 'es'=>__("Spanish"), 'ja'=>__("Japanese"));
@@ -344,7 +369,7 @@
 				
 				<!--Twitter Retweet Count-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Twitter&nbsp;<?php _e("Retweet Count Show/Hide"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Retweet Count Show/Hide"); ?>:</div>
 					<select name="lacands-html-widget-twitter-counter">
 						<?php
 							$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
@@ -367,7 +392,7 @@
 				
 				<!--LinkedIn button-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">LinkedIn&nbsp;<?php _e("Button Show/Hide"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
 					<div>
 						<select name="lacands-html-widget-linkedin-button">
 							<?php
@@ -386,7 +411,7 @@
 				
 				<!--LinkedIn Counter-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">LinkedIn&nbsp;<?php _e("Share Count Show/Hide"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Share Count Show/Hide"); ?>:</div>
 					<div>
 						<select name="lacands-html-widget-linkedin-counter">
 							<?php
@@ -404,12 +429,74 @@
 				</div>
 			</fieldset>
 			
+			<!--Google +1-->
+			<fieldset class="lacands_fieldset">
+				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/googleplus_icon_24.png" style="vertical-align:middle;" />&nbsp;Google +1</legend>
+				
+				<!--Google +1 Button-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-g1-button">
+							<?php
+								$options = array(1=>LACANDS_SHOW, 0=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_g1_button == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+				
+				<!--Google +1 Counter-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Share Count Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-g1-counter">
+							<?php
+								$options = array(1=>LACANDS_SHOW, 0=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_g1_counter == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+				
+				<!--Google +1 Button lang-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button language"); ?>:</div>
+					<select name="lacands-html-widget-g1-lang">
+						<?php
+							$langs = lacands_g1_langs();
+							asort($langs);
+							foreach($langs as $key=>$val) {
+								if($lacands_opt_widget_g1_lang == $key) {
+									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+								} else{
+									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+								}
+							}
+						?>
+					</select>
+				</div>
+				
+			</fieldset>
+			
 			<!--Google Buzz-->
 			<fieldset class="lacands_fieldset">
 				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/buzz_icon.png" style="vertical-align:bottom;" />&nbsp;Google Buzz</legend>
 				<!--LinkedIn Counter-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">Google Buzz&nbsp;<?php _e("Share Count Show/Hide"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Share Count Show/Hide"); ?>:</div>
 					<div>
 						<select name="lacands-html-widget-buzz-counter">
 							<?php
@@ -455,7 +542,7 @@
 				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/stumbleupon_icon.png" style="vertical-align:bottom;" />&nbsp;StumbleUpon</legend>
 				<!--StumbleUpon Counter-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers">StumbleUpon&nbsp;<?php _e("Stumble Count Show/Hide"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Stumble Count Show/Hide"); ?>:</div>
 					<div>
 						<select name="lacands-html-widget-stumble-counter">
 							<?php

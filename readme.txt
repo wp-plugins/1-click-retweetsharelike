@@ -1,23 +1,25 @@
 === Plugin Name ===
 
 Contributors: LinksAlpha
-Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live
+Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live, google +1, google plus one, google plusone
 Requires at least: 2.0.2
-Tested up to: 3.0.4
-Stable tag: 4.0.0
+Tested up to: 3.1.3
+Stable tag: 4.1.0
 
 
 == Description ==
 
-Shows following 7 buttons on your blog posts:
+Shows following 8 buttons on your blog posts:
 
+1. Google +1
 1. Facebook Like
 1. Facebook Share
 1. Twitter button
 1. LinkedIn Share
 1. Google Buzz
-1. Digg
 1. StumbleUpon
+1. Digg
+1. Email
 
 AND, Facebook Recommendations in the Widgets Sidebar
 
@@ -139,6 +141,9 @@ Email us at post@linksalpha.com
 
 
 == Changelog ==
+
+= 4.1.0 =
+* Adds Support for Google +1
 
 = 4.0.0 =
 * Adds Support for Google Buzz, Digg, and StumbleUpon
