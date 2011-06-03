@@ -212,6 +212,23 @@
 			<fieldset class="lacands_fieldset">
 				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/facebook_icon.png" style="vertical-align:bottom;" />&nbsp;Facebook Like</legend>
 				
+				<!--Facebook Like Button-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
+					<select name="lacands-html-widget-fb-like-show">
+						<?php
+							$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
+							foreach($options as $key=>$val) {
+								if($lacands_opt_widget_fb_like_show == $key) {
+									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+								} else{
+									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+								}
+							}
+						?>
+					</select>
+				</div>
+				
 				<!--Facebook Like button text-->
 				<div class="lacands_input_header">
 					<div class="lacands_input_headers"><?php _e("Button text"); ?>:</div>
@@ -239,23 +256,6 @@
 							asort($langs);
 							foreach($langs as $key=>$val) {
 								if($lacands_opt_widget_fb_like_lang == $key) {
-									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
-								} else{
-									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
-								}
-							}
-						?>
-					</select>
-				</div>
-				
-				<!--Facebook Like Button Show -->
-				<div class="lacands_input_header">
-					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
-					<select name="lacands-html-widget-fb-like-show">
-						<?php
-							$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
-							foreach($options as $key=>$val) {
-								if($lacands_opt_widget_fb_like_show == $key) {
 									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
 								} else{
 									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
@@ -330,6 +330,25 @@
 			<!--Twitter-->
 			<fieldset class="lacands_fieldset">
 				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/twitter_icon.png" style="vertical-align:bottom;" />&nbsp;Twitter</legend>
+				
+				<!--Twitter Button-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-twitter-button">
+							<?php
+								$options = array(1=>LACANDS_SHOW, 0=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_twitter_button == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
 				
 				<!--Twitter button mention-->
 				<div class="lacands_input_header">
@@ -494,7 +513,27 @@
 			<!--Google Buzz-->
 			<fieldset class="lacands_fieldset">
 				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/buzz_icon.png" style="vertical-align:bottom;" />&nbsp;Google Buzz</legend>
-				<!--LinkedIn Counter-->
+				
+				<!--Google Buzz Button-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-buzz-button">
+							<?php
+								$options = array(1=>LACANDS_SHOW, 0=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_buzz_button == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+				
+				<!--Google Buzz Counter-->
 				<div class="lacands_input_header">
 					<div class="lacands_input_headers"><?php _e("Share Count Show/Hide"); ?>:</div>
 					<div>
@@ -517,6 +556,26 @@
 			<!--Digg-->
 			<fieldset class="lacands_fieldset">
 				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/digg_icon.png" style="vertical-align:bottom;" />&nbsp;Digg.com</legend>
+				
+				<!--Digg Button-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-digg-button">
+							<?php
+								$options = array(1=>LACANDS_SHOW, 0=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_digg_button == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+				
 				<!--Digg Counter-->
 				<div class="lacands_input_header">
 					<div class="lacands_input_headers">Digg&nbsp;<?php _e("Count Show/Hide"); ?>:</div>
@@ -540,6 +599,26 @@
 			<!--StumbleUpon-->
 			<fieldset class="lacands_fieldset">
 				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/stumbleupon_icon.png" style="vertical-align:bottom;" />&nbsp;StumbleUpon</legend>
+				
+				<!--StumbleUpon Button-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-stumble-button">
+							<?php
+								$options = array(1=>LACANDS_SHOW, 0=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_stumble_button == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+				
 				<!--StumbleUpon Counter-->
 				<div class="lacands_input_header">
 					<div class="lacands_input_headers"><?php _e("Stumble Count Show/Hide"); ?>:</div>
