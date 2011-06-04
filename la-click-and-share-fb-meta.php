@@ -74,6 +74,9 @@ function lacands_thumbnail_link($post_id, $post_content) {
             return $src;
         }
     }
+	if(!$post_content) {
+		return False;
+	}
     if(class_exists("DOMDocument") and function_exists('simplexml_import_dom')) {
         $doc = new DOMDocument();
         if(!($doc->loadHTML($post_content))){
