@@ -7,7 +7,7 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        		__('You are currently Publishi
 define('LACANDSNW_SOCIAL_NETWORKS',        				__('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',        				__('Network'));
 define('LACANDSNW_PLUGIN_NAME',        					__('cs'));
-define('LACANDSNW_PLUGIN_VERSION', 						'4.1.1');
+define('LACANDSNW_PLUGIN_VERSION', 						'4.1.2');
 
 
 function lacandsnw_networkping($id) {

@@ -66,7 +66,7 @@ function lacands_clean_text($text) {
 }
 
 
-function lacands_thumbnail_link( $post_id, $post_content ) {
+function lacands_thumbnail_link($post_id, $post_content) {
     if(function_exists('get_post_thumbnail_id') and function_exists('wp_get_attachment_image_src')) {
         $src = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'full');
         if($src) {
@@ -76,7 +76,9 @@ function lacands_thumbnail_link( $post_id, $post_content ) {
     }
     if(class_exists("DOMDocument") and function_exists('simplexml_import_dom')) {
         $doc = new DOMDocument();
-        @$doc->loadHTML($post_content);
+        if(!($doc->loadHTML($post_content))){
+			return False;
+		}
         $xml = simplexml_import_dom($doc);
         $images = $xml->xpath('//img');
         if(!empty($images)) {
