@@ -1,6 +1,7 @@
 <?php  
 
 function lacands_get_plugin_dir() {
+	global $wp_version;
 	if ( version_compare($wp_version, '2.8', '<') ) {
 		$path = dirname(plugin_basename(__FILE__));
 		if ( $path == '.' )
@@ -8,7 +9,7 @@ function lacands_get_plugin_dir() {
 		$plugin_path = trailingslashit( plugins_url( $path ) );
 	} 
 	else {
-		$plugin_path = trailingslashit( plugins_url( '', _FILE_) );
+		$plugin_path = trailingslashit( plugins_url( '', __FILE__) );
 	}	
 	return $plugin_path;
 }
@@ -23,7 +24,7 @@ function lacands_http_post($link, $body) {
 	}
 	if (class_exists('WP_Http')) {
 		$request = new WP_Http;
-		$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body, 'headers'=>$headers) );
+		$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body) );
 		if(isset($response_full->errors)) {			
 			return array(500, 'Unknown Error');				
 		}

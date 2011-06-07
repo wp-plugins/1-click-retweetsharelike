@@ -6,7 +6,7 @@
 	<div class="lacands_font_bold14"><?php _e("Preview"); ?></div>
 	<div class="lacands_header_border_bottom"></div>
 	<div style="padding-top:5px;">
-		<iframe style="height:25px !important; border:none !important; overflow:hidden !important; width:500px !important;" frameborder="0" scrolling="no" allowTransparency="true" src="http://www.linksalpha.com/social?link=http%253A%252F%252Fdev30.linksalpha.com%252F%253Fp%253D8&fc=333333&fs=lucida+grande&fblname=like&fblref=fb&fbllang=en_US&twitterlang=en&twittermention=vivekpuri&twitterrelated1=vivekpuri&twitterrelated12=twitfn&linkedinbutton=show"></iframe>
+		<iframe style="height:25px !important; border:none !important; overflow:hidden !important; width:560px !important;" frameborder="0" scrolling="no" allowTransparency="true" src="http://www.linksalpha.com/social?link=http%253A%252F%252Fdev30.linksalpha.com%252F%253Fp%253D8&fc=333333&fs=lucida+grande&fblname=like&fblref=fb&fbllang=en_US&twitterlang=en&twittermention=vivekpuri&twitterrelated1=vivekpuri&twitterrelated12=twitfn&linkedinbutton=show&g1button=1"></iframe>
 	</div>
 </div>
 
@@ -374,7 +374,8 @@
 					<div class="lacands_input_headers"><?php _e("Button language"); ?>:</div>
 					<select name="lacands-html-widget-twitter-lang">
 						<?php
-							$langs = array('en'=>'English', 'fr'=>__("French"), 'de'=>__("German"), 'es'=>__("Spanish"), 'ja'=>__("Japanese"));
+							$langs = lacands_twitter_langs();
+							asort($langs);
 							foreach($langs as $key=>$val) {
 								if($lacands_opt_widget_twitter_lang == $key) {
 									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
@@ -471,6 +472,24 @@
 					</div>
 				</div>
 				
+				<!--Google +1 Button lang-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button language"); ?>:</div>
+					<select name="lacands-html-widget-g1-lang">
+						<?php
+							$langs = lacands_googleplus_langs();
+							asort($langs);
+							foreach($langs as $key=>$val) {
+								if($lacands_opt_widget_g1_lang == $key) {
+									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+								} else{
+									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+								}
+							}
+						?>
+					</select>
+				</div>
+				
 				<!--Google +1 Counter-->
 				<div class="lacands_input_header">
 					<div class="lacands_input_headers"><?php _e("Share Count Show/Hide"); ?>:</div>
@@ -488,24 +507,6 @@
 							?>
 						</select>
 					</div>
-				</div>
-				
-				<!--Google +1 Button lang-->
-				<div class="lacands_input_header">
-					<div class="lacands_input_headers"><?php _e("Button language"); ?>:</div>
-					<select name="lacands-html-widget-g1-lang">
-						<?php
-							$langs = lacands_g1_langs();
-							asort($langs);
-							foreach($langs as $key=>$val) {
-								if($lacands_opt_widget_g1_lang == $key) {
-									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
-								} else{
-									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
-								}
-							}
-						?>
-					</select>
 				</div>
 				
 			</fieldset>
@@ -531,6 +532,24 @@
 							?>
 						</select>
 					</div>
+				</div>
+				
+				<!--Google +1 Button lang-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Button language"); ?>:</div>
+					<select name="lacands-html-widget-buzz-lang">
+						<?php
+							$langs = lacands_googlebuzz_langs();
+							asort($langs);
+							foreach($langs as $key=>$val) {
+								if($lacands_opt_widget_buzz_lang == $key) {
+									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
+								} else{
+									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
+								}
+							}
+						?>
+					</select>
 				</div>
 				
 				<!--Google Buzz Counter-->
