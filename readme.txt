@@ -4,7 +4,7 @@ Contributors: LinksAlpha
 Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live, google +1, google plus one, google plusone, google plus
 Requires at least: 2.0.2
 Tested up to: 3.1.3
-Stable tag: 4.1.5
+Stable tag: 4.2
 
 
 == Description ==
@@ -141,6 +141,9 @@ Email us at post@linksalpha.com
 
 
 == Changelog ==
+
+= 4.2 =
+* Minor bug fixes
 
 = 4.1.4 =
 * Bug fix

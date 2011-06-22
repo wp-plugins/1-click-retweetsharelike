@@ -1,12 +1,8 @@
 <?php
 
-
 function lacands_fb_meta() {
     global $posts;
-    global $paged;
-    
     $opengraph_meta = "";
-    
     //Site name
     $site_name = get_bloginfo('name');
     if($site_name) {
@@ -83,11 +79,19 @@ function lacands_thumbnail_link($post_id, $post_content) {
         if(!($doc->loadHTML($post_content))){
 			return False;
 		}
-        $xml = simplexml_import_dom($doc);
-        $images = $xml->xpath('//img');
-        if(!empty($images)) {
-            return $images[0]['src'];
-        }
+		try {
+			$xml = @simplexml_import_dom($doc);
+			if($xml) {
+				$images = $xml->xpath('//img');
+				if(!empty($images)) {
+					return $images[0]['src'];
+				}
+			} else {
+				return False;	
+			}
+		} catch (Exception $e) {
+			return False;
+		}
     }
     return False;
 }
