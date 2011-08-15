@@ -1,13 +1,13 @@
 <?php
 
-define('LACANDSNW_YOU_HAVE_NOT_ADDED_ANY_API_KEY',      __('You have not added any API Key'));
-define('LACANDSNW_API_KEY_ADDED',        				__('API Key has been added successfully'));
-define('LACANDSNW_ERROR_LOADING_API_KEYS',        		__('Error occured while trying to load the API Keys. Please try again later'));
-define('LACANDSNW_CURRENTLY_PUBLISHING',        		__('You are currently Publishing your Blog to'));
-define('LACANDSNW_SOCIAL_NETWORKS',        				__('Networks'));
-define('LACANDSNW_SOCIAL_NETWORK',        				__('Network'));
-define('LACANDSNW_PLUGIN_NAME',        					__('cs'));
-define('LACANDSNW_PLUGIN_VERSION', 						'4.2');
+define('LACANDSNW_YOU_HAVE_NOT_ADDED_ANY_API_KEY',  __('You have not added any API Key'));
+define('LACANDSNW_API_KEY_ADDED',                   __('API Key has been added successfully'));
+define('LACANDSNW_ERROR_LOADING_API_KEYS',          __('Error occured while trying to load the API Keys. Please try again later'));
+define('LACANDSNW_CURRENTLY_PUBLISHING',        	__('You are currently Publishing your Blog to'));
+define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
+define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
+define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
+define('LACANDSNW_PLUGIN_VERSION',                  '4.3');
 
 
 function lacandsnw_networkping($id) {
@@ -22,6 +22,21 @@ function lacandsnw_networkping($id) {
 	$response_full = lacandsnw_networkpub_http($link);
 	return;
 }
+
+
+function lacandsnw_networkping_custom($new, $old, $post) {
+    if ($new == 'publish' && $old != 'publish') {
+        $post_types = get_post_types( array('public' => true), 'objects' );
+        foreach ( $post_types as $post_type ) {
+            if ( $post->post_type == $post_type->name ) {
+                networkpub_ping($post->ID, $post);
+                break;
+            }
+        }
+	}
+    return;
+}
+
 
 function lacandsnw_convert($id) {
 	if(!$id) {
@@ -66,9 +81,18 @@ function lacandsnw_post($post_id) {
 	}
 	$id = $options['id_2'];
 	$api_key = $options['api_key'];
-	//Post Published?
+    //Post data
 	$post_data = get_post( $post_id, ARRAY_A );
+    //Post Published?
 	if(in_array($post_data['post_status'], array('future', 'publish'))) {
+        //Post too old
+        $post_date = strtotime($post_data['post_date_gmt']);
+        $current_date = time();
+        $diff = $current_date - $post_date;
+        $days = floor( $diff / (60*60*24) );
+        if($days > 3) {
+            return;
+        }
 		//Post data: id, content and title
 		$post_title = $post_data['post_title'];
 		$post_content = $post_data['post_content'];
@@ -120,6 +144,25 @@ function lacandsnw_post($post_id) {
 		$response_full = lacandsnw_networkpub_http_post($link,$params);
 	}
 	return;
+}
+
+
+function lacandsnw_post_xmlrpc($post_id) {
+    lacandsnw_post($post_id);
+}
+
+
+function lacandsnw_post_custom($new, $old, $post) {
+    if ($new == 'publish' && $old != 'publish') {
+        $post_types = get_post_types( array('public' => true), 'objects' );
+        foreach ( $post_types as $post_type ) {
+            if ( $post->post_type == $post_type->name ) {
+                networkpub_post($post->ID, $post);
+                break;
+            }
+        }
+	}
+    return;
 }
 
 
@@ -233,9 +276,9 @@ function lacandsnw_networkpub_load() {
 		return '<div class="msg_error">You have not added an API Key</div>';
 	}
 	if(count($response->results) == 1) {
-		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORK.'</div>';	
+		$html = '<div style="padding:0px 10px 5px 0px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORK.'</div>';	
 	} else {
-		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORKS.'</div>';
+		$html = '<div style="padding:0px 10px 5px 0px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORKS.'</div>';
 	}
 	$html .= '<table class="networkpub_added"><tr><th>'.__('Network').'</th><th>'.__('Option').'</th><th>'.__('Remove').'</th></tr>';
 	$i = 1;

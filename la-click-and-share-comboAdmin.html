@@ -11,7 +11,7 @@
 </div>
 
 <div class="outsideBorder">
-	<div class="lacands_font_bold14"><?php echo LACANDS_AUTO_PUBLISH_ON_NETWORKS; ?>&nbsp;(<?php echo LACANDS_ENTER_API_KEY;?>)</div>
+	<div class="lacands_font_bold14"><?php echo LACANDS_AUTO_PUBLISH_ON_NETWORKS; ?></div>
 	<div class="lacands_header_border_bottom"></div>
 	<div class="lacands_started" style="margin:20px;">
 		<div style="padding:0px 0px 5px 0px;"><?php _e(LACANDSNW_NETWORKPUB.". To configure:"); ?></div>
@@ -24,7 +24,7 @@
 		<table style="width:100%;">
 			<tr>
 				<td style="padding-bottom:10px;">
-					<div class="rts_header2"><big><strong><?php _e("Setup"); ?></strong></big></div>
+					<div class="rts_header2"><big><strong><img src="http://www.linksalpha.com/images/config.png" />&nbsp;<?php _e("Setup"); ?></strong></big></div>
 					<div class="la_content_box">
 						<form action="" method="post" id="networkpubadd" name="networkpubadd" style="width:90%;">
 							<fieldset class="rts_fieldset">
@@ -86,16 +86,23 @@
 			</tr>
 			<tr>
 				<td>
-					<div class="rts_header2"><big><strong>Postbox</strong></big></div>
+					<div class="rts_header2"><big><strong><img src="http://www.linksalpha.com/images/user-group.png" />&nbsp;Postbox</strong></big></div>
 					<div class="la_content_box">
 						<table>
 							<tr>
 								<td>
-									<div>
-										<a href="<?php echo lacandsnw_postbox_url(); ?>" style="text-decoration:none;">
-											<div class="lacands_button_yellow"><?php _e("View"); ?> Postbox</div>
-										</a>
-									</div>
+                                    <div style="padding-bottom: 3px;">To self Publish content to your Social Networking Profiles right from your blog, click on the button below:</div>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <a href="<?php echo lacandsnw_postbox_url(); ?>" style="text-decoration:none;">
+                                                        <div class="lacands_button_yellow"><?php _e("View"); ?> Postbox</div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
 								</td>
 							</tr>
 						</table>
@@ -111,12 +118,12 @@
 	
 	<div class="outsideBorder">
 	
-		<div class="lacands_font_bold14"><?php _e("Widget Options"); ?></div>
+        <div class="lacands_font_bold14"><img src="http://www.linksalpha.com/images/tools.png" />&nbsp;<?php _e("Widget Options"); ?></div>
 		<div class="lacands_header_border_bottom"></div>
 		
 		<div>
 			<fieldset class="lacands_fieldset">
-				<legend><?php _e("Style & Location"); ?></legend>
+				<legend><?php _e("Basics"); ?></legend>
 				
 				<!--Location-->
 				<div class="lacands_input_header">
@@ -206,6 +213,26 @@
 						<option <?php if($lacands_opt_widget_font_style == 'verdana') echo "selected"; ?> value="verdana">verdana</option>						
 					</select>
 				</div>
+                
+                <!--Google +1 Button-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Show/Hide on Password Protected and Private Posts"); ?>:</div>
+					<div>
+						<select name="lacands-html-widget-display-password-protected">
+							<?php
+								$options = array(1=>LACANDS_SHOW, 0=>LACANDS_DONT_SHOW);
+								foreach($options as $key=>$val) {
+									if($lacands_opt_widget_display_password_protected == $key) {
+										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
+									} else{
+										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
+									}
+								}
+							?>
+						</select>
+					</div>
+				</div>
+				
 			</fieldset>
 			
 			<!--Facebook Like -->

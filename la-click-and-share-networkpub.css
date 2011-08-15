@@ -3,12 +3,14 @@ table.networkpub_added th {padding:5px 10px 5px 10px;border:1px solid #BFBFBF;ba
 table.networkpub_added td {padding:4px 10px 4px 10px;border:1px solid #BFBFBF;}
 table.networkpub_added td a{text-decoration:none;}
 
-.rts_header {padding:20px 0px 20px 0px;}
-.rts_header2{padding:5px 0px 3px 10px;border-bottom:1px solid #BFBFBF;margin-bottom:0px;background-color:#bdc7d8;}
-.la_content_box {text-align:left;background-color:#FFF;padding:20px;border:1px solid #eceff5;}
-.la_content_box_2 {text-align:left;background-color:#FFF;padding:0px 20px 20px 20px;border:1px solid #eceff5;}
-.la_content_box_3 {text-align:left;background-color:#FFF;padding:10px 15px 15px 15px;border:1px solid #eceff5;}
-.la_image {width:16px;height:16px;}
+.rts_header         {padding:20px 0px 20px 0px;}
+.rts_header2        {padding:5px 0px 3px 10px;border-bottom:1px solid #BFBFBF;margin-bottom:0px;background-color:#bdc7d8;}
+
+.la_content_header  {padding:5px 0px 3px 10px;border-bottom:1px solid #BFBFBF;margin-bottom:0px;background-color:#bdc7d8;}
+.la_content_box     {text-align:left;background-color:#FFF;padding:20px;border:1px solid #eceff5;}
+.la_content_box_2   {text-align:left;background-color:#FFF;padding:0px 20px 20px 20px;border:1px solid #eceff5;}
+.la_content_box_3   {text-align:left;background-color:#FFF;padding:10px 15px 15px 15px;border:1px solid #eceff5;}
+.la_image           {width:16px;height:16px;}
 fieldset.rts_fieldset {padding:15px; border:1px solid #DCDCD8;width:100%;background-color:#FFF;}
 fieldset.rts_fieldset label {float:left;margin:0px;padding:0px;}
 fieldset.lacands_fieldset {padding:0px 15px 15px 15px; border:1px solid #DCDCD8;background-color:#FFF;margin:20px;}
