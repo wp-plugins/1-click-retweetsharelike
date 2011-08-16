@@ -7,7 +7,7 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        	__('You are currently Publishin
 define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
 define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
-define('LACANDSNW_PLUGIN_VERSION',                  '4.3.1');
+define('LACANDSNW_PLUGIN_VERSION',                  '4.3.2');
 
 
 function lacandsnw_networkping($id) {
@@ -29,7 +29,7 @@ function lacandsnw_networkping_custom($new, $old, $post) {
         $post_types = get_post_types( array('public' => true), 'objects' );
         foreach ( $post_types as $post_type ) {
             if ( $post->post_type == $post_type->name ) {
-                networkpub_ping($post->ID, $post);
+                lacandsnw_networkping($post->ID, $post);
                 break;
             }
         }
@@ -157,7 +157,7 @@ function lacandsnw_post_custom($new, $old, $post) {
         $post_types = get_post_types( array('public' => true), 'objects' );
         foreach ( $post_types as $post_type ) {
             if ( $post->post_type == $post_type->name ) {
-                networkpub_post($post->ID, $post);
+                lacandsnw_post($post->ID);
                 break;
             }
         }
@@ -276,9 +276,9 @@ function lacandsnw_networkpub_load() {
 		return '<div class="msg_error">You have not added an API Key</div>';
 	}
 	if(count($response->results) == 1) {
-		$html = '<div style="padding:0px 10px 5px 0px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORK.'</div>';	
+		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORK.'</div>';	
 	} else {
-		$html = '<div style="padding:0px 10px 5px 0px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORKS.'</div>';
+		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORKS.'</div>';
 	}
 	$html .= '<table class="networkpub_added"><tr><th>'.__('Network').'</th><th>'.__('Option').'</th><th>'.__('Remove').'</th></tr>';
 	$i = 1;
@@ -540,7 +540,7 @@ function lacandsnw_error_msgs($errMsg) {
 			
 		case 'subscription upgrade required':
 			$html = '<div class="msg_error">
-					<b>'.__('Upgrade account').'.</b> '.__('Please').' <a href="http://www.linksalpha.com/account" target="_blank">'.__('upgrade your subscription').'</a> '.__('to add more networks').'.
+					<b>'.__('Upgrade account').'.</b> '.__('Please').' <a href="http://www.linksalpha.com/account" target="_blank">'.__('upgrade your subscription').'</a> '.__('to publish to more networks').'.
 				</div>';
 			return $html;
 			break;
