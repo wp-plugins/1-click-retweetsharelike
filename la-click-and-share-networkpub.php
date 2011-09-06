@@ -7,7 +7,7 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        	__('You are currently Publishin
 define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
 define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
-define('LACANDSNW_PLUGIN_VERSION',                  '4.3.2');
+define('LACANDSNW_PLUGIN_VERSION',                  '4.4.0');
 
 
 function lacandsnw_networkping($id) {
@@ -378,6 +378,9 @@ function lacandsnw_networkpub_http($link) {
 		$request = new WP_Http;
 		$headers = array( 'Agent' => LAECHONW_WIDGET_NAME.' - '.get_bloginfo('url') );
 		$response_full = $request->request( $link );
+        if(isset($response_full->errors)) {			
+			return array(500, 'internal error');			
+		}
 		$response_code = $response_full['response']['code'];
 		if ($response_code == 200) {
 			$response = $response_full['body'];

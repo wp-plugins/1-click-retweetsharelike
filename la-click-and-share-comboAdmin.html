@@ -170,6 +170,10 @@
 						<input name="lacands-html-display-page-page" 		id="lacands-html-display-page-page" 	type="checkbox"<?php if($lacands_display_pages['page'] == "1") echo 'checked="checked"'; ?> 	value="1" />&nbsp;&nbsp;
 						<label for="lacands-html-display-page-page"><?php _e("Pages"); ?></label>
 					</div>
+                    <div>
+						<input name="lacands-html-display-page-search" 		id="lacands-html-display-page-search" 	type="checkbox"<?php if($lacands_display_pages['search'] == "1") echo 'checked="checked"'; ?> 	value="1" />&nbsp;&nbsp;
+						<label for="lacands-html-display-page-page"><?php _e("Search Results"); ?></label>
+					</div>
 				</div>		
 				
 				<!--Padding-->
@@ -214,7 +218,7 @@
 					</select>
 				</div>
                 
-                <!--Google +1 Button-->
+                <!--Show/Hide on Password protected posts-->
 				<div class="lacands_input_header">
 					<div class="lacands_input_headers"><?php _e("Show/Hide on Password Protected and Private Posts"); ?>:</div>
 					<div>
@@ -230,6 +234,17 @@
 								}
 							?>
 						</select>
+					</div>
+				</div>
+                
+                <!--Show/Hide on given post_ids-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Show/Hide on following Post Ids"); ?>:</div>
+                    <div>
+                        <label for="lacands-html-widget-display-not-postids"><?php _e("Enter comma separated"); ?> <a href="http://help.linksalpha.com/1-click-retweet-share-like/wordpress-post-id" target="_blank"><?php _e("WordPress Post ids"); ?></a></label>
+                    </div>
+					<div>
+						<textarea name="lacands-html-widget-display-not-postids"><?php if($lacands_opt_widget_display_not_postids) {echo $lacands_opt_widget_display_not_postids;} ?></textarea>
 					</div>
 				</div>
 				
