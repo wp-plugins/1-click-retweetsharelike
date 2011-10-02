@@ -7,7 +7,7 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        	__('You are currently Publishin
 define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
 define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
-define('LACANDSNW_PLUGIN_VERSION',                  '4.4.0');
+define('LACANDSNW_PLUGIN_VERSION',                  '4.5.0');
 
 
 function lacandsnw_networkping($id) {
@@ -295,7 +295,7 @@ function lacandsnw_networkpub_load() {
 		} else {
 			$html .= '<td style="text-align:center;background-color:#F7F7F7;">';
 		}
-		$html .= '<a href="http://www.linksalpha.com/a/networkpuboptions?api_key='.$row->api_key.'&id='.$options['id_2'].'&version='.lacandsnw_version().'&KeepThis=true&TB_iframe=true&height=465&width=650" title="Publish Options" class="thickbox" type="button" />'.__('Options').'</a></td>';
+		$html .= '<a href="http://www.linksalpha.com/a/networkpuboptions?api_key='.$row->api_key.'&id='.$options['id_2'].'&version='.lacandsnw_version().'&KeepThis=true&TB_iframe=true&height=465&width=650" title="Publish Options" class="thickbox" type="button">'.__('Options').'</a></td>';
 		if($i&1) {
 			$html .= '<td style="text-align:center;">';
 		} else {
@@ -377,7 +377,7 @@ function lacandsnw_networkpub_http($link) {
 	if (class_exists('WP_Http')) {
 		$request = new WP_Http;
 		$headers = array( 'Agent' => LAECHONW_WIDGET_NAME.' - '.get_bloginfo('url') );
-		$response_full = $request->request( $link );
+		$response_full = $request->request( $link, array( 'timeout'=>30 ) );
         if(isset($response_full->errors)) {			
 			return array(500, 'internal error');			
 		}
@@ -412,7 +412,7 @@ function lacandsnw_networkpub_http_post($link, $body) {
 	if (class_exists('WP_Http')) {
 		$request = new WP_Http;
 		$headers = array( 'Agent' => LAECHONW_WIDGET_NAME.' - '.get_bloginfo('url') );
-		$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body, 'headers'=>$headers) );
+		$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body, 'headers'=>$headers, 'timeout'=>30 ) );
 		if(isset($response_full->errors)) {
 			return array(500, 'internal error');
 		}
@@ -603,13 +603,13 @@ function lacandsnw_postbox(){
 	$html  = '<div class="wrap"><div class="icon32" id="lacands_laicon"><br /></div><h2>'.LAECHONW_WIDGET_NAME.' - '.LACANDSNW_WIDGET_NAME_POSTBOX.'</h2></div>';
 	$html .= '<iframe id="networkpub_postbox" src="http://www.linksalpha.com/post?source=wordpress&sourcelink='.urlencode(lacandsnw_postbox_url()).'#'.urlencode(lacandsnw_postbox_url()).'" width="1050px;" height="700px;" scrolling="no" style="border:none !important;" frameBorder="0"></iframe>';
 	$html .= '<div style="padding:10px 10px 6px 10px;background-color:#FFFFFF;margin-bottom:15px;margin-top:0px;border:1px solid #F0F0F0;width:1005px;">
-			<div style="width:130px;float:left;font-weight:bold;">
-				'.__('Share this Plugin').'
-			</div>
-			<div style="width:600px">
-				<iframe style="height:25px !important; border:none !important; overflow:hidden !important; width:380px !important;" frameborder="0" scrolling="no" allowTransparency="true" src="http://www.linksalpha.com/social?link=http%253A%252F%252Fdev30.linksalpha.com%252F%253Fp%253D8&fc=333333&fs=lucida+grande&fblname=like&fblref=fb&fbllang=en_US&twitterlang=en&twittermention=vivekpuri&twitterrelated1=vivekpuri&twitterrelated12=twitfn&linkedinbutton=show"></iframe>
-			</div>
-		  </div>';
+                <div style="width:130px;float:left;font-weight:bold;">
+                    '.__('Share this Plugin').'
+                </div>
+                <div style="width:600px">
+                    <iframe style="height:25px !important; border:none !important; overflow:hidden !important; width:450px !important;" frameborder="0" scrolling="no" allowTransparency="true" src="http://www.linksalpha.com/social?link='.  urlencode('http://www.linksalpha.com').'&fc=333333&fs=lucida+grande&fblname=like&fblref=fb&fbllang=en_US&twitterlang=en&twittermention=vivekpuri&twitterrelated1=vivekpuri&linkedinbutton=show&g1button=1&fbsbutton=0"></iframe>
+                </div>
+              </div>';
 	echo $html;
 	return;
 }

@@ -24,7 +24,7 @@ function lacands_http_post($link, $body) {
 	}
 	if (class_exists('WP_Http')) {
 		$request = new WP_Http;
-		$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body) );
+		$response_full = $request->request( $link, array( 'method' => 'POST', 'body' => $body, 'timeout'=>30 ) );
 		if(isset($response_full->errors)) {			
 			return array(500, 'Unknown Error');				
 		}

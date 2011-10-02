@@ -33,7 +33,7 @@
 									<tr>
 										<td>
 											<label for="<?php echo $field_name ?>">
-												<a href="http://www.linksalpha.com/user/your_api_key" target="_blank" style="color:red"><?php _e("Click here"); ?></a>&nbsp;<b><?php _e("to get your API Key"); ?></b>&nbsp;<?php _e("and enter it in the box below"); ?>
+												<a href="http://www.linksalpha.com/user/your_api_key" target="_blank"><?php _e("Click here"); ?></a>&nbsp;<?php _e("to get your API Key"); ?>&nbsp;<?php _e("and enter it in the box below"); ?>
 											</label>
 										</td>
 									</tr>
@@ -44,16 +44,22 @@
 											</div>
 										</td>
 									</tr>
-									<tr>
-										<td>
-											<?php _e("You need to get key from LinksAlpha and copy it here. You CANNOT generate your own key"); ?>.
-											<a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank"><?php _e("Read more about the simple and quick process here"); ?></a>
-										</td>
-									</tr>
 								</table>
 							</fieldset>
-							<div style="padding-top:20px;"><input type="submit" name="AddAPIKey" class="button-primary" value="Add API Key" /></div>
-							<input type="hidden" value="<?php echo LACANDS_PLUGIN_URL ?>" id="la-networkpub_plugin_url" />
+                            <div style="margin: 20px 20px 0px 0px;text-align:left;">
+                                <table class="lacands_add_key_submit">
+                                    <tr>
+                                        <td class="lacands_add_key_submit_button">
+                                            <input type="hidden" value="<?php echo LACANDS_PLUGIN_URL ?>" id="la-networkpub_plugin_url" />
+                                            <input type="submit" name="AddAPIKey" class="button-primary" value="Add API Key" />
+                                        </td>
+                                        <td class="lacands_social_buttons_text">&nbsp;Share the plugin:&nbsp;&nbsp;&nbsp;</td>
+                                        <td class="lacands_add_key_submit_social">
+                                            <iframe id="websites_iframe" height="25px" width="550px" scrolling="no" frameborder="0px" src="http://www.linksalpha.com/social?link=http%3A//www.linksalpha.com/&g1button=1&fbsbutton=0"></iframe>
+                                        </td>
+                                    </tr>
+                                </table>
+							</div>
 						</form>
 					</div>
 				</td>
@@ -75,11 +81,11 @@
 				<td>
 					<div style="margin:20px 10px 20px 10px;color:gray;">
 						<div>
-							<?php _e("Note: If you decide to stop using this functionality permanently (after adding API key even once), pls also remove your blog URL by logging into"); ?>&nbsp;<a href="http://www.linksalpha.com/user/tracked" target="_blank">http://www.linksalpha.com/user/tracked</a>.
+							<?php _e("Note: If you decide to stop using this functionality permanently (after adding API key even once), please also remove your blog URL by logging into"); ?>&nbsp;<a href="http://www.linksalpha.com/user/tracked" target="_blank">LinksAlpha Website Manager</a>.
 							<?php _e("Otherwise, your blog posts may continue to get posted even after you do not use this functionality."); ?>
 						</div>
 						<div>
-							<?php _e("If you have questions, pls email us at"); ?>&nbsp;<a href="mailto:post@linksalpha.com">post@linksalpha.com</a>.
+							<?php _e("If you have questions, please email us at"); ?>&nbsp;<a href="mailto:post@linksalpha.com">post@linksalpha.com</a>.
 						</div>
 					</div>
 				</td>
@@ -700,7 +706,16 @@
 				</div>
 			</fieldset>
 			
-			<!--Misc-->
+            <!--Mobile-->
+            <fieldset class="lacands_fieldset">
+                <legend><img style="vertical-align:text-bottom;" src="<?php echo LACANDS_PLUGIN_URL; ?>mobile-phone.png" />&nbsp;<?php _e("Show/Hide on Mobile Devices"); ?></legend>
+                <div class="lacands_input_header">
+                    <input name="lacands-html-widget-mobile-hide" id="lacands-html-widget-mobile-hide" type="checkbox"<?php if($lacands_opt_widget_mobile_hide != "0") echo 'checked="checked"'; ?> value="1" />
+                    <label for="lacands-html-widget-mobile-hide">&nbsp;&nbsp;<?php _e("Check this box to hide the plugin on mobile and tablet devices."); ?></label>
+                </div>
+            </fieldset>
+			
+            <!--Misc-->
 			<fieldset class="lacands_fieldset">
 				<legend><?php _e("Misc"); ?></legend>
 				
@@ -718,8 +733,18 @@
 			</fieldset>
 								
 			<div style="margin: 20px 20px 20px 20px;text-align:left;">
-				<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" />
-			</div>	
+			    <table class="lacands_add_key_submit">
+                    <tr>
+                        <td class="lacands_add_key_submit_button">
+                            <input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" />
+                        </td>
+                        <td class="lacands_social_buttons_text">&nbsp;Share the plugin:&nbsp;&nbsp;&nbsp;</td>
+                        <td class="lacands_add_key_submit_social">
+                            <iframe id="websites_iframe" height="25px" width="550px" scrolling="no" frameborder="0px" src="http://www.linksalpha.com/social?link=http%3A//www.linksalpha.com/&g1button=1&fbsbutton=0"></iframe>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 		</div>			
 	</div>
 </form>
@@ -732,7 +757,7 @@
 			<input type="hidden" name="warning_msg" id="warning_msg" value="true" />
 			<div style="margin:10px 10px 10px 0px; font-size:13px;">
 				<div>
-					<input name="lacandsnw-html-warning-msg" id="lacandsnw-html-warning-msg" type="checkbox"<?php if($lacandsnw_opt_warning_msg != "0") echo 'checked="checked"'; ?> value="1" /><label for="lacandsnw-html-warning-msg">&nbsp;&nbsp;<?php _e("Do NOT show warning message"); ?>:&nbsp;'<?php echo LAECHONW_WIDGET_NAME; ?>&nbsp;<?php _e("plugin is almost ready"); ?>'</label>
+					<input name="lacandsnw-html-warning-msg" id="lacandsnw-html-warning-msg" type="checkbox"<?php if($lacandsnw_opt_warning_msg != "0") echo 'checked="checked"'; ?> value="1" /><label for="lacandsnw-html-warning-msg">&nbsp;&nbsp;<?php _e("Check this box to hide the message"); ?>:&nbsp;'<?php echo LAECHONW_WIDGET_NAME; ?>&nbsp;<?php _e("plugin is almost ready"); ?>'</label>
 				</div>
 				<div style="padding-top:10px;">
 					<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Warning Msg Change' ); ?>" />
@@ -745,11 +770,11 @@
 <div class="outsideBorder">			
 	<div class="lacands_font_bold14"><?php _e("Your Suggestion"); ?></div>
 	<div class="lacands_header_border_bottom"></div>
-	<div style="font-size: 11px;">Email us at <a href="mailto:post@linksalpha.com">post@linksalpha.com</a> <?php _e("if you would like a particular functionality or have any recommendations. Thanks"); ?>.</div>				
+	<div>Email us at <a href="mailto:post@linksalpha.com">post@linksalpha.com</a> <?php _e("if you would like a particular functionality or have any recommendations"); ?>.</div>
 </div>
 
 <div class="outsideBorder">			
 	<div class="lacands_font_bold14"><?php _e("FAQs / Help Pages"); ?></div>								
 	<div class="lacands_header_border_bottom"></div>
-	<div style="font-size: 11px;">Go to <a href="http://help.linksalpha.com/1-click-retweet-share-like/faqs" target="_blank"><?php echo LAECHONW_WIDGET_NAME; ?>&nbsp;<?php _e("FAQs"); ?></a></div>				
+	<div>Go to <a href="http://help.linksalpha.com/1-click-retweet-share-like/faqs" target="_blank"><?php echo LAECHONW_WIDGET_NAME; ?>&nbsp;<?php _e("FAQs"); ?></a></div>				
 </div>

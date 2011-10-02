@@ -5,7 +5,7 @@ Plugin URI: http://www.linksalpha.com/publish
 Description: Adds Facebook Like, Facebook Share, Twitter, Google +1, LinkedIn Share, Facebook Recommendations. Automatic publishing of content to 30+ Social Networks.
 Author: LinksAlpha
 Author URI: http://www.linksalpha.com/publish
-Version: 4.4.0
+Version: 4.5.0
 */
 
 /*
@@ -64,7 +64,7 @@ define('LACANDS_DONT_SHOW', 						__("Don't Show"));
 $lacandsnw_networkpub_settings['api_key'] 	= array('label'=>__('API Key:'), 'type'=>'text', 'default'=>'');
 $lacandsnw_networkpub_settings['id']      	= array('label'=>__('id'), 'type'=>'text', 'default'=>'');
 $lacandsnw_options                        	= get_option(LACANDSNW_WIDGET_NAME_INTERNAL);
-$lacands_version_number 					= '4.4.0';
+$lacands_version_number 					= '4.5.0';
 
 
 function lacands_init() {
@@ -91,6 +91,7 @@ function lacands_readOptionsValuesFromWPDatabase() {
 	global $lacands_opt_widget_fb_reco_title;
 	global $lacands_opt_widget_buzz_button, $lacands_opt_widget_buzz_lang, $lacands_opt_widget_fb_like_button, $lacands_opt_widget_digg_button, $lacands_opt_widget_stumble_button, $lacands_opt_widget_twitter_button;
     global $lacands_opt_widget_display_password_protected, $lacands_opt_widget_display_not_postids;
+    global $lacands_opt_widget_mobile_hide;
 
 	$lacands_opt_widget_counters_location           = get_option('lacands-html-widget-counters-location');
 	$lacands_opt_widget_margin_top                  = get_option('lacands-html-widget-margin-top');
@@ -143,6 +144,7 @@ function lacands_readOptionsValuesFromWPDatabase() {
 	$lacandsnw_opt_warning_msg                      = get_option('lacandsnw-html-warning-msg');
     $lacands_opt_widget_display_password_protected  = get_option('lacands-html-widget-display-password-protected');
     $lacands_opt_widget_display_not_postids         = get_option('lacands-html-widget-display-not-postids');
+    $lacands_opt_widget_mobile_hide                 = get_option('lacands-html-widget-mobile-hide');
 }
 
 
@@ -164,8 +166,7 @@ function lacands_writeOptionsValuesToWPDatabase_twitter() {
 function lacands_writeOptionsValuesToWPDatabase($option) {
 	global $lacands_display_pages;
 	global $lacands_version_number;
-
-	if($option == 'default') {
+    if($option == 'default') {
 		$lacands_eget = get_bloginfo('admin_email'); $lacands_uget = get_bloginfo('url'); $lacands_nget = get_bloginfo('name');
 		$lacands_dget = get_bloginfo('description'); $lacands_cget = get_bloginfo('charset'); $lacands_vget = get_bloginfo('version');
 		$lacands_lget = get_bloginfo('language'); $link='http://www.linksalpha.com/a/bloginfo';
@@ -223,6 +224,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 		add_option('lacands-html-widget-g1-lang', 						'en-US');
         add_option('lacands-html-widget-display-password-protected',    0);
         add_option('lacands-html-widget-display-not-postids',           0);
+        add_option('lacands-html-widget-mobile-hide',                   1);
 		update_option('lacands-html-version-number', 					$lacands_version_number);
 	
 	} else if ($option == 'update') {
@@ -520,6 +522,13 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
 				update_option('lacandsnw-html-warning-msg', 			'0');
 			}
 		}	    
+        if(!empty($_POST['lacands-html-widget-mobile-hide'])) {
+			update_option('lacands-html-widget-mobile-hide',	$_POST['lacands-html-widget-mobile-hide']);
+		} else {
+			update_option('lacands-html-widget-mobile-hide',            0);
+		}
+		
+		
 	} 
 }
 
@@ -569,11 +578,21 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 	global $lacands_opt_widget_g1_button, $lacands_opt_widget_g1_counter, $lacands_opt_widget_g1_lang;
 	global $lacands_opt_widget_buzz_button, $lacands_opt_widget_buzz_lang, $lacands_opt_widget_fb_like_button, $lacands_opt_widget_digg_button, $lacands_opt_widget_stumble_button, $lacands_opt_widget_twitter_button;
     global $lacands_opt_widget_display_password_protected, $lacands_opt_widget_display_not_postids;
+    global $lacands_opt_widget_mobile_hide;
 	global $post;
-
+    
+    lacands_readOptionsValuesFromWPDatabase();
+    if($lacands_opt_widget_mobile_hide) {
+        $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows (phone|ce)|blackberry|tablet'.
+                    '|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp|laystation portable)|nokia|fennec|htc[\-_]'.
+                    '|mobile|up\.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\b#i', $_SERVER['HTTP_USER_AGENT'] );
+        if($isMobile) {
+            return;
+        }
+    }
+    
 	$p = $post;
-	lacands_readOptionsValuesFromWPDatabase();
-	$position = '';
+    $position = '';
 	if( $lacands_widget_disable_cntr_display == '0') {
 		$position = 'padding-top:'.$lacands_opt_widget_margin_top.'px;padding-right:'.$lacands_opt_widget_margin_right.'px;padding-bottom:'.$lacands_opt_widget_margin_bottom.'px;padding-left:'.$lacands_opt_widget_margin_left.'px;';
 	}
@@ -688,7 +707,7 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 		$lacands_widget_display_cntrs = '<div style="'.$position.';">
 											<iframe
 												style="height:25px !important; border:0px solid gray !important; overflow:hidden !important; width:'.$widget_width.'px !important;" frameborder="0" scrolling="no" allowTransparency="true"
-												src="http://www.linksalpha.com/social?'.$args_data.'">
+												src="http://117.linksalphacom.appspot.com/social?'.$args_data.'">
 											</iframe>
 										</div>';
 		if($show) {
@@ -714,6 +733,7 @@ function lacands_wp_admin_options_settings () {
 	global $lacands_opt_widget_g1_button, $lacands_opt_widget_g1_counter, $lacands_opt_widget_g1_lang;
 	global $lacands_opt_widget_buzz_button, $lacands_opt_widget_buzz_lang, $lacands_opt_widget_fb_like_button, $lacands_opt_widget_digg_button, $lacands_opt_widget_stumble_button, $lacands_opt_widget_twitter_button;
     global $lacands_opt_widget_display_password_protected, $lacands_opt_widget_display_not_postids;
+    global $lacands_opt_widget_mobile_hide;
     
 	if (isset($_POST['lacands_widget_update'])) {
 		if ( function_exists('current_user_can') && !current_user_can('manage_options') ) {
@@ -1009,7 +1029,7 @@ function lacands_main() {
 		wp_enqueue_script('postmessagejs');
 		wp_register_script('lacandsjs', LACANDS_PLUGIN_URL.'la-click-and-share.js');
 		wp_enqueue_script ('lacandsjs');
-		wp_register_style ('lacandsnetworkpubcss', LACANDS_PLUGIN_URL.'la-click-and-share-networkpub.css');
+		wp_register_style ('lacandsnetworkpubcss', LACANDS_PLUGIN_URL.'la-click-and-share-networkpub.css?test='.rand());
 		wp_enqueue_style  ('lacandsnetworkpubcss');
 		add_action ( 'admin_menu',  'lacands_wp_admin');
 		add_action ( 'admin_menu',  'lacands_pages');

@@ -44,3 +44,9 @@ div#rts_tweets_load_button {text-align:center;}
 .outsideBorder {width:1000px;height:auto;border-width:1px;border-color:#DCDCD8;border-style:solid;margin:20px 10px; padding:10px;}
 
 .lacands_started {padding:20px;background-color:#FFF9D7;margin-bottom:15px;;-moz-border-radius: 3px;border-radius: 3px;-webkit-border-radius: 3px;border:1px solid #e6db55;}
+
+.lacands_add_key_submit{width:100%;margin:0px;padding: 0px; border-collapse: collapse;white-space: nowrap;}
+.lacands_add_key_submit td{vertical-align: bottom;height:22px;white-space: nowrap;}
+.lacands_add_key_submit_button {width:120px;}
+.lacands_add_key_submit_social {text-align: left;}
+.lacands_social_buttons_text {vertical-align:bottom;font-size: 14px;padding-bottom: 3px;font-weight: bold;width: 130px;}
