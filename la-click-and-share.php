@@ -1029,7 +1029,7 @@ function lacands_main() {
 		wp_enqueue_script('postmessagejs');
 		wp_register_script('lacandsjs', LACANDS_PLUGIN_URL.'la-click-and-share.js');
 		wp_enqueue_script ('lacandsjs');
-		wp_register_style ('lacandsnetworkpubcss', LACANDS_PLUGIN_URL.'la-click-and-share-networkpub.css?test='.rand());
+		wp_register_style ('lacandsnetworkpubcss', LACANDS_PLUGIN_URL.'la-click-and-share-networkpub.css');
 		wp_enqueue_style  ('lacandsnetworkpubcss');
 		add_action ( 'admin_menu',  'lacands_wp_admin');
 		add_action ( 'admin_menu',  'lacands_pages');
