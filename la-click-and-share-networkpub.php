@@ -8,6 +8,7 @@ define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
 define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
 define('LACANDSNW_PLUGIN_VERSION',                  '4.5.3');
+define('LACANDSNW_WP_PLUGIN_URL',                  lacandsnw_get_plugin_dir());
 
 
 function lacandsnw_networkping($id) {
@@ -200,6 +201,8 @@ function lacandsnw_networkpub_add($api_key) {
 	$params = array('url'=>urlencode($url),
 					'key'=>$api_key,
 					'plugin'=>LACANDSNW_PLUGIN_NAME,
+					'version'=>LACANDSNW_PLUGIN_VERSION,
+					'all_keys'=>$options['api_key'],
 					'id'=>$id);
 	//HTTP Call
 	$response_full = lacandsnw_networkpub_http_post($link,$params);
@@ -541,6 +544,15 @@ function lacandsnw_error_msgs($errMsg) {
 			return $html;
 			break;
 			
+		case 'multiple accounts':
+			$html = '<div class="msg_error">
+                        <div class="msg_error_header"><b><img src="'.LACANDSNW_WP_PLUGIN_URL .'alert.png" style="vertical-align:text-bottom;" />&nbsp;Account Error</b></div>
+                        <div>'.__('The key that you entered is for a LinksAlpha account that is different from the currently used account for this website. You can use API key from only one account on this website. Please input a valid <a target="_blank" href="http://www.linksalpha.com/account/your_api_key">User</a> or <a target="_blank" href="http://www.linksalpha.com/user/networks">Network</a> API key and try again').'.</div>
+                        <div>'.__('If you still face issues, please open a ticket at: ').'<a target="_blank" href="http://support.linksalpha.com/">LinksAlpha.com '.__('Help Desk').'</a></div>
+                    </div>';
+			return $html;
+			break;
+			
 		case 'subscription upgrade required':
 			$html = '<div class="msg_error">
 					<b>'.__('Upgrade account').'.</b> '.__('Please').' <a href="http://www.linksalpha.com/account" target="_blank">'.__('upgrade your subscription').'</a> '.__('to publish to more networks').'.
@@ -557,6 +569,21 @@ function lacandsnw_error_msgs($errMsg) {
 			return $html;		
 			break;			
 	}	
+}
+
+
+function lacandsnw_get_plugin_dir() {
+	global $wp_version;
+	if ( version_compare($wp_version, '2.8', '<') ) {
+		$path = dirname(plugin_basename(__FILE__));
+		if ( $path == '.' )
+		$path = '';
+		$plugin_path = trailingslashit( plugins_url( $path ) );
+	} 
+	else {
+		$plugin_path = trailingslashit( plugins_url( '', __FILE__) );
+	}	
+	return $plugin_path;
 }
 
 
