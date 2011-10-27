@@ -627,8 +627,8 @@ function lacandsnw_postbox_url() {
 
 
 function lacandsnw_postbox(){
-	$html  = '<div class="wrap"><div class="icon32" id="lacands_laicon"><br /></div><h2>'.LAECHONW_WIDGET_NAME.' - '.LACANDSNW_WIDGET_NAME_POSTBOX.'</h2></div>';
-	$html .= '<iframe id="networkpub_postbox" src="http://www.linksalpha.com/post?source=wordpress&sourcelink='.urlencode(lacandsnw_postbox_url()).'#'.urlencode(lacandsnw_postbox_url()).'" width="1050px;" height="700px;" scrolling="no" style="border:none !important;" frameBorder="0"></iframe>';
+	$html  = '<div class="wrap"><a href="http://www.linksalpha.com"><div class="icon32" id="lacands_laicon"><br /></div></a><h2>'.LACANDSNW_WIDGET_NAME_POSTBOX.'</h2></div>';
+	$html .= '<iframe id="networkpub_postbox" src="http://www.linksalpha.com/post?source=wordpress&netpublink='.urlencode(LACANDSNW_WP_PLUGIN_URL).'&sourcelink='.urlencode(lacandsnw_postbox_url()).'#'.urlencode(lacandsnw_postbox_url()).'" width="1050px;" height="700px;" scrolling="no" style="border:none !important;" frameBorder="0"></iframe>';
 	$html .= '<div style="padding:10px 10px 6px 10px;background-color:#FFFFFF;margin-bottom:15px;margin-top:0px;border:1px solid #F0F0F0;width:1005px;">
                 <div style="width:130px;float:left;font-weight:bold;">
                     '.__('Share this Plugin').'
@@ -655,6 +655,43 @@ function lacandsnw_thumbnail_link( $post_id ) {
 	}
 }
 
+
+function lacandsnw_get_posts() {
+	if(!empty($_GET['linksalpha_request_type'])) {
+		$args = array(
+	    'numberposts'     => 20,
+	    'offset'          => 0,
+	    'orderby'         => 'post_date',
+	    'order'           => 'DESC',
+	    'post_type'       => 'post',
+	    'post_status'     => 'publish' );
+		$posts_array = get_posts( $args );
+		$html  = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>';
+		$html .= '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>';
+		$html .= '<script type="text/javascript" src="'.LACANDSNW_WP_PLUGIN_URL.'jquery.ba-postmessage.min.js"></script>';
+		$html .= '<script type="text/javascript" src="'.LACANDSNW_WP_PLUGIN_URL.'la-click-and-share.js"></script>';
+		$html .= '</head><body style="margin:0 !important;padding:0 !important;">';
+		$html .= '<select style="margin:0 !important;padding:0 !important;width:300px !important;" id="site_links" name="site_links" class="post_network" >';
+		$html .= '<option class="post_network" value="" selected >---</option>';
+		foreach( $posts_array as $post ) {
+			$params = array();
+			$post_link = get_permalink($post->ID);
+			$params['content_link'] = $post_link;
+			$params['title'] = trim(strip_tags($post->post_title));
+			$params['content_text'] = trim(strip_tags($post->post_title));
+			$params['content_body'] = trim(strip_tags($post->post_content));
+			$post_image = lacandsnw_thumbnail_link( $post_id );
+			if($post_image) {
+				$params['content_image'] = $post_image;
+			}
+			$form_data = http_build_query($params);
+			$html .= '<option class="post_network" value="'.$form_data.'">'.$post->post_title.'</option>';
+		}
+		$html .= '</select></body></html>';
+		echo $html;
+	}
+	return;
+}
 
 function lacandsnw_version() {
 	return LACANDSNW_PLUGIN_VERSION;

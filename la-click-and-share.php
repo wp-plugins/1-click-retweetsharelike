@@ -769,6 +769,13 @@ function lacands_wp_admin_options_settings () {
 		echo '</strong></p></div>';
 	}
 	
+	if ( !empty($_GET['linksalpha_request_type'])) {
+		if($_GET['linksalpha_request_type'] == 'get_posts') {
+ 			lacandsnw_get_posts();
+ 		}		
+ 		return;
+	}
+	
 	$options    = get_option(LACANDSNW_WIDGET_NAME_INTERNAL);
 	$curr_field = 'api_key';
 	$field_name = sprintf('%s_%s', LACANDSNW_WIDGET_PREFIX, $curr_field);
@@ -1057,6 +1064,7 @@ add_filter("plugin_action_links_$plugin", 'lacands_actlinks' );
 
 
 add_action ( 'init', 								'lacandsnw_networkpub_remove' );
+add_action ( 'init', 								'lacandsnw_get_posts' );
 
 add_action ( 'xmlrpc_publish_post',                 'lacandsnw_networkping' );
 add_action ( '{$new_status}_{$post->post_type}',	'lacandsnw_networkping' );
