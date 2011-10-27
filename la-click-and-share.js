@@ -27,4 +27,11 @@ jQuery(document).ready(function() {
 		'http://www.linksalpha.com'
 	);
 		
+	jQuery("#site_links").live("change", function(event) {
+		jQuery.postMessage(
+			jQuery(this).val(),
+			'http://www.linksalpha.com/post',
+			parent
+		);
+	});
 });
