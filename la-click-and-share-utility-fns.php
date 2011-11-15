@@ -7,8 +7,7 @@ function lacands_get_plugin_dir() {
 		if ( $path == '.' )
 		$path = '';
 		$plugin_path = trailingslashit( plugins_url( $path ) );
-	} 
-	else {
+	} else {
 		$plugin_path = trailingslashit( plugins_url( '', __FILE__) );
 	}	
 	return $plugin_path;
@@ -63,14 +62,11 @@ function lacands_http_process($response_full) {
 function lacands_json_decode($str) {
 	if (function_exists("json_decode")) {
 		return json_decode($str);
-	} 
-	else {
+	} else {
 		if (!class_exists('Services_JSON')) {
-		require_once("JSON.php");
+			require_once("JSON.php");
 		}
-	
 		$json = new Services_JSON();
-	
 		return $json->decode($str);
 	}
 }
