@@ -35,6 +35,7 @@ define('LACANDS_PLUGIN_URL', 						lacands_get_plugin_dir());
 define('LAECHONW_WIDGET_NAME', 						__('1-Click Retweet/Share/Like'));
 define('LACANDS_FB_RECOMMENDATIONS_ID',  			'LACANDS_Facebook_Recommendations');
 define('LACANDS_FB_RECOMMENDATIONS_NAME',  			__('Facebook Recommendations'));
+define('LAECHONW_WIDGET_NAME_INTERNAL',				'LAECHONW_WIDGET_NAME_INTERNAL');
 define('LACANDSNW_WIDGET_NAME_INTERNAL', 			'lacandsnw_networkpub');
 define('LACANDSNW_WIDGET_PREFIX',        			'lacandsnw_networkpub');
 define('LACANDSNW_NETWORKPUB', 						__('Automatically publish your blog posts to 30+ Social Networks including Facebook, Twitter, LinkedIn, Yahoo, MySpace...'));
