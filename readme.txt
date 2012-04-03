@@ -3,8 +3,8 @@
 Contributors: LinksAlpha
 Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live, google +1, google plus one, google plusone, google plus
 Requires at least: 2.0.2
-Tested up to: 3.2.1
-Stable tag: 4.6
+Tested up to: 3.3.1
+Stable tag: 4.7
 
 
 == Description ==
@@ -41,15 +41,12 @@ Plugin also enables you to `Automatically Publish` or `Self Publish` your `Blog 
 1. Yahoo
 1. Identi.ca
 1. Status.net
-1. Google Buzz
 1. Socialcast
 1. Plurk
 1. Sonico
 1. Delicious
 1. Diigo
 1. Foursquare
-1. Gowalla
-1. Brightkite
 1. Wordpress.com Blog
 1. Wordpress.org Blog
 1. Blogger
@@ -57,8 +54,6 @@ Plugin also enables you to `Automatically Publish` or `Self Publish` your `Blog 
 1. Typepad
 1. Posterous
 1. Yahoo Meme
-1. Basecamp
-1. Backpack
 1. Windows Live
 
 
@@ -141,6 +136,10 @@ Email us at post@linksalpha.com
 
 
 == Changelog ==
+
+= 4.7 =
+* Added 4 new options
+* Minor Fixes
 
 = 4.6 =
 * Fixes to Postbox

@@ -1,8 +1,8 @@
-<div class="wrap">
-	<div class="icon32" id="lacands_laicon"><br /></div><h2><?php echo LAECHONW_WIDGET_NAME; ?></h2>
+<div class="lacands_widget_title">
+	<img src="http://lh4.ggpht.com/owLnuUNOtSkZCW2PKk1MKSutmjbQAjMB4_N094Zz6uTBENTsGRLt2lQWG0o6yMXheS_93DwahbndU-EPqc8=s28" />&nbsp;<?php echo LAECHONW_WIDGET_NAME; ?>
 </div>
 
-<div class="outsideBorder" style="background-color:#FFF !important;">
+<div class="lacands_box_white">
 	<div class="lacands_font_bold14"><?php _e("Preview"); ?></div>
 	<div class="lacands_header_border_bottom"></div>
 	<div style="padding-top:5px;">
@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-<div class="outsideBorder">
+<div class="lacands_box">
 	<div class="lacands_font_bold14"><?php echo LACANDS_AUTO_PUBLISH_ON_NETWORKS; ?></div>
 	<div class="lacands_header_border_bottom"></div>
 	<div class="lacands_started" style="margin:20px;">
@@ -21,108 +21,143 @@
 		<div><?php _e("You can"); ?>&nbsp;<a href="http://help.linksalpha.com/wordpress-plugin-network-publisher" target="_blank"><?php _e("read more about this process at LinksAlpha.com."); ?></a></div>
 	</div>
 	<div style="margin:20px;">
-		<table style="width:100%;">
-			<tr>
-				<td style="padding-bottom:10px;">
-					<div class="rts_header2"><big><strong><img src="http://www.linksalpha.com/images/config.png" />&nbsp;<?php _e("Setup"); ?></strong></big></div>
-					<div class="la_content_box">
-						<form action="" method="post" id="networkpubadd" name="networkpubadd" style="width:90%;">
-							<fieldset class="rts_fieldset">
-								<legend><?php _e("API Key"); ?></legend>
-								<table style="width:100%;">
-									<tr>
-										<td>
-											<label for="<?php echo $field_name ?>">
-												<a href="http://www.linksalpha.com/user/your_api_key" target="_blank"><?php _e("Click here"); ?></a>&nbsp;<?php _e("to get your API Key"); ?>&nbsp;<?php _e("and enter it in the box below"); ?>
-											</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div style="padding-bottom:10px">
-												<input style="width:400px;" class="widefat" id="<?php echo $field_name ?>" name="<?php echo $field_name ?>" type="text" />
-											</div>
-										</td>
-									</tr>
-								</table>
-							</fieldset>
-                            <div style="margin: 20px 20px 0px 0px;text-align:left;">
-                                <table class="lacands_add_key_submit">
-                                    <tr>
-                                        <td class="lacands_add_key_submit_button">
-                                            <input type="hidden" value="<?php echo LACANDS_PLUGIN_URL ?>" id="la-networkpub_plugin_url" />
-                                            <input type="submit" name="AddAPIKey" class="button-primary" value="Add API Key" />
-                                        </td>
-                                        <td class="lacands_social_buttons_text">&nbsp;Share the plugin:&nbsp;&nbsp;&nbsp;</td>
-                                        <td class="lacands_add_key_submit_social">
-                                            <iframe id="websites_iframe" height="25px" width="550px" scrolling="no" frameborder="0px" src="http://www.linksalpha.com/social?link=http%3A//www.linksalpha.com/&g1button=1&fbsbutton=0"></iframe>
-                                        </td>
-                                    </tr>
-                                </table>
-							</div>
-						</form>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td style="padding:0px 0px 0px 0px;vertical-align:top;">
-					<div style="height:25px;margin-bottom:10px;">
-						<div id="la-networkpub_msg" style="display:none;"></div>
-					</div>
-					<div class="rts_header2"><big><strong><?php _e("Currently Publishing"); ?></strong></big></div>
-					<div class="la_content_box">
-						<div id="la-idAPIBox">
-						 <?php echo lacandsnw_networkpub_load() ?>
-						</div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div style="margin:20px 10px 20px 10px;color:gray;">
-						<div>
-							<?php _e("Note: If you decide to stop using this functionality permanently (after adding API key even once), please also remove your blog URL by logging into"); ?>&nbsp;<a href="http://www.linksalpha.com/user/tracked" target="_blank">LinksAlpha Website Manager</a>.
-							<?php _e("Otherwise, your blog posts may continue to get posted even after you do not use this functionality."); ?>
-						</div>
-						<div>
-							<?php _e("If you have questions, please email us at"); ?>&nbsp;<a href="mailto:post@linksalpha.com">post@linksalpha.com</a>.
-						</div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div class="rts_header2"><big><strong><img src="http://www.linksalpha.com/images/user-group.png" />&nbsp;Postbox</strong></big></div>
-					<div class="la_content_box">
-						<table>
+		<div class="lacandsnw_content_box">
+			<div class="lacandsnw_content_box_header">
+				<img src="http://www.linksalpha.com/images/config.png" />&nbsp;<?php _e("Setup"); ?>
+			</div>
+			<div class="lacandsnw_content_box_data">
+				<form action="" method="post" id="networkpubadd" name="networkpubadd">
+					<fieldset class="rts_fieldset">
+						<legend><?php _e("API Key"); ?></legend>
+						<table style="width:100%;">
 							<tr>
 								<td>
-                                    <div style="padding-bottom: 3px;">To self Publish content to your Social Networking Profiles right from your blog, click on the button below:</div>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <div>
-                                                    <a href="<?php echo lacandsnw_postbox_url(); ?>" style="text-decoration:none;">
-                                                        <div class="lacands_button_yellow"><?php _e("View"); ?> Postbox</div>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
+									<label for="<?php echo $field_name ?>">
+										<a href="http://www.linksalpha.com/user/your_api_key" target="_blank"><?php _e("Click here"); ?></a>&nbsp;<?php _e("to get your API Key"); ?>&nbsp;<?php _e("and enter it in the box below"); ?>
+									</label>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div style="padding-bottom:10px">
+										<input style="width:400px;" class="widefat" id="<?php echo $field_name ?>" name="<?php echo $field_name ?>" type="text" />
+									</div>
 								</td>
 							</tr>
 						</table>
-					</div>
-				</td>
-			</tr>
-		</table>
+					</fieldset>
+					<table class="lacands_add_key_submit">
+	                	<tr>
+	                    	<td class="lacands_add_key_submit_button">
+	                        	<input type="hidden" value="<?php echo LACANDS_PLUGIN_URL ?>" id="la-networkpub_plugin_url" />
+	                            <input type="submit" name="AddAPIKey" class="button-primary" value="Add API Key" />
+							</td>
+	                        <td class="lacands_add_key_submit_social">
+	                        	<div class="lacands_add_key_submit_social_helper">Share the Plugin:</div>
+	                        	<div class="lacands_add_key_submit_social_buttons">
+		                            <div style="margin:0px 0px 0px 0px !important;" id="linksalpha_tag_32587491111" class="linksalpha-email-button" data-url="http://www.linksalpha.com" data-text="LinksAlpha - Making Social Easy" data-desc="LinksAlpha provides quick and easy way for companies and users to connect and share on social web. Using LinksAlpha tools, you can integrate Social Media Buttons into your website, Publish your Website Content Automatically to Social Media Sites, and Track Social Media Profiles, all from one place." data-site="http://www.linksalpha.com" data-image="http://www.linksalpha.com/images/LALOGO_s175.png" ></div>
+		                            <script type="text/javascript" src="http://www.linksalpha.com/social/loader?tag_id=linksalpha_tag_32587491111&link=http%3A%2F%2Fwww.linksalpha.com&halign=left&fblikeverb=like&fblikeref=linksalpha&fblikefont=arial&v=2&twitterw=110&facebookw=90&googleplus=1&facebook=1&twitter=1&linkedin=1&reddit=1&stumbleupon=1&pinterest=1&identica=1&yammer=1&gmail=1&yahoomail=1&hotmail=1&aolmail=1&mailru=1&email=1&print=1&digg=1&delicious=1&diigo=1&posterous=1&tumblr=1&myspace=1&evernote=1&instapaper=1&readitlater=1&msn=1&livejournal=1&sonico=1&netlog=1&hyves=1&xing=1&vkontakte=1&weibo=1&button=googleplus%2Cfacebook%2Ctwitter&gpluslang=en-US&twitterlang=en&xinglang=en&fblikelang=en_US&twittermention=vivekpuri&twitterrelated1=linksalpha&twitterhash=linksalpha&twitterrelated=linksalpha&counters=googleplus%2Cfacebook%2Ctwitter%2Clinkedin"></script>
+		                        </div>
+	                        </td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<br />
+		<div class="lacandsnw_ajax_msg"></div>
+		<div class="lacandsnw_content_box">
+			<div class="lacandsnw_content_box_header">
+				<?php _e("Currently Publishing"); ?>
+			</div>
+			<div class="lacandsnw_content_box_data">
+				<div id="la-idAPIBox">
+				 <?php echo lacandsnw_networkpub_load() ?>
+				</div>
+			</div>
+		</div>
+		<br />
+		
+		<div class="lacandsnw_ajax_msg"></div>
+		<div class="lacandsnw_content_box">
+		    <div class="lacandsnw_content_box_header">
+		       <?php _e("Show/Hide Authorization Errors"); ?>
+		    </div>
+		    <div class="lacandsnw_content_box_data">
+		        <form action="" method="post">
+		            <div>
+		                <input type="checkbox" id="lacandsnw_auth_error_show" name="lacandsnw_auth_error_show" <?php echo $lacandsnw_auth_error_show; ?> /><label for="lacandsnw_auth_error_show">&nbsp;&nbsp;<?php _e("Check this box to show error message in WordPress Admin Console in case there are Authorization Errors with any of your social network profiles."); ?> <a target="_blank" href="http://help.linksalpha.com/networks/authorization-error"><?php _e("Click Here"); ?></a> <?php _e("to learn more."); ?></label>
+		            </div>
+		            <div style="padding-top:5px;">
+		                <input type="hidden" name="lacandsnw_form_type" value="lacandsnw_auth_error_show" />
+		                <input type="hidden" name="action" value="lacandsnw_save_options" />
+		                <input type="button" name="submit" class="button-primary lacandsnw_options" value="<?php _e("Update"); ?>" />
+		            </div>
+		        </form>
+		    </div>
+		</div>
+		<br />
+		<div class="lacandsnw_ajax_msg"></div>
+		<div class="lacandsnw_content_box">
+		    <div class="lacandsnw_content_box_header">
+		        <?php _e("Show/Hide Mixed Mode Configuration Alert"); ?>
+		    </div>
+		    <div class="lacandsnw_content_box_data">
+		        <form action="" method="post">
+		            <div>
+		                <input type="checkbox" id="lacandsnw_mixed_mode_alert_show" name="lacandsnw_mixed_mode_alert_show" <?php echo $lacandsnw_mixed_mode_alert_show; ?> /><label for="lacandsnw_mixed_mode_alert_show">&nbsp;&nbsp;<?php _e("Check this box to show alert if Mixed Mode configuration is detected."); ?> <a target="_blank" href="http://help.linksalpha.com/wordpress-plugin-network-publisher/mixed-mode-alert"><?php _e("Click Here"); ?></a> <?php _e("to learn more."); ?></label>
+		            </div>
+		            <div style="padding-top:5px;">
+		                <input type="hidden" name="lacandsnw_form_type" value="lacandsnw_mixed_mode_alert_show" />
+		                <input type="hidden" name="action" value="lacandsnw_save_options" />
+		                <input type="button" name="submit" class="button-primary lacandsnw_options" value="<?php _e("Update"); ?>" />
+		            </div>
+		        </form>
+		    </div>
+		</div>
+		<br />
+		<div class="lacandsnw_content_box">
+		    <div class="lacandsnw_content_box_header">
+		        <?php _e("Note"); ?>
+		    </div>
+		    <div class="lacandsnw_content_box_data">
+		        <?php _e("If you decide to stop using this functionality permanently, please remove your blog from"); ?>&nbsp;<a href="https://www.linksalpha.com/websites" target="_blank"><?php _e("LinksAlpha Website Manager"); ?></a>. <?php _e("Otherwise, your blog posts may continue to get posted even after you do not use this plugin. For Support, open ticket at"); ?>&nbsp;<a target="_blank" href="http://support.linksalpha.com">LinksAlpha Help Desk</a>.
+		    </div>
+		</div>
+		<br />
+           
+        <div class="lacandsnw_content_box">
+		    <div class="lacandsnw_content_box_header">
+				<?php _e("Postbox"); ?>
+			</div>
+			<div class="lacandsnw_content_box_data">
+				<table>
+					<tr>
+						<td>
+							<div style="padding-bottom: 3px;">To self Publish content to your Social Networking Profiles right from your blog, click on the button below:</div>
+							<table>
+							    <tr>
+							        <td>
+							            <div>
+							                <a href="<?php echo lacandsnw_postbox_url(); ?>" style="text-decoration:none;">
+							                    <div class="lacands_button_yellow"><?php _e("View"); ?> Postbox</div>
+							                </a>
+							            </div>
+							        </td>
+							    </tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 
 <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 	<input type="hidden" name="lacands_widget_update" id="lacands_widget_update" value="true" />
 	
-	<div class="outsideBorder">
+	<div class="lacands_box">
 	
         <div class="lacands_font_bold14"><img src="http://www.linksalpha.com/images/tools.png" />&nbsp;<?php _e("Widget Options"); ?></div>
 		<div class="lacands_header_border_bottom"></div>
@@ -312,6 +347,24 @@
 						?>
 					</select>
 				</div>
+				
+				<!--Facebook App ID-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Facebook App ID"); ?>:</div>
+					<div>
+						<input name="lacands-html-fb-app-id" id="lacands-html-fb-app-id" type="text" size="15" value="<?php echo $lacands_opt_fb_app_id ?>" ></input>
+						<label for="lacands-html-fb-app-id"><?php _e("Facebook Platform application ID (this option is only for advanced users)"); ?></label>
+					</div>
+				</div>
+				
+				<!--Facebook Show/Hide Meta tags-->
+				<div class="lacands_input_header">
+					<div class="lacands_input_headers"><?php _e("Facebook OpenGraphs Tags"); ?>:</div>
+					<div>
+					    <input name="lacands-html-fb-metatags" id="lacands-html-fb-metatags" type="checkbox" <?php if($lacands_opt_fb_metatags != 0) echo 'checked="checked"'; ?> value="1" />
+	                    <label for="lacands-html-fb-metatags">&nbsp;&nbsp;<?php _e("Check this box if you want Facebook OpenGraph metatags to be added to your pages. Please don't disable this option unless you are using an alternate way to show the metatags in your pages. Without these metatags, publishing of your content to Facebook will be impacted."); ?></label>
+	                </div>
+                </div>
 				
 			</fieldset>
 			
@@ -557,21 +610,15 @@
 					</div>
 				</div>
 				
-			</fieldset>
-			
-			<!--Google Buzz-->
-			<fieldset class="lacands_fieldset">
-				<legend><img src="<?php echo lacands_get_plugin_dir(); ?>/buzz_icon.png" style="vertical-align:bottom;" />&nbsp;Google Buzz</legend>
-				
-				<!--Google Buzz Button-->
+				<!--GooglePlus Page Type-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers"><?php _e("Button Show/Hide"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Page Type"); ?>:</div>
 					<div>
-						<select name="lacands-html-widget-buzz-button">
+						<select name="lacands-html-googleplus-page-type">
 							<?php
-								$options = array(1=>LACANDS_SHOW, 0=>LACANDS_DONT_SHOW);
+								$options = array('Article'=>__('Article'), 'Blog'=>__('Blog'), 'Book'=>__('Book'), 'Event'=>__('Event'), 'LocalBusiness'=>__('Local Business'), 'Organization'=>__('Organization'), 'Person'=>__('Person'), 'Product'=>__('Product'), 'Review'=>__('Review'));
 								foreach($options as $key=>$val) {
-									if($lacands_opt_widget_buzz_button == $key) {
+									if($$lacands_opt_googleplus_page_type == $key) {
 										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
 									} else{
 										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
@@ -582,42 +629,15 @@
 					</div>
 				</div>
 				
-				<!--Google +1 Button lang-->
+				<!--GooglePlus Show/Hide Meta tags-->
 				<div class="lacands_input_header">
-					<div class="lacands_input_headers"><?php _e("Button language"); ?>:</div>
-					<select name="lacands-html-widget-buzz-lang">
-						<?php
-							$langs = lacands_googlebuzz_langs();
-							asort($langs);
-							foreach($langs as $key=>$val) {
-								if($lacands_opt_widget_buzz_lang == $key) {
-									echo '<option value="'.htmlentities($key).'" selected>'.htmlentities($val).'</option>';
-								} else{
-									echo '<option value="'.htmlentities($key).'">'.htmlentities($val).'</option>';
-								}
-							}
-						?>
-					</select>
-				</div>
-				
-				<!--Google Buzz Counter-->
-				<div class="lacands_input_header">
-					<div class="lacands_input_headers"><?php _e("Share Count Show/Hide"); ?>:</div>
+					<div class="lacands_input_headers"><?php _e("Google Plus Tags"); ?>:</div>
 					<div>
-						<select name="lacands-html-widget-buzz-counter">
-							<?php
-								$options = array('1'=>LACANDS_SHOW, '0'=>LACANDS_DONT_SHOW);
-								foreach($options as $key=>$val) {
-									if($lacands_opt_widget_buzz_counter == $key) {
-										echo '<option value="'.$key.'" selected>'.htmlentities($val).'</option>';
-									} else{
-										echo '<option value="'.$key.'">'.htmlentities($val).'</option>';
-									}
-								}
-							?>
-						</select>
-					</div>
-				</div>
+					    <input name="lacands-html-googleplus-metatags" id="lacands-html-googleplus-metatags" type="checkbox" <?php if($lacands_opt_googleplus_metatags != 0) echo 'checked="checked"'; ?> value="1" />
+	                    <label for="lacands-html-googleplus-metatags">&nbsp;&nbsp;<?php _e("Check this box if you want Google Plus metatags to be added to your pages. Please don't disable this option unless you are using an alternate way to show the metatags in your pages. Without these metatags, publishing of your content to Google Plus will be impacted."); ?></label>
+	                </div>
+                </div>
+                
 			</fieldset>
 			
 			<!--Digg-->
@@ -726,30 +746,31 @@
 						<input name="lacands-html-widget-disable-cntr-display" id="lacands-html-widget-disable-cntr-display" type="checkbox"<?php if($lacands_widget_disable_cntr_display != "0") echo 'checked="checked"'; ?> value="1" />
 						<label for="lacands-html-widget-disable-cntr-display"><?php _e("Disable displaying"); ?>&nbsp;<?php echo LAECHONW_WIDGET_NAME; ?>&nbsp;(<?php _e("for Manual Option Only - see "); ?>readme.txt)</label>
 					</div>
-					<div style="font-size:11px;padding-top:10px;">
+					<div style="padding-top:3px;">
 						<?php _e("Place the code"); ?>&nbsp;<?php highlight_string("<?php lacands_wp_filter_content_widget(); ?>");?>&nbsp;<?php _e("in one of the files single.php or index.php (note: or any other file - as the file name depends on the theme you are using). These files can be found under directory ...\wordpress\wp-content\themes\\"); ?>
 					</div>
 				</div>
 			</fieldset>
 								
-			<div style="margin: 20px 20px 20px 20px;text-align:left;">
-			    <table class="lacands_add_key_submit">
-                    <tr>
-                        <td class="lacands_add_key_submit_button">
-                            <input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" />
-                        </td>
-                        <td class="lacands_social_buttons_text">&nbsp;Share the plugin:&nbsp;&nbsp;&nbsp;</td>
-                        <td class="lacands_add_key_submit_social">
-                            <iframe id="websites_iframe" height="25px" width="550px" scrolling="no" frameborder="0px" src="http://www.linksalpha.com/social?link=http%3A//www.linksalpha.com/&g1button=1&fbsbutton=0"></iframe>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+			<table class="lacands_add_key_submit_2">
+	            <tr>
+	                <td class="lacands_add_key_submit_button">
+	                    <input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" />
+	                </td>
+	                <td class="lacands_add_key_submit_social">
+	                	<div class="lacands_add_key_submit_social_helper">Share the Plugin:</div>
+	                	<div class="lacands_add_key_submit_social_buttons">
+	                     <div style="margin:0px 0px 0px 0px !important;" id="linksalpha_tag_32587491" class="linksalpha-email-button" data-url="http://www.linksalpha.com" data-text="LinksAlpha - Making Social Easy" data-desc="LinksAlpha provides quick and easy way for companies and users to connect and share on social web. Using LinksAlpha tools, you can integrate Social Media Buttons into your website, Publish your Website Content Automatically to Social Media Sites, and Track Social Media Profiles, all from one place." data-site="http://www.linksalpha.com" data-image="http://www.linksalpha.com/images/LALOGO_s175.png" ></div>
+	                     <script type="text/javascript" src="http://www.linksalpha.com/social/loader?tag_id=linksalpha_tag_32587491&link=http%3A%2F%2Fwww.linksalpha.com&halign=left&fblikeverb=like&fblikeref=linksalpha&fblikefont=arial&v=2&twitterw=110&facebookw=90&googleplus=1&facebook=1&twitter=1&linkedin=1&reddit=1&stumbleupon=1&pinterest=1&identica=1&yammer=1&gmail=1&yahoomail=1&hotmail=1&aolmail=1&mailru=1&email=1&print=1&digg=1&delicious=1&diigo=1&posterous=1&tumblr=1&myspace=1&evernote=1&instapaper=1&readitlater=1&msn=1&livejournal=1&sonico=1&netlog=1&hyves=1&xing=1&vkontakte=1&weibo=1&button=googleplus%2Cfacebook%2Ctwitter&gpluslang=en-US&twitterlang=en&xinglang=en&fblikelang=en_US&twittermention=vivekpuri&twitterrelated1=linksalpha&twitterhash=linksalpha&twitterrelated=linksalpha&counters=googleplus%2Cfacebook%2Ctwitter%2Clinkedin"></script>
+	                 </div>
+	                </td>
+	            </tr>
+            </table>
 		</div>			
 	</div>
 </form>
 
-<div class="outsideBorder">			
+<div class="lacands_box_white">			
 	<div class="lacands_font_bold14"><?php _e("Show/Hide Message"); ?></div>
 	<div class="lacands_header_border_bottom"></div>
 	<div style="padding-left:20px;">
@@ -767,14 +788,14 @@
 	</div>
 </div>
 		
-<div class="outsideBorder">			
-	<div class="lacands_font_bold14"><?php _e("Your Suggestion"); ?></div>
+<div class="lacands_box_white">			
+	<div class="lacands_font_bold14"><?php _e("Your Suggestions"); ?></div>
 	<div class="lacands_header_border_bottom"></div>
 	<div>Email us at <a href="mailto:post@linksalpha.com">post@linksalpha.com</a> <?php _e("if you would like a particular functionality or have any recommendations"); ?>.</div>
 </div>
 
-<div class="outsideBorder">			
-	<div class="lacands_font_bold14"><?php _e("FAQs / Help Pages"); ?></div>								
+<div class="lacands_box_white">			
+	<div class="lacands_font_bold14"><?php _e("Help"); ?></div>								
 	<div class="lacands_header_border_bottom"></div>
-	<div>Go to <a href="http://help.linksalpha.com/1-click-retweet-share-like/faqs" target="_blank"><?php echo LAECHONW_WIDGET_NAME; ?>&nbsp;<?php _e("FAQs"); ?></a></div>				
+	<div>Checkout the help documents for the plugin by <a href="http://help.linksalpha.com/1-click-retweet-share-like" target="_blank"><?php _e("Clicking Here."); ?></a></div>				
 </div>
