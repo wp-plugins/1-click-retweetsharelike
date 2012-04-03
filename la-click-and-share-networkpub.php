@@ -17,12 +17,17 @@ add_action('admin_notices', 'lacandsnw_auth_errors');
 
 function lacandsnw_set_options() {
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
-	if(!array_key_exists('lacandsnw_auth_error_show', $options)) {
+	if(is_array($options)) {
+		if(!array_key_exists('lacandsnw_auth_error_show', $options)) {
+			$options['lacandsnw_auth_error_show'] = 1;
+		}
+		if(!array_key_exists('lacandsnw_mixed_mode_alert_show', $options)) {
+			$options['lacandsnw_mixed_mode_alert_show'] = 1;
+		}	
+	} else {
 		$options['lacandsnw_auth_error_show'] = 1;
-	}
-	if(!array_key_exists('lacandsnw_mixed_mode_alert_show', $options)) {
 		$options['lacandsnw_mixed_mode_alert_show'] = 1;
-	}
+	}	
 	update_option(LAECHONW_WIDGET_NAME_INTERNAL, $options);
 }
 
@@ -58,6 +63,7 @@ function lacandsnw_load_options() {
 	}
 	lacandsnw_mixed_mode();
 }
+
 
 add_action('admin_head', 'lacandsnw_save_options_javascript');
 
@@ -803,37 +809,16 @@ function lacandsnw_postbox(){
 
 
 function lacandsnw_thumbnail_link( $post_id ) {
-	if(function_exists('get_post_thumbnail_id') and function_exists('wp_get_attachment_image_src')) {
-        $src = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'medium');
-        if($src) {
-            $src = $src[0];
-            return $src;
-        }
-    }
-	if(!$post_content) {
+	if(!function_exists('get_post_thumbnail_id')) {
 		return False;
 	}
-    if(class_exists("DOMDocument") and function_exists('simplexml_import_dom')) {
-		libxml_use_internal_errors(true);
-        $doc = new DOMDocument();
-        if(!($doc->loadHTML($post_content))){
-			return False;
-		}
-		try {
-			$xml = @simplexml_import_dom($doc);
-			if($xml) {
-				$images = $xml->xpath('//img');
-				if(!empty($images)) {
-					return $images[0]['src'];
-				}
-			} else {
-				return False;	
-			}
-		} catch (Exception $e) {
-			return False;
-		}
-    }
-    return False;
+	$src = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'full');
+	if($src) {
+		$src = $src[0];
+		return $src;	
+	} else {
+		return False;
+	}
 }
 
 
