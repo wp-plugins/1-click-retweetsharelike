@@ -17,12 +17,17 @@ add_action('admin_notices', 'lacandsnw_auth_errors');
 
 function lacandsnw_set_options() {
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
-	if(!array_key_exists('lacandsnw_auth_error_show', $options)) {
+	if(is_array($options)) {
+		if(!array_key_exists('lacandsnw_auth_error_show', $options)) {
+			$options['lacandsnw_auth_error_show'] = 1;
+		}
+		if(!array_key_exists('lacandsnw_mixed_mode_alert_show', $options)) {
+			$options['lacandsnw_mixed_mode_alert_show'] = 1;
+		}	
+	} else {
 		$options['lacandsnw_auth_error_show'] = 1;
-	}
-	if(!array_key_exists('lacandsnw_mixed_mode_alert_show', $options)) {
 		$options['lacandsnw_mixed_mode_alert_show'] = 1;
-	}
+	}	
 	update_option(LAECHONW_WIDGET_NAME_INTERNAL, $options);
 }
 
