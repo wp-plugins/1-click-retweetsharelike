@@ -93,7 +93,7 @@ function lacands_readOptionsValuesFromWPDatabase() {
 	global $lacands_opt_widget_buzz_button, $lacands_opt_widget_buzz_lang, $lacands_opt_widget_fb_like_button, $lacands_opt_widget_digg_button, $lacands_opt_widget_stumble_button, $lacands_opt_widget_twitter_button;
     global $lacands_opt_widget_display_password_protected, $lacands_opt_widget_display_not_postids;
     global $lacands_opt_widget_mobile_hide;
-    global $lacands_opt_fb_app_id, $lacands_opt_fb_metatags, $lacands_opt_googleplus_metatags, $lacands_opt_googleplus_page_type;
+    global $lacands_opt_fb_app_id, $lacands_opt_fb_metatags, $lacands_opt_googleplus_metatags, $lacands_opt_googleplus_page_type, $lacands_opt_extra_params;
 
 	$lacands_opt_widget_counters_location           = get_option('lacands-html-widget-counters-location');
 	$lacands_opt_widget_margin_top                  = get_option('lacands-html-widget-margin-top');
@@ -150,7 +150,8 @@ function lacands_readOptionsValuesFromWPDatabase() {
     $lacands_opt_fb_app_id 							= get_option('lacands-html-fb-app-id');
     $lacands_opt_fb_metatags						= get_option('lacands-html-fb-metatags');
     $lacands_opt_googleplus_metatags				= get_option('lacands-html-googleplus-metatags');
-    $lacands_opt_googleplus_page_type 				= get_option('lacands-html-googleplus-page-type');   
+    $lacands_opt_googleplus_page_type 				= get_option('lacands-html-googleplus-page-type');
+    $lacands_opt_extra_params 						= get_option('lacands-html-extra-params');   
 }
 
 
@@ -235,6 +236,7 @@ function lacands_writeOptionsValuesToWPDatabase($option) {
     	add_option('lacands-html-fb-metatags', 							1);
     	add_option('lacands-html-googleplus-metatags', 					1);
     	add_option('lacands-html-googleplus-page-type', 				'Article');
+    	add_option('lacands-html-extra-params',							'');
         update_option('lacands-html-widget-mobile-hide',                0);
 		update_option('lacands-html-version-number', 					$lacands_version_number);
 	} else if ($option == 'update') {
@@ -610,7 +612,7 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
 	global $lacands_opt_widget_buzz_button, $lacands_opt_widget_buzz_lang, $lacands_opt_widget_fb_like_button, $lacands_opt_widget_digg_button, $lacands_opt_widget_stumble_button, $lacands_opt_widget_twitter_button;
     global $lacands_opt_widget_display_password_protected, $lacands_opt_widget_display_not_postids;
     global $lacands_opt_widget_mobile_hide;
-    global $lacands_opt_fb_app_id, $lacands_opt_fb_metatags, $lacands_opt_googleplus_metatags, $lacands_opt_googleplus_page_type;
+    global $lacands_opt_fb_app_id, $lacands_opt_fb_metatags, $lacands_opt_googleplus_metatags, $lacands_opt_googleplus_page_type, $lacands_opt_extra_params;
 	global $post;
     
     lacands_readOptionsValuesFromWPDatabase();
@@ -685,7 +687,7 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
         }
     }
     
-	if ($show_widget) {
+    if ($show_widget) {
 		$post_data = lacands_get_post_data($post);
 		$lacands_opt_cntr_font_color = 	str_replace('#', '', $lacands_opt_cntr_font_color);
 		$lacands_opt_cntr_font_color = 	trim($lacands_opt_cntr_font_color);
@@ -728,6 +730,9 @@ function lacands_wp_filter_content_widget ($show=TRUE) {
         	}
         }
 		$args_data = http_build_query($args);
+		if($lacands_opt_extra_params) {
+        	$args_data = $args_data.'&'.$lacands_opt_extra_params;
+        }
 		
 		$widget_width = 460;
 		if($lacands_opt_widget_fb_share_button and $lacands_opt_widget_g1_button) {
@@ -768,7 +773,7 @@ function lacands_wp_admin_options_settings () {
 	global $lacands_opt_widget_buzz_button, $lacands_opt_widget_buzz_lang, $lacands_opt_widget_fb_like_button, $lacands_opt_widget_digg_button, $lacands_opt_widget_stumble_button, $lacands_opt_widget_twitter_button;
     global $lacands_opt_widget_display_password_protected, $lacands_opt_widget_display_not_postids;
     global $lacands_opt_widget_mobile_hide;
-    global $lacands_opt_fb_app_id, $lacands_opt_fb_metatags, $lacands_opt_googleplus_metatags, $lacands_opt_googleplus_page_type;
+    global $lacands_opt_fb_app_id, $lacands_opt_fb_metatags, $lacands_opt_googleplus_metatags, $lacands_opt_googleplus_page_type, $lacands_opt_extra_params;
     
 	if (isset($_POST['lacands_widget_update'])) {
 		if ( function_exists('current_user_can') && !current_user_can('manage_options') ) {
@@ -798,6 +803,19 @@ function lacands_wp_admin_options_settings () {
 			update_option('lacandsnw-html-warning-msg',  (string)$_POST['lacandsnw-html-warning-msg']);
 		} else {
 			update_option('lacandsnw-html-warning-msg', '0');
+		}
+		echo '<div id="message" class="updated fade" style="margin:20px;text-align:center;"><p><strong>'.LACANDS_SETTINGS_SAVED.'</strong></p></div>';
+		echo '</strong></p></div>';
+	}
+	
+	if (isset($_POST['extra_params'])) {
+		if ( function_exists('current_user_can') && !current_user_can('manage_options') ) {
+			die(__('Cheatin&#8217; uh?'));
+		}
+		if(!empty($_POST['lacands-html-extra-params'])) {
+			update_option('lacands-html-extra-params', 							$_POST['lacands-html-extra-params']);
+		} else {
+			update_option('lacands-html-extra-params', 							'');
 		}
 		echo '<div id="message" class="updated fade" style="margin:20px;text-align:center;"><p><strong>'.LACANDS_SETTINGS_SAVED.'</strong></p></div>';
 		echo '</strong></p></div>';
@@ -1054,6 +1072,7 @@ function lacands_set_options() {
     add_option('lacands-html-fb-metatags', 							1);
     add_option('lacands-html-googleplus-metatags', 					1);
     add_option('lacands-html-googleplus-page-type', 				'Article');
+    add_option('lacands-html-extra-params', 						'');
 }
 
 

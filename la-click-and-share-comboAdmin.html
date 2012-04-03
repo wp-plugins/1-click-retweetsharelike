@@ -771,6 +771,24 @@
 </form>
 
 <div class="lacands_box_white">			
+	<div class="lacands_font_bold14"><?php _e("Extra Parameters"); ?></div>
+	<div class="lacands_header_border_bottom"></div>
+	<div style="padding-left:20px;">
+		<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+			<input type="hidden" name="extra_params" id="extra_params" value="true" />
+			<div style="margin:10px 10px 10px 0px; font-size:13px;">
+				<div>
+					<input name="lacands-html-extra-params" id="lacands-html-extra-params" type="text" value="<?php echo $lacands_opt_extra_params; ?>" /><label for="lacands-html-extra-params">&nbsp;&nbsp;<?php _e("Add any extra parameters that you might have been provided by LinksAlpha.com Support."); ?></label>
+				</div>
+				<div style="padding-top:10px;">
+					<input type="submit" name="option_value" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" />
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="lacands_box_white">			
 	<div class="lacands_font_bold14"><?php _e("Show/Hide Message"); ?></div>
 	<div class="lacands_header_border_bottom"></div>
 	<div style="padding-left:20px;">
