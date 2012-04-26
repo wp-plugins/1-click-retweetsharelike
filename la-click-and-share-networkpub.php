@@ -7,7 +7,7 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        	__('You are currently Publishin
 define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
 define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
-define('LACANDSNW_PLUGIN_VERSION',                  '4.7');
+define('LACANDSNW_PLUGIN_VERSION',                  '4.8');
 define('LACANDSNW_WP_PLUGIN_URL',                  	lacandsnw_get_plugin_dir());
 define('LACANDSNW_WIDGET_NAME_POST_EDITOR', 		'1-Click');
 
@@ -63,6 +63,7 @@ function lacandsnw_load_options() {
 	}
 	lacandsnw_mixed_mode();
 }
+
 
 add_action('admin_head', 'lacandsnw_save_options_javascript');
 
@@ -808,37 +809,16 @@ function lacandsnw_postbox(){
 
 
 function lacandsnw_thumbnail_link( $post_id ) {
-	if(function_exists('get_post_thumbnail_id') and function_exists('wp_get_attachment_image_src')) {
-        $src = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'medium');
-        if($src) {
-            $src = $src[0];
-            return $src;
-        }
-    }
-	if(!$post_content) {
+	if(!function_exists('get_post_thumbnail_id')) {
 		return False;
 	}
-    if(class_exists("DOMDocument") and function_exists('simplexml_import_dom')) {
-		libxml_use_internal_errors(true);
-        $doc = new DOMDocument();
-        if(!($doc->loadHTML($post_content))){
-			return False;
-		}
-		try {
-			$xml = @simplexml_import_dom($doc);
-			if($xml) {
-				$images = $xml->xpath('//img');
-				if(!empty($images)) {
-					return $images[0]['src'];
-				}
-			} else {
-				return False;	
-			}
-		} catch (Exception $e) {
-			return False;
-		}
-    }
-    return False;
+	$src = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'full');
+	if($src) {
+		$src = $src[0];
+		return $src;	
+	} else {
+		return False;
+	}
 }
 
 
