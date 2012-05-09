@@ -75,7 +75,7 @@ function lacands_build_meta_facebook($og_site_name, $og_title, $og_link, $og_lin
 		$opengraph_meta .= "\n<meta property=\"og:locale\" content=\"" . strtolower($og_locale) . "\" />";	
 	}
 	if($og_fb_app_id) {
-		$opengraph_meta .= "\n<meta property=\"fb:app_id\" content=\"" . $og_fb_app_id . "\" />";
+		$opengraph_meta .= "\n<meta property=\"fb:app_id\" content=\"" . trim($og_fb_app_id) . "\" />";
 	}
 	echo "\n<!-- Facebook Open Graph metatags added by WordPress plugin. Get it at: http://www.linksalpha.com/widgets/buttons -->" . $opengraph_meta . "\n<!-- End Facebook Open Graph metatags-->\n";
 }
