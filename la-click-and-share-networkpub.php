@@ -7,7 +7,7 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        	__('You are currently Publishin
 define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
 define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
-define('LACANDSNW_PLUGIN_VERSION',                  '4.8');
+define('LACANDSNW_PLUGIN_VERSION',                  '4.9');
 define('LACANDSNW_WP_PLUGIN_URL',                  	lacandsnw_get_plugin_dir());
 define('LACANDSNW_WIDGET_NAME_POST_EDITOR', 		'1-Click');
 

@@ -72,7 +72,7 @@ function lacands_build_meta_facebook($og_site_name, $og_title, $og_link, $og_lin
 		$opengraph_meta .= "\n<meta property=\"og:type\" content=\"". $og_type ."\" />";	
 	}
 	if($og_locale) {
-		$opengraph_meta .= "\n<meta property=\"og:locale\" content=\"" . $og_locale . "\" />";	
+		$opengraph_meta .= "\n<meta property=\"og:locale\" content=\"" . strtolower($og_locale) . "\" />";	
 	}
 	if($og_fb_app_id) {
 		$opengraph_meta .= "\n<meta property=\"fb:app_id\" content=\"" . $og_fb_app_id . "\" />";
