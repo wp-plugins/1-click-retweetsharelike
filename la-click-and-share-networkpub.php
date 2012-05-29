@@ -7,7 +7,7 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        	__('You are currently Publishin
 define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
 define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
-define('LACANDSNW_PLUGIN_VERSION',                  '4.9');
+define('LACANDSNW_PLUGIN_VERSION',                  '4.9.1');
 define('LACANDSNW_WP_PLUGIN_URL',                  	lacandsnw_get_plugin_dir());
 define('LACANDSNW_WIDGET_NAME_POST_EDITOR', 		'1-Click');
 
@@ -480,9 +480,9 @@ function lacandsnw_networkpub_load() {
 		return '<div class="msg_error">You have not added an API Key</div>';
 	}
 	if(count($response->results) == 1) {
-		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORK.'</div>';	
+		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;<span id="lacands_pub_count">'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORK.'</span></div>';	
 	} else {
-		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORKS.'</div>';
+		$html = '<div style="padding:0px 10px 10px 10px;">'.LACANDSNW_CURRENTLY_PUBLISHING.'&nbsp;<span id="lacands_pub_count">'.count($response->results).'&nbsp;'.LACANDSNW_SOCIAL_NETWORKS.'</span></div>';
 	}
 	$html .= '<table class="lacands_networkpub_added"><tr><th>'.__('Network').'</th><th>'.__('Option').'</th><th>'.__('Remove').'</th></tr>';
 	$i = 1;
@@ -514,17 +514,42 @@ function lacandsnw_networkpub_load() {
 	return;
 }
 
+add_action('admin_head', 'lacandsnw_networkpub_remove_javascript');
 
-function lacandsnw_networkpub_ajax() {
-	if(!empty($_POST['type'])) {
-		if(in_array($_POST['type'], array('remove'))) {
-			if($_POST['type']=='remove') {
-				lacandsnw_networkpub_remove($_POST['key']);				
-			}			
-		}
-	}
+function lacandsnw_networkpub_remove_javascript() {
+?>
+<script type="text/javascript" >
+	jQuery(document).ready(function($) {
+		jQuery(".lacandsnw_remove").live("click", function() {
+			var lacandsnw_ajax_msg = jQuery(this).parents(".lacandsnw_content_box:first").prev();
+			lacandsnw_ajax_msg.show();
+			lacandsnw_ajax_msg.html('Removing...');
+	        var key = jQuery(this).attr("id");
+	        var this_row = jQuery(this).parents('tr:first');
+	        this_row.css('opacity', '.30');
+	        jQuery.post(ajaxurl, {lacandsnw_networkpub_key:key, type:'remove'}, function(data) {
+		        if (data == '500') {
+	            	lacandsnw_ajax_msg.html('Error occured while removing the Network. As a workaround, you can remove this publishing at the following link: <a target="_blank" href="http://www.linksalpha.com/publisher/pubs">LinksAlpha Publisher</a>');
+	            } else {
+	            	this_row.remove();
+	                lacandsnw_ajax_msg.html('Network has been removed successfully');
+	                var lacands_pub_count = jQuery(".lacandsnw_remove").length;
+	                if(lacands_pub_count > 1) {
+	                	$("#lacands_pub_count").html(lacands_pub_count+' <?php echo LACANDSNW_SOCIAL_NETWORKS ?>');
+			        } else {
+			        	$("#lacands_pub_count").html(lacands_pub_count+' <?php echo LACANDSNW_SOCIAL_NETWORK ?>');
+			        }
+	            }
+	            oneclick_msg_fade(lacandsnw_ajax_msg);
+	        });
+	        return false;
+	    });
+	});
+</script>
+<?php
 }
 
+add_action('wp_ajax_lacandsnw_networkpub_remove', 'lacandsnw_networkpub_remove');
 
 function lacandsnw_networkpub_remove() {
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);

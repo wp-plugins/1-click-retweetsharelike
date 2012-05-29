@@ -5,7 +5,7 @@ Plugin URI: http://www.linksalpha.com/publish
 Description: Adds Facebook Like, Facebook Share, Twitter, Google +1, LinkedIn Share, Facebook Recommendations. Automatic publishing of content to 30+ Social Networks.
 Author: LinksAlpha
 Author URI: http://www.linksalpha.com/publish
-Version: 4.9
+Version: 4.9.1
 */
 
 /*
@@ -65,7 +65,7 @@ define('LACANDS_DONT_SHOW', 						__("Don't Show"));
 $lacandsnw_networkpub_settings['api_key'] 	= array('label'=>__('API Key:'), 'type'=>'text', 'default'=>'');
 $lacandsnw_networkpub_settings['id']      	= array('label'=>__('id'), 'type'=>'text', 'default'=>'');
 $lacandsnw_options                        	= get_option(LACANDSNW_WIDGET_NAME_INTERNAL);
-$lacands_version_number 					= '4.9';
+$lacands_version_number 					= '4.9.1';
 
 
 function lacands_init() {
@@ -1094,12 +1094,11 @@ function lacands_main() {
 		wp_enqueue_script ('lacandsjs');
 		wp_register_style ('lacandsnetworkpubcss', LACANDS_PLUGIN_URL.'la-click-and-share-networkpub.css');
 		wp_enqueue_style  ('lacandsnetworkpubcss');
-		add_action ( 'admin_menu',  'lacands_wp_admin');
-		add_action ( 'admin_menu',  'lacands_pages');
-		add_action ( 'admin_notices', 'lacands_warning');
-		add_action ( 'init', 'lacandsnw_networkpub_ajax');
-		add_action ( 'activate_{$plugin}', 'lacandsnw_pushpresscheck');
-		add_action ( 'activated_plugin', 'lacandsnw_pushpresscheck');
+		add_action('admin_menu',  'lacands_wp_admin');
+		add_action('admin_menu',  'lacands_pages');
+		add_action('admin_notices', 'lacands_warning');
+		add_action('activate_{$plugin}', 'lacandsnw_pushpresscheck');
+		add_action('activated_plugin', 'lacandsnw_pushpresscheck');
 		wp_register_widget_control(LACANDS_FB_RECOMMENDATIONS_ID, LACANDS_FB_RECOMMENDATIONS_NAME, 'lacands_fb_recommendations_settings', $dims, $widget_ops);
 	}
 	add_filter ( 'the_content', 'lacands_wp_filter_post_content');
