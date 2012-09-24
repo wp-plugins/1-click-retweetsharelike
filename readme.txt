@@ -123,7 +123,7 @@ Deactivate and then Activate the plugin. If by default it shows as 'activated', 
 
 = What if I have more questions? =
 
-Go to http://help.linksalpha.com/1-click-retweet-share-like/faqs for list of FAQs and corresponding answers.
+Go to http://help.linksalpha.com/1-click-retweet-share-like for getting started help documents.
 
 = Question still not answered? =
 
