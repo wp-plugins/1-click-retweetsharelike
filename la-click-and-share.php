@@ -5,7 +5,7 @@ Plugin URI: http://www.linksalpha.com/publish
 Description: Adds Facebook Like, Facebook Share, Twitter, Google +1, LinkedIn Share, Facebook Recommendations. Automatic publishing of content to 30+ Social Networks.
 Author: LinksAlpha
 Author URI: http://www.linksalpha.com/publish
-Version: 4.9.1
+Version: 5.0
 */
 
 /*
@@ -65,7 +65,7 @@ define('LACANDS_DONT_SHOW', 						__("Don't Show"));
 $lacandsnw_networkpub_settings['api_key'] 	= array('label'=>__('API Key:'), 'type'=>'text', 'default'=>'');
 $lacandsnw_networkpub_settings['id']      	= array('label'=>__('id'), 'type'=>'text', 'default'=>'');
 $lacandsnw_options                        	= get_option(LACANDSNW_WIDGET_NAME_INTERNAL);
-$lacands_version_number 					= '4.9.1';
+$lacands_version_number 					= '5.0';
 
 
 function lacands_init() {
@@ -986,7 +986,6 @@ function lacands_fb_recommendations() {
 	return;
 }
 
-
 function lacands_fb_recommendations_settings($data) {
 	$fb_reco_options = array('lacands-html-widget-fb-reco-width'=>'300', 'lacands-html-widget-fb-reco-height'=>'300', 'lacands-html-widget-fb-reco-header'=>'true', 'lacands-html-widget-fb-reco-color'=>'light', 'lacands-html-widget-fb-reco-font'=>'arial', 'lacands-html-widget-fb-reco-border'=>'#AAAAAA', 'lacands-html-widget-fb-reco-margin-top'=>'10', 'lacands-html-widget-fb-reco-margin-right'=>'0', 'lacands-html-widget-fb-reco-margin-bottom'=>'10', 'lacands-html-widget-fb-reco-margin-left'=>'0', 'lacands-html-widget-fb-reco-title'=>'');
 	foreach($fb_reco_options as $key=>$val) {
@@ -1014,59 +1013,6 @@ function lacands_fb_recommendations_settings($data) {
 	require("la-click-and-share-fb-recommendation.html");
 }
 
-
-function lacands_create_post_meta_box() {
-	add_meta_box( 'lacands_meta_box', LAECHONW_WIDGET_NAME, 'lacands_post_meta_box', 'post', 'side', 'core' );
-    add_meta_box( 'lacands_meta_box', LAECHONW_WIDGET_NAME, 'lacands_post_meta_box', 'page', 'side', 'core' );
-    add_meta_box( 'lacands_meta_box', LAECHONW_WIDGET_NAME, 'lacands_post_meta_box', 'link', 'side', 'core' );
-    if(function_exists('get_post_types')) {
-        $args=array('public'   => true,
-                    '_builtin' => false);
-        $post_types=get_post_types($args, '');
-        foreach($post_types as $key=>$val) {
-            add_meta_box( 'lacands_meta_box', LAECHONW_WIDGET_NAME, 'lacands_post_meta_box', $val->name, 'side', 'core' );
-        }
-    }
-}
-
-
-function lacands_post_meta_box( $object, $box ) {
-	//Publish
-	$curr_val = get_post_meta( $object->ID, '_lacands_meta_show', true );
-	if($curr_val == '') {
-		$curr_val = 1;
-	}
-    $html  = '<div style="padding:2px;">';
-	if($curr_val) {
-		$html .= '<input type="checkbox" name="lacands_meta_cb_show"    id="lacands_meta_cb_show" checked />';
-	} else {
-		$html .= '<input type="checkbox" name="lacands_meta_cb_show"    id="lacands_meta_cb_show" />';
-	}
-	$html .= '&nbsp;<label for="lacands_meta_cb_show">Show 1-Click Social Buttons</a></label>';
-	//Hidden
-	$html .= '<input type="hidden" name="lacands_meta_nonce" value="'. wp_create_nonce( plugin_basename( __FILE__ ) ).'" />';
-	$html .= '</div>';
-	echo $html;
-}
-
-
-function lacands_save_post_meta_box( $post_id, $post ) {
-	if ( !wp_verify_nonce( $_POST['lacands_meta_nonce'], plugin_basename( __FILE__ ) ) ) {
-		return $post_id;	
-	}
-	if ( !current_user_can( 'edit_post', $post_id ) ) {
-		return $post_id;
-	}
-	//Show
-	if($_POST['lacands_meta_cb_show']) {
-		$new_meta_value = 1;
-	} else {
-		$new_meta_value = 0;
-	}
-	update_post_meta( $post_id, '_lacands_meta_show', $new_meta_value );
-}
-
-
 function lacands_set_options() {
 	add_option('lacands-html-fb-app-id', 							'');
     add_option('lacands-html-fb-metatags', 							1);
@@ -1074,7 +1020,6 @@ function lacands_set_options() {
     add_option('lacands-html-googleplus-page-type', 				'Article');
     add_option('lacands-html-extra-params', 						'');
 }
-
 
 function lacands_main() {
 	lacands_init();
@@ -1138,8 +1083,9 @@ add_action ( 'future_to_publish', 					'lacandsnw_convert' );
 
 add_action ( 'wp_head',                             'lacands_fb_meta' );
 
-add_action ( 'admin_menu',                          'lacands_create_post_meta_box' );
-add_action ( 'save_post',                           'lacands_save_post_meta_box',       5,      2 );
+add_action ( 'admin_menu',                          'lacandsnw_create_post_meta_box' );
+add_action ( 'save_post',                           'lacandsnw_save_post_meta_box',       5,      2 );
+
 
 add_filter ( 'language_attributes', 				'lacands_html_schema' );
 

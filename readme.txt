@@ -3,8 +3,8 @@
 Contributors: LinksAlpha
 Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live, google +1, google plus one, google plusone, google plus
 Requires at least: 2.0.2
-Tested up to: 3.3.2
-Stable tag: 4.9.1
+Tested up to: 3.4.2
+Stable tag: 5.0
 
 
 == Description ==
@@ -123,7 +123,7 @@ Deactivate and then Activate the plugin. If by default it shows as 'activated', 
 
 = What if I have more questions? =
 
-Go to http://help.linksalpha.com/1-click-retweet-share-like/faqs for list of FAQs and corresponding answers.
+Go to http://help.linksalpha.com/1-click-retweet-share-like for getting started help documents.
 
 = Question still not answered? =
 
@@ -133,9 +133,15 @@ Email us at post@linksalpha.com
 == Screenshots ==
 1. Social 1-click Retweet/Share/Like buttons
 2. List of supported networks for automatic publishing
+3. 1-click Retweet/Share/Like widget in the WordPress Post Editor window
 
 
 == Changelog ==
+
+= 5.0 =
+* Users can now add message to their Facebook and LinkedIn posts.
+* Users can now add Twitter Handle and Twitter Hash in their posts.
+* Users can view the publish results on the 1-click Retweet/Share/Like's settings page.
 
 = 4.9.1 =
 * Minor Fix for AJSAX requests
