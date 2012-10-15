@@ -7,7 +7,7 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        	__('You are currently Publishin
 define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
 define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
-define('LACANDSNW_PLUGIN_VERSION',                  '5.0');
+define('LACANDSNW_PLUGIN_VERSION',                  '5.0.1');
 define('LACANDSNW_WP_PLUGIN_URL',                  	lacandsnw_get_plugin_dir());
 define('LACANDSNW_WIDGET_NAME_POST_EDITOR', 		'1-Click');
 
@@ -98,7 +98,7 @@ function lacandsnw_create_post_meta_box() {
                     '_builtin' => false);
         $post_types=get_post_types($args, '');
         foreach($post_types as $key=>$val) {
-            add_meta_box( 'lacandsnw_meta_box', LAECHONW_WIDGET_NAME, 'lacandsnw_post_meta_box', $val->name, 'side', 'core' );
+            add_meta_box( 'lacandsnw_meta_box', LAECHONW_WIDGET_NAME, 'lacandsnw_post_meta_box', $val->name, 'side', 'core', array($key) );
         }
     }
 }
@@ -106,6 +106,9 @@ function lacandsnw_create_post_meta_box() {
 function lacandsnw_post_meta_box($object, $box) {
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
 	$this_post_type = $object -> post_type;
+	if(!$this_post_type) {
+	     $this_post_type = $box['args'][0];
+	}
 	//1 Click Publish
 	$curr_val = get_post_meta( $object->ID, '_lacands_meta_show', true );
 	if($curr_val == '') {

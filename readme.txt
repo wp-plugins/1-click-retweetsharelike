@@ -1,10 +1,10 @@
 === Plugin Name ===
 
-Contributors: LinksAlpha
+Contributors: linksalpha
 Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live, google +1, google plus one, google plusone, google plus
 Requires at least: 2.0.2
 Tested up to: 3.4.2
-Stable tag: 5.0
+Stable tag: 5.0.1
 
 
 == Description ==
@@ -137,6 +137,9 @@ Email us at post@linksalpha.com
 
 
 == Changelog ==
+
+= 5.0.1 =
+* Minor Fix
 
 = 5.0 =
 * Users can now add message to their Facebook and LinkedIn posts.
