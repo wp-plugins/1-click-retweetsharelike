@@ -5,11 +5,28 @@
 <div class="lacands_box_white">
 	<div class="lacands_font_bold14"><?php _e("Preview"); ?></div>
 	<div class="lacands_header_border_bottom"></div>
-	<div style="padding-top:5px;">
-		<iframe style="height:25px !important; border:none !important; overflow:hidden !important; width:560px !important;" frameborder="0" scrolling="no" allowTransparency="true" src="http://www.linksalpha.com/social?link=http%253A%252F%252Fdev30.linksalpha.com%252F%253Fp%253D8&fc=333333&fs=lucida+grande&fblname=like&fblref=fb&fbllang=en_US&twitterlang=en&twittermention=vivekpuri&twitterrelated1=vivekpuri&twitterrelated12=twitfn&linkedinbutton=show&g1button=1"></iframe>
+	<div style="padding-top:5px;" class="lacandsnw_share_box">
+		<table>
+			<tr>
+				<td class="lacandsnw_share_box_left">
+					<table>
+						<tr>
+							<td>
+								<iframe style="height:25px !important; border:none !important; overflow:hidden !important; width:560px !important;" frameborder="0" scrolling="no" allowTransparency="true" src="http://www.linksalpha.com/social?link=http%253A%252F%252Fdev30.linksalpha.com%252F%253Fp%253D8&fc=333333&fs=lucida+grande&fblname=like&fblref=fb&fbllang=en_US&twitterlang=en&twittermention=vivekpuri&twitterrelated1=vivekpuri&twitterrelated12=twitfn&linkedinbutton=show&g1button=1"></iframe>									
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="lacandsnw_share_box_right">
+					<span>Install Browser Extension&nbsp;</span>
+					<span><img src="//lh4.ggpht.com/RcHmTiAjiRPW5GSamTaet1etjiNYaeHVT2yOtEsJDEs9IRWTdt1P64zpDmh6XzAbN4HH9byl9YhgTK_NbcXq=s16" style="vertical-align: text-bottom" />&nbsp;<a target="_blank" href="https://chrome.google.com/webstore/detail/ffifmkcjncgmnnmkedgkiabklmjdmpgi">Chrome</a></span>
+					<span><img src="//lh5.ggpht.com/HE6TEsIgCGZgRKAZJ8SI1Yq7rGGxy5s_TQhleiphoEY2QFye1OlFRm8r_6JmGq4OUfHq07OE2dk6XeHWcYyU=s16" style="vertical-align: text-bottom" />&nbsp;<a href="http://www.linksalpha.com/downloads/app?id=980907126">Firefox</a></span>
+					<span><img src="//lh6.ggpht.com/4FQoS1Pn8OQOlahH5ESbjJv8iuVPV2If34-fABfBWcrJLUja5wiyLgWAekHWEuk_WaZg_iU9bf4Jli07WDQrRQ=s16" style="vertical-align: text-bottom" />&nbsp;<a href="http://www.linksalpha.com/downloads/app?id=980926069">Safari</a></span>
+				</td>
+			</tr>
+		</table>
 	</div>
 </div>
-
 <div class="lacands_box">
 	<div class="lacands_font_bold14"><?php echo LACANDS_AUTO_PUBLISH_ON_NETWORKS; ?></div>
 	<div class="lacands_header_border_bottom"></div>
@@ -33,15 +50,18 @@
 							<tr>
 								<td>
 									<label for="<?php echo $field_name ?>">
-										<a href="http://www.linksalpha.com/user/your_api_key" target="_blank"><?php _e("Click here"); ?></a>&nbsp;<?php _e("to get your API Key"); ?>&nbsp;<?php _e("and enter it in the box below"); ?>
+										Get your&nbsp;<a href="http://www.linksalpha.com/account/your_api_key" target="_blank"><?php _e("User API Key"); ?></a>&nbsp;<?php _e("or"); ?>&nbsp;<a href="http://www.linksalpha.com/networks" target="_blank"><?php _e("Network API Key "); ?></a>&nbsp;<?php _e("and enter below"); ?>
 									</label>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<div style="padding-bottom:10px">
+									<div style="padding-top:3px;">
 										<input style="width:400px;" class="widefat" id="<?php echo $field_name ?>" name="<?php echo $field_name ?>" type="text" />
 									</div>
+									<div style="padding-top:3px;padding-bottom:10px;color:gray;">
+                                    	<a href="http://help.linksalpha.com/networks/getting-started" target="_blank"><?php _e("Click here"); ?></a>&nbsp;<?php _e("to read getting started document."); ?>
+                                    </div>
 								</td>
 							</tr>
 						</table>
@@ -115,6 +135,25 @@
 		    </div>
 		</div>
 		<br />
+		<div class="lacandsnw_ajax_msg"></div>
+		<div class="lacandsnw_content_box">
+		    <div class="lacandsnw_content_box_header">
+		        <?php _e("Show/Hide message to Install Browser Extension"); ?>
+		    </div>
+		    <div class="lacandsnw_content_box_data">
+		        <form action="" method="post">
+		            <div>
+		                <input type="checkbox" id="lacandsnw_install_extension_alert_show" name="lacandsnw_install_extension_alert_show" <?php echo $lacandsnw_install_extension_alert_show ?> /><label for="lacandsnw_install_extension_alert_show">&nbsp;&nbsp;<?php _e("Check this box to show the message in 1-Click widget to install browser extension from LinksAlpha.com"); ?> <a target="_blank" href="http://www.linksalpha.com/downloads"><?php _e("Click Here"); ?></a> <?php _e("to learn more."); ?></label>
+		            </div>
+		            <div style="padding-top:5px;">
+		                <input type="hidden" name="lacandsnw_form_type" value="lacandsnw_install_extension_alert_show" />
+		                <input type="hidden" name="action" value="lacandsnw_save_options" />
+		                <input type="button" name="submit" class="button-primary lacandsnw_options" value="<?php _e("Update"); ?>" />
+		            </div>
+		        </form>
+		    </div>
+		</div>
+		<br />
 		<div class="lacandsnw_content_box">
 		    <div class="lacandsnw_content_box_header">
 		        <?php _e("Note"); ?>
@@ -124,32 +163,7 @@
 		    </div>
 		</div>
 		<br />
-           
-        <div class="lacandsnw_content_box">
-		    <div class="lacandsnw_content_box_header">
-				<?php _e("Postbox"); ?>
-			</div>
-			<div class="lacandsnw_content_box_data">
-				<table>
-					<tr>
-						<td>
-							<div style="padding-bottom: 3px;">To self Publish content to your Social Networking Profiles right from your blog, click on the button below:</div>
-							<table>
-							    <tr>
-							        <td>
-							            <div>
-							                <a href="<?php echo lacandsnw_postbox_url(); ?>" style="text-decoration:none;">
-							                    <div class="lacands_button_yellow"><?php _e("View"); ?> Postbox</div>
-							                </a>
-							            </div>
-							        </td>
-							    </tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
+        
 	</div>
 </div>
 

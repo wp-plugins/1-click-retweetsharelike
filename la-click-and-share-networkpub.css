@@ -59,3 +59,16 @@ div.rts_success {text-align:center;background-color:#F7F7F7;border:1px solid #7f
 .lacands_warning_message_header, .lacands_warning_message_ol_item_header {font-weight: bold !important;}
 .lacands_warning_message_header {padding-bottom: 5px !important }
 .lacands_warning_message_ol_item_header_alert {color: red !important;}
+#lacandsnw_overlay {position:fixed;top:0;left:0;bottom:0;right:0;height: 100%;width: 100%;margin: 0;padding: 0;z-index: 101;}
+.lacandsnw_post_meta_box_label_box {padding-bottom:3px;}
+.lacandsnw_post_meta_box_helper {color:#8F8F8F;}
+
+.lacandsnw_share_box {}
+.lacandsnw_share_box table {width:100%;}
+.lacandsnw_share_box table td {padding-right:10px;font-weight:bold;}
+.lacandsnw_share_box table td a{font-weight:normal;}
+
+.lacandsnw_share_box_left {text-align:left;}
+.lacandsnw_share_box_right {text-align:right;padding-right:10px !important;}
+.lacandsnw_share_box_right table {white-space:nowrap;}
+.lacandsnw_share_box_right table td{text-align:right;padding-right:0px !important;}

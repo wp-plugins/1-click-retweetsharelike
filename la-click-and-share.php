@@ -5,7 +5,7 @@ Plugin URI: http://www.linksalpha.com
 Description: Adds Facebook Like, Facebook Share, Twitter, Google +1, LinkedIn Share, Facebook Recommendations. Automatic publishing of content to 30+ Social Networks.
 Author: linksalpha
 Author URI: http://www.linksalpha.com
-Version: 5.0.1
+Version: 5.1
 */
 
 /*
@@ -65,7 +65,7 @@ define('LACANDS_DONT_SHOW', 						__("Don't Show"));
 $lacandsnw_networkpub_settings['api_key'] 	= array('label'=>__('API Key:'), 'type'=>'text', 'default'=>'');
 $lacandsnw_networkpub_settings['id']      	= array('label'=>__('id'), 'type'=>'text', 'default'=>'');
 $lacandsnw_options                        	= get_option(LACANDSNW_WIDGET_NAME_INTERNAL);
-$lacands_version_number 					= '5.0.1';
+$lacands_version_number 					= '5.1';
 
 
 function lacands_init() {
@@ -830,7 +830,7 @@ function lacands_wp_admin_options_settings () {
 	//NetworkPub
 	$curr_field = 'api_key';
 	$field_name = sprintf('%s_%s', LACANDSNW_WIDGET_PREFIX, $curr_field);
-	global $lacandsnw_auth_error_show, $lacandsnw_mixed_mode_alert_show;
+	global $lacandsnw_auth_error_show, $lacandsnw_mixed_mode_alert_show, $lacandsnw_install_extension_alert_show;
 	lacandsnw_load_options();
 	
 	//Defaults

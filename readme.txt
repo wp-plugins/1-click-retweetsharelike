@@ -1,10 +1,10 @@
 === Plugin Name ===
 
 Contributors: linksalpha
-Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live, google +1, google plus one, google plusone, google plus
+Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live, google +1, google plus one, google plusone, google plus, chrome extension, firefox extension, safari extension
 Requires at least: 2.0.2
-Tested up to: 3.4.2
-Stable tag: 5.0.1
+Tested up to: 3.5
+Stable tag: 5.1
 
 
 == Description ==
@@ -57,10 +57,13 @@ Plugin also enables you to `Automatically Publish` or `Self Publish` your `Blog 
 1. Windows Live
 
 
-**Postbox**
+**Browser Extensions**
 
-* Postbox enables you to self/manually post to your Connected LinksAlpha.com Networks. This gives you more control over the content you want to publish
-* To self post from your wordpress blog, click on `Postbox` menu option located under `Posts` in Admin Console 
+We are excited to announce launch of [LinksAlpha.com](http://www.linksalpha.com) browser extensions for Chrome, Firefox, or Safari. These extensions enable quick and easy posting to your social profiles from your browser. Below are the download links:
+
+1. [Chrome](https://chrome.google.com/webstore/detail/ffifmkcjncgmnnmkedgkiabklmjdmpgi)
+1. [Firefox](http://www.linksalpha.com/downloads/app?id=980907126)
+1. [Safari](http://www.linksalpha.com/downloads/app?id=980926069)
 
 
 **List of Features**
@@ -137,6 +140,9 @@ Email us at post@linksalpha.com
 
 
 == Changelog ==
+
+= 5.1 =
+* Added support to manually re-publish posts to Facebook, Twitter and LinkedIn.
 
 = 5.0.1 =
 * Minor Fix

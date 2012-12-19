@@ -7,13 +7,11 @@ define('LACANDSNW_CURRENTLY_PUBLISHING',        	__('You are currently Publishin
 define('LACANDSNW_SOCIAL_NETWORKS',                 __('Networks'));
 define('LACANDSNW_SOCIAL_NETWORK',                  __('Network'));
 define('LACANDSNW_PLUGIN_NAME',                     __('cs'));
-define('LACANDSNW_PLUGIN_VERSION',                  '5.0.1');
+define('LACANDSNW_PLUGIN_VERSION',                  '5.1');
 define('LACANDSNW_WP_PLUGIN_URL',                  	lacandsnw_get_plugin_dir());
 define('LACANDSNW_WIDGET_NAME_POST_EDITOR', 		'1-Click');
 
-
 add_action('admin_notices', 'lacandsnw_auth_errors');
-
 
 function lacandsnw_set_options() {
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
@@ -23,16 +21,20 @@ function lacandsnw_set_options() {
 		}
 		if(!array_key_exists('lacandsnw_mixed_mode_alert_show', $options)) {
 			$options['lacandsnw_mixed_mode_alert_show'] = 1;
-		}	
+		}
+		if(!array_key_exists('lacandsnw_install_extension_alert_show', $options)) {
+			$options['lacandsnw_install_extension_alert_show'] = 1;
+		}
 	} else {
 		$options['lacandsnw_auth_error_show'] = 1;
 		$options['lacandsnw_mixed_mode_alert_show'] = 1;
+		$options['lacandsnw_install_extension_alert_show'] = 1;
 	}	
 	update_option(LAECHONW_WIDGET_NAME_INTERNAL, $options);
 }
 
 function lacandsnw_load_options() {
-	global $lacandsnw_auth_error_show, $lacandsnw_mixed_mode_alert_show;
+	global $lacandsnw_auth_error_show, $lacandsnw_mixed_mode_alert_show, $lacandsnw_install_extension_alert_show;
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
 	if(is_array($options)) {
 		//Auth Error show hide
@@ -57,13 +59,24 @@ function lacandsnw_load_options() {
 		} else {
 			$lacandsnw_mixed_mode_alert_show = 'checked';
 		}
+		//Extension install
+    	if(array_key_exists('lacandsnw_install_extension_alert_show', $options)) {
+			$lacandsnw_install_extension_alert_show = $options['lacandsnw_install_extension_alert_show'];
+			if($lacandsnw_install_extension_alert_show) {
+				$lacandsnw_install_extension_alert_show = 'checked';	
+			} else {
+				$lacandsnw_install_extension_alert_show = '';
+			}
+		} else {
+			$lacandsnw_install_extension_alert_show = 'checked';
+		}
 	} else {
 		$lacandsnw_auth_error_show = 'checked';
 		$lacandsnw_mixed_mode_alert_show = 'checked';
+		$lacandsnw_install_extension_alert_show = 'checked';
 	}
 	lacandsnw_mixed_mode();
 }
-
 
 add_action('admin_head', 'lacandsnw_save_options_javascript');
 
@@ -87,7 +100,35 @@ jQuery(document).ready(function($) {
 </script>
 <?php
 }
+
 add_action('wp_ajax_lacandsnw_save_options', 'lacandsnw_save_options');
+
+function lacandsnw_save_options() {
+	if ($_POST['lacandsnw_form_type'] == 'lacandsnw_auth_error_show') {
+		if(array_key_exists('lacandsnw_auth_error_show', $_POST)) {
+			$lacandsnw_auth_error_show = 1;	
+		} else {
+			$lacandsnw_auth_error_show = 0;
+		}
+		lacandsnw_auth_error_show($lacandsnw_auth_error_show);	
+	} elseif ($_POST['lacandsnw_form_type'] == 'lacandsnw_mixed_mode_alert_show') {
+		if(array_key_exists('lacandsnw_mixed_mode_alert_show', $_POST)) {
+			$lacandsnw_mixed_mode_alert_show = 1;	
+		} else {
+			$lacandsnw_mixed_mode_alert_show = 0;
+		}
+		lacandsnw_mixed_mode_alert_show($lacandsnw_mixed_mode_alert_show);	
+	} elseif ($_POST['lacandsnw_form_type'] == 'lacandsnw_install_extension_alert_show') {
+		if(array_key_exists('lacandsnw_install_extension_alert_show', $_POST)) {
+			$lacandsnw_install_extension_alert_show = 1;	
+		} else {
+			$lacandsnw_install_extension_alert_show = 0;
+		}
+		lacandsnw_install_extension_alert_show($lacandsnw_install_extension_alert_show);	
+	}
+	echo 'updated';
+	return;
+}
 
 function lacandsnw_create_post_meta_box() {
 	add_meta_box( 'lacandsnw_meta_box', LAECHONW_WIDGET_NAME, 'lacandsnw_post_meta_box', 'post', 'side', 'high' );
@@ -109,12 +150,32 @@ function lacandsnw_post_meta_box($object, $box) {
 	if(!$this_post_type) {
 	     $this_post_type = $box['args'][0];
 	}
+	//HTML
+	
+	//Extension download
+	$lacandsnw_install_extension_alert_show = $options['lacandsnw_install_extension_alert_show'];
+	if($lacandsnw_install_extension_alert_show) {
+		global $is_gecko, $is_safari, $is_chrome;
+		$html = '<div style="display: none;" id="linksalpha_post_download_chrome" class="misc-pub-section lacandsnw_post_meta_box_first"><img src="//lh4.ggpht.com/RcHmTiAjiRPW5GSamTaet1etjiNYaeHVT2yOtEsJDEs9IRWTdt1P64zpDmh6XzAbN4HH9byl9YhgTK_NbcXq=s16" style="vertical-align: text-bottom" />&nbsp;Install <a class="linksalpha_post_download_chrome_link" target="_blank" href="https://chrome.google.com/webstore/detail/ffifmkcjncgmnnmkedgkiabklmjdmpgi">Post extension for Chrome</a>.</div>';
+		$html .= '<div style="display: none;" id="linksalpha_post_download_firefox" class="misc-pub-section lacandsnw_post_meta_box_first"><img src="//lh5.ggpht.com/HE6TEsIgCGZgRKAZJ8SI1Yq7rGGxy5s_TQhleiphoEY2QFye1OlFRm8r_6JmGq4OUfHq07OE2dk6XeHWcYyU=s16" style="vertical-align: text-bottom" />&nbsp;Install <a class="linksalpha_post_download_firefox_link" href="http://www.linksalpha.com/downloads/app?id=980907126">Post extension for Firefox</a>.</div>';
+		$html .= '<div style="display: none;" id="linksalpha_post_download_safari" class="misc-pub-section lacandsnw_post_meta_box_first"><img src="//lh6.ggpht.com/4FQoS1Pn8OQOlahH5ESbjJv8iuVPV2If34-fABfBWcrJLUja5wiyLgWAekHWEuk_WaZg_iU9bf4Jli07WDQrRQ=s16" style="vertical-align: text-bottom" />&nbsp;Install <a class="linksalpha_post_download_safari_link" href="http://www.linksalpha.com/downloads/app?id=980926069">Post extension for Safari</a>.</div>';
+		if($is_gecko) {
+			$browser = 'firefox';
+		} elseif($is_chrome) {
+			$browser = 'chrome';
+		} elseif($is_safari) {
+			$browser = 'safari';
+		} else {
+			$browser = '';
+		}
+		$html .= '<input type="hidden" name="linksalpha_browser" id="linksalpha_browser" value="'.$browser.'" autocomplete="off" />';
+	}
 	//1 Click Publish
 	$curr_val = get_post_meta( $object->ID, '_lacands_meta_show', true );
 	if($curr_val == '') {
 		$curr_val = 1;
 	}
-    $html  = '<div class="misc-pub-section">';
+    $html  .= '<div class="misc-pub-section">';
 	if($curr_val) {
 		$html .= '<input type="checkbox" name="lacands_meta_cb_show"    id="lacands_meta_cb_show" checked />';
 	} else {
@@ -164,7 +225,7 @@ function lacandsnw_post_meta_box($object, $box) {
 	// Message
 	$curr_val_message = get_post_meta($object -> ID, 'lacandsnw_postmessage', true);
 	$html .= '<div class="misc-pub-section">';
-	$html .= '<div class="lacandsnw_post_meta_box_label_box"><label class="lacandsnw_post_meta_box_label" for="lacandsnw_postmessage"><a target="_blank" href="http://help.linksalpha.com/wordpress-plugin-network-publisher/message">'. __('Message').'</a>'.(' to be included in the post(for Facebook & LinkedIn):') . '</label></div>';
+	$html .= '<div class="lacandsnw_post_meta_box_label_box"><label class="lacandsnw_post_meta_box_label" for="lacandsnw_postmessage"><a target="_blank" href="http://help.linksalpha.com/wordpress-plugin-network-publisher/message">'. __('Message').'</a>'.(' to be included in the post:') . '</label></div>';
 	$html .= '<textarea name="lacandsnw_postmessage" id="lacandsnw_postmessage">' . $curr_val_message . '</textarea>';
 	$html .= '</div>';
 	// Twitter handle
@@ -186,7 +247,11 @@ function lacandsnw_post_meta_box($object, $box) {
 	if ($curr_val_content == '') {
 		$curr_val_content = 0;
 	}
-	$html .= '<div class="misc-pub-section">';
+	if (in_array($lacandsnw_meta_published, array('failed', 'done'))) {
+		$html .= '<div class="misc-pub-section">';	
+	} else {
+		$html .= '<div class="misc-pub-section" style="border-bottom:0px;padding-bottom:0px;">';
+	}
 	if ($curr_val_content) {
 		$html .= '<input type="checkbox" name="lacandsnw_meta_cb_content" id="lacandsnw_meta_cb_content" checked ' . $inputs_disabled . ' />';
 	} else {
@@ -199,6 +264,15 @@ function lacandsnw_post_meta_box($object, $box) {
 		$html .= '<div class="misc-pub-section" style="color:red;"><img src="' . LACANDSNW_WP_PLUGIN_URL . 'alert.png" />&nbsp;' . __('Post to social networks failed.') . '</div>';
 	} elseif ($lacandsnw_meta_published == 'done') {
 		$html .= '<div class="misc-pub-section" style="color:green;"><input type="checkbox" checked disabled="disabled" />&nbsp;<label for="lacandsnw_meta_cb_content">' . __('Data sent successfully.') . '</label></div>';
+	}
+	//Manually post an update
+	if(in_array($lacandsnw_meta_published, array('failed', 'done'))) {
+		$html .= '<div class="misc-pub-section" style="border-bottom:0px;padding-bottom:0px;">';
+		$post_data = lacandsnw_get_post_data_republish($object);
+		$post_data_string = http_build_query($post_data);
+		$html .= '<input type="button" class="button-primary" id="lacandsnw_post_update" value="Post an Update">';
+		$html .= '<input type="hidden" id="lacandsnw_post_data" value="'.$post_data_string.'">';
+		$html .= '</div>';
 	}
 	//nonce
 	$html .= '<input type="hidden" name="lacandsnw_meta_nonce" value="' . wp_create_nonce(plugin_basename(__FILE__)) . '" />';
@@ -255,7 +329,6 @@ function lacandsnw_save_post_meta_box($post_id, $post) {
 			$new_meta_value_twitterhash = str_replace("#", "", $new_meta_value_twitterhash);
 		}
 	}
-	update_post_meta($post_id, 'lacandsnw_twitterhash', $new_meta_value_twitterhash);
 	// Published
 	$new_meta_value_publish = 0;
 	if (!empty($_POST['lacandsnw_meta_cb_publish'])) {
@@ -305,7 +378,7 @@ function lacandsnw_auth_errors() {
 		echo "
 		<div class='updated fade' style='padding:10px;'>
 			<div style='color:red;font-weight:bold;'>
-				<img src='".LACANDSNW_WP_PLUGIN_URL ."/icons/alert.png' style='vertical-align:text-bottom;' />&nbsp;".LACANDSNW_WIDGET_NAME_POST_EDITOR.' - '.__("Authorization Error")."
+				<img src='".LACANDSNW_WP_PLUGIN_URL ."/alert.png' style='vertical-align:text-bottom;' />&nbsp;".LACANDSNW_WIDGET_NAME_POST_EDITOR.' - '.__("Authorization Error")."
 			</div>
 			<div style='padding-top:0px;'>
 				".__("Authorization provided on one or more of your Network accounts has expired. Please")." <a target='_blank' href='http://www.linksalpha.com/networks'>".__("add the related Account")."</a> ".__("again to be able to publish content. To learn more, ")."<a target='_blank' href='http://help.linksalpha.com/networks/authorization-error'>".__("Click Here")."</a>. ".__("To access Settings page of the plugin, ")."<a href='".LAECHO_PLUGIN_ADMIN_URL."'>".__("Click Here.")."</a>
@@ -354,7 +427,7 @@ function lacandsnw_mixed_mode() {
 				echo "
 				<div class='updated fade' style='padding:10px;'>
 					<div style='color:red;font-weight:bold;'>
-						<img src='".LACANDSNW_WP_PLUGIN_URL ."/icons/alert.png' style='vertical-align:text-bottom;' />&nbsp;".LACANDSNW_WIDGET_NAME_POST_EDITOR.' - '.__("Mixed Mode Alert")."
+						<img src='".LACANDSNW_WP_PLUGIN_URL ."/alert.png' style='vertical-align:text-bottom;' />&nbsp;".LACANDSNW_WIDGET_NAME_POST_EDITOR.' - '.__("Mixed Mode Alert")."
 					</div>
 					<div style='padding-top:0px;'>
 						".__("Publishing of your website content via LinksAlpha Publisher seems to be configured using both the WordPress Plugin and RSS Feed of your website. LinksAlpha recommends use of plugin over RSS Feed. ")."<a target='_blank' href='http://help.linksalpha.com/wordpress-plugin-network-publisher/mixed-mode-alert'>".__("Click here")."</a> ".__("to read the help document that will help resolve this Mixed Mode configuration issue.")."
@@ -369,6 +442,13 @@ function lacandsnw_mixed_mode() {
 function lacandsnw_mixed_mode_alert_show($lacandsnw_mixed_mode_alert_show) {
 	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
 	$options['lacandsnw_mixed_mode_alert_show'] = $lacandsnw_mixed_mode_alert_show;
+	update_option(LAECHONW_WIDGET_NAME_INTERNAL, $options);
+	return;
+}
+
+function lacandsnw_install_extension_alert_show($lacandsnw_install_extension_alert_show) {
+	$options = get_option(LAECHONW_WIDGET_NAME_INTERNAL);
+	$options['lacandsnw_install_extension_alert_show'] = $lacandsnw_install_extension_alert_show;
 	update_option(LAECHONW_WIDGET_NAME_INTERNAL, $options);
 	return;
 }
@@ -856,28 +936,28 @@ function lacandsnw_error_msgs($errMsg) {
 			break;
 		case 'invalid url':
 			$html  = 	'<div class="lacandsnw_error">
-							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/icons/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Your website URL is invalid').'</div>
+							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Your website URL is invalid').'</div>
 							<div>'.__('URL of your website is not valid and as a result LinksAlpha.com is not able to connect to it. You can try adding the website URL directly in the').'&nbsp;'.'<a target="_blank" href="https://www.linksalpha.com/websites">'.__('LinksAlpha Website Manager.').'</a>&nbsp;'.__('If that also does not work, please open a ticket at').'&nbsp;'.'<a target="_blank" href="http://support.linksalpha.com">'.__('LinksAlpha Help Desk.').'</a></div>
 						</div>';
 			return $html;
 			break;
 		case 'remote url error':
 			$html  = 	'<div class="lacandsnw_error">
-							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/icons/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Remote URL error').'</div>
+							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Remote URL error').'</div>
 							<div>'.__('Your website is either loading extremely slowly or it is in maintenance mode. As a result LinksAlpha.com is not able to connect to it. You can try adding the website URL directly in the').'&nbsp;'.'<a target="_blank" href="https://www.linksalpha.com/websites">'.__('LinksAlpha Website Manager.').'</a>&nbsp;'.__('If that also does not work, please open a ticket at').'&nbsp;'.'<a target="_blank" href="http://support.linksalpha.com">'.__('LinksAlpha Help Desk.').'</a></div>
 						</div>';
 			return $html;
 			break;
 		case 'feed parsing error':
 			$html  = 	'<div class="lacandsnw_error">
-							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/icons/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('RSS Feed parsing error').'</div>
+							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('RSS Feed parsing error').'</div>
 							<div>'.__('Your RSS feed has errors and as a result LinksAlpha.com is not able to connect to it. You can try validating your RSS feed using').'&nbsp;'.'<a target="_blank" href="http://feedvalidator.org/">'.__('Feed Validator.').'</a>&nbsp;'.__('If the RSS feed is indeed valid and you continue to face isses, please open a ticket at').'&nbsp;'.'<a target="_blank" href="http://support.linksalpha.com">'.__('LinksAlpha Help Desk.').'</a></div>
 						</div>';
 			return $html;
 			break;
 		case 'feed not found':
 			$html  = 	'<div class="lacandsnw_error">
-							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/icons/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('RSS Feed URL not found').'</div>
+							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('RSS Feed URL not found').'</div>
 							<div>'.__('Plugin was not able to find RSS feed URL for your website. Please ensure that under Settings').'->'.__('General').'->'.__('Blog address (URL)').'&nbsp;'.__('the URL is filled-in correctly').'</div>
 							<div>'.__('If you still face issues, please open a ticket at: ').'<a target="_blank" href="http://support.linksalpha.com/">LinksAlpha.com '.__('Help Desk').'</a></div>
 						</div>';
@@ -885,7 +965,7 @@ function lacandsnw_error_msgs($errMsg) {
 			break;
 		case 'invalid key':
 			$html  = 	'<div class="lacandsnw_error">
-							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/icons/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Invalid Key').'</div>
+							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Invalid Key').'</div>
 							<div>'.__('The').'&nbsp;'.'<a target="_blank" href="https://www.linksalpha.com/account/your_api_key">'.__('User').'</a>&nbsp;'.__('or').'&nbsp;<a target="_blank" href="https://www.linksalpha.com/networks">'.__('Network').'</a>&nbsp;'.__('API key that you entered is not valid. Please input a valid key and try again.').'</div>
 							<div>'.__('If you still face issues, please open a ticket at: ').'<a target="_blank" href="http://support.linksalpha.com/">LinksAlpha.com '.__('Help Desk').'</a></div>
 						</div>';
@@ -893,7 +973,7 @@ function lacandsnw_error_msgs($errMsg) {
 			break;
 		case 'subscription upgrade required':
 			$html  = 	'<div class="lacandsnw_error">
-							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/icons/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Account Error').'</div>
+							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Account Error').'</div>
 							<div>'.__('Please ').'&nbsp;'.'<a target="_blank" href="http://www.linksalpha.com/account">'.__('Upgrade your Account').'</a>&nbsp;'.__('to be able to Publish to more Networks. You can learn more about LinksAlpha Networks by').'&nbsp;<a target="_blank" href="http://help.linksalpha.com/networks-1">'.__('clicking here').'</a></div>
 							<div>'.__('If you still face issues, please open a ticket at: ').'<a target="_blank" href="http://support.linksalpha.com/">LinksAlpha.com '.__('Help Desk').'</a></div>
 						</div>';
@@ -901,7 +981,7 @@ function lacandsnw_error_msgs($errMsg) {
 			break;
 		case 'localhost url':
 			$html  = 	'<div class="lacandsnw_error">
-							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/icons/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Website/Blog inaccessible').'</div>
+							<div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/alert.png" style="vertical-align:text-bottom;" />&nbsp;'.__('Website/Blog inaccessible').'</div>
 							<div>'.__('You are trying to use the plugin on localhost or behind a firewall which is not supported. Please install the plugin on a Wordpress blog on a live server.').'</div>
 							<div>'.__('If you still face issues, please open a ticket at: ').'<a target="_blank" href="http://support.linksalpha.com/">LinksAlpha.com '.__('Help Desk').'</a></div>
 						</div>';
@@ -909,7 +989,7 @@ function lacandsnw_error_msgs($errMsg) {
 			break;
 		case 'multiple accounts':
 			$html = '<div class="lacandsnw_error">
-                        <div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/icons/alert.png" style="vertical-align:text-bottom;" />&nbsp;Account Error</div>
+                        <div class="lacandsnw_error_header"><img src="'.LAECHONW_WP_PLUGIN_URL .'/alert.png" style="vertical-align:text-bottom;" />&nbsp;Account Error</div>
                         <div>'.__('The key that you entered is for a LinksAlpha account that is different from the currently used account for this website. You can use API key from only one account on this website. Please input a valid <a target="_blank" href="http://www.linksalpha.com/account/your_api_key">User</a> or <a target="_blank" href="http://www.linksalpha.com/user/networks">Network</a> API key and try again').'.</div>
                         <div>'.__('If you still face issues, please open a ticket at: ').'<a target="_blank" href="http://support.linksalpha.com/">LinksAlpha.com '.__('Help Desk').'</a></div>
                     </div>';
@@ -1020,7 +1100,7 @@ function lacandsnw_thumbnail_link( $post_id ) {
 			if ($xml) {
 				$images = $xml -> xpath('//img');
 				if (!empty($images)) {
-					return $images[0]['src'];
+					return (string)$images[0]['src'];
 				}
 			} else {
 				return False;
@@ -1066,6 +1146,70 @@ function lacandsnw_get_posts() {
 		echo $html;
 	}
 	return;
+}
+
+function lacandsnw_smart_truncate($string, $required_length) {
+	$parts = preg_split('/([\s\n\r]+)/', $string, null, PREG_SPLIT_DELIM_CAPTURE);
+	$parts_count = count($parts);
+	$length = 0;
+	$last_part = 0;
+	for (; $last_part < $parts_count; ++$last_part) {
+		$length += strlen($parts[$last_part]);
+		if ($length > $required_length) {
+			break;
+		}
+	}
+	return implode(array_slice($parts, 0, $last_part));
+}
+
+function lacandsnw_prepare_string($string, $string_length) {
+	$final_string = '';
+	$utf8marker = chr(128);
+	$count = 0;
+	while (isset($string{$count})) {
+		if ($string{$count} >= $utf8marker) {
+			$parsechar = substr($string, $count, 2);
+			$count += 2;
+		} else {
+			$parsechar = $string{$count};
+			$count++;
+		}
+		if ($count > $string_length) {
+			return $final_string;
+		}
+		$final_string = $final_string . $parsechar;
+	}
+	return $final_string;
+}
+
+function lacandsnw_prepare_text($text) {
+	$text = stripslashes($text);
+	$text = strip_tags($text);
+	$text = preg_replace("/\[.*?\]/", '', $text);
+	$text = preg_replace('/([\n \t\r]+)/', ' ', $text);
+	$text = preg_replace('/( +)/', ' ', $text);
+	$text = preg_replace('/\s\s+/', ' ', $text);
+	$text = lacandsnw_prepare_string($text, 310);
+	$text = lacandsnw_smart_truncate($text, 300);
+	$text = trim($text);
+	$text = htmlspecialchars($text);
+	return $text;
+}
+
+function lacandsnw_get_post_data_republish($p) {
+	$post_data = array();
+	$post_data['page_url'] 				=	get_permalink($p);
+	if($p->post_title) {
+		$post_data['page_title'] 		=	lacandsnw_prepare_text($p->post_title);	
+	}
+	if($p->post_content) {
+		$post_data['page_text'] 		= 	lacandsnw_prepare_text($p->post_content);	
+	}
+	$page_url_image = lacandsnw_thumbnail_link($p->ID, $p->post_content);
+	if($page_url_image) {
+		$post_data['page_url_image'] 	= 	$page_url_image;	
+	}
+	return $post_data;
 }
 
 function lacandsnw_version() {
