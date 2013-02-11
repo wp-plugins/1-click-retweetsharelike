@@ -1,10 +1,10 @@
 === Plugin Name ===
 
 Contributors: linksalpha
-Tags: like, facebook like, facebook, widget, plugin, twitter, retweet, tweet, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social networks, social, Blogger, Brightkite, Delicious, Diigo, Foursquare, Google Buzz, Plurk, Posterous, Sonico, Tumblr, Typepad, Windows Live, Yahoo, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, gowalla, basecamp, backpack, linkedin share, windows live, google +1, google plus one, google plusone, google plus, chrome extension, firefox extension, safari extension
+Tags: social media, social media buttons, like, facebook, facebook like, twitter, retweet, tweet, widget, plugin, images, social plugins, Post, google, admin, social posts, posts, shares, comments, sidebar, likes, page, image, social networks, buttons, counters, social media, social, links, comments, social, Blogger, Delicious, Diigo, Foursquare, Plurk, Sonico, Tumblr, Typepad, Yahoo Meme, Yammer, Status.net, socialcast, p2, tumblr, linkedin share, google +1, google plus one, google plusone, google plus, chrome extension, firefox extension, safari extension
 Requires at least: 2.0.2
-Tested up to: 3.5
-Stable tag: 5.1
+Tested up to: 3.5.1
+Stable tag: 5.2
 
 
 == Description ==
@@ -16,7 +16,6 @@ Shows following 8 buttons on your blog posts:
 1. Facebook Share
 1. Twitter button
 1. LinkedIn Share
-1. Google Buzz
 1. StumbleUpon
 1. Digg
 1. Email
@@ -31,14 +30,12 @@ Plugin also enables you to `Automatically Publish` or `Self Publish` your `Blog 
 
 1. Facebook Profile/Wall
 1. Facebook Pages
-1. Facebook Application Page
 1. Facebook Events
 1. Facebook Groups
 1. Twitter
 1. LinkedIn
 1. MySpace
 1. Yammer
-1. Yahoo
 1. Identi.ca
 1. Status.net
 1. Socialcast
@@ -52,9 +49,7 @@ Plugin also enables you to `Automatically Publish` or `Self Publish` your `Blog 
 1. Blogger
 1. Tumblr
 1. Typepad
-1. Posterous
 1. Yahoo Meme
-1. Windows Live
 
 
 **Browser Extensions**
@@ -140,6 +135,10 @@ Email us at post@linksalpha.com
 
 
 == Changelog ==
+
+= 5.2 =
+* Bug fixes.
+* Readme cleanup
 
 = 5.1 =
 * Added support to manually re-publish posts to Facebook, Twitter and LinkedIn.
